@@ -1,0 +1,977 @@
+0:100  0:100  MemLog inited, TSC freq: 2594105049
+0:100  0:000  
+0:100  0:000  Now is 25.10.2016,  18:41:57 (GMT)
+0:100  0:000  Starting Clover revision: 3835 on INSYDE Corp. EFI
+0:100  0:000  Build with: [Args: --no-lto -D NO_GRUB_DRIVERS_EMBEDDED | -D DISABLE_LTO -D NO_GRUB_DRIVERS_EMBEDDED -D USE_LOW_EBDA -a X64 -b RELEASE -t XCODE5 -n 5 | OS: 10.12.1 | XCODE: 8.0]
+0:100  0:000  SelfDevicePath=PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(18,GPT,19009EC5-475E-43AD-9305-3919DF11DD2F,0x6CE0A800,0xFA000) @ACCC0998
+0:100  0:000  SelfDirPath = \EFI\BOOT
+0:100  0:000  === [ Get Smbios ] ========================================
+0:100  0:000  Type 16 Index = 0
+0:100  0:000  Total Memory Slots Count = 2
+0:100  0:000  Type 17 Index = 0
+0:100  0:000  Table has error information, checking
+0:100  0:000  Found memory information in table 18/0, type=0x3, operation=0x2 syndrome=0x0
+0:100  0:000  ...memory OK
+0:100  0:000  SmbiosTable.Type17->Speed = 1600MHz
+0:100  0:000  SmbiosTable.Type17->Size = 4096MB
+0:100  0:000  SmbiosTable.Type17->Bank/Device = BANK 0 DIMM0
+0:100  0:000  SmbiosTable.Type17->Vendor = Unknown
+0:100  0:000  SmbiosTable.Type17->SerialNumber = 4342CA7B
+0:100  0:000  SmbiosTable.Type17->PartNumber = RMT3160ED58E9W1600
+0:100  0:000  Type 17 Index = 1
+0:100  0:000  Table has error information, checking
+0:100  0:000  Found memory information in table 18/1, type=0x3, operation=0x2 syndrome=0x0
+0:100  0:000  ...memory OK
+0:100  0:000  SmbiosTable.Type17->Speed = 1600MHz
+0:100  0:000  SmbiosTable.Type17->Size = 8192MB
+0:100  0:000  SmbiosTable.Type17->Bank/Device = BANK 2 DIMM1
+0:100  0:000  SmbiosTable.Type17->Vendor = Kingston
+0:100  0:000  SmbiosTable.Type17->SerialNumber = 20120206
+0:100  0:000  SmbiosTable.Type17->PartNumber = 99P5471-002.AOOLF 
+0:100  0:000  Boot status=0
+0:100  0:000  Running on: '20192' with board 'INVALID'
+0:100  0:000  === [ GetCPUProperties ] ==================================
+0:100  0:000  CPU Vendor = 756E6547 Model=306A9
+0:100  0:000  got cores from CPUID_1 = 0
+0:100  0:000  The CPU supported turbo
+0:100  0:000  BrandString = Intel(R) Core(TM) i5-3230M CPU @ 2.60GHz
+0:100  0:000  MSR 0xE2 before patch 1E008404
+0:100  0:000  MSR 0xE2 is locked, PM patches will be turned on
+0:100  0:000  MSR 0xE4              00020414
+0:100  0:000  MSR 0xCE              00080C10_E0011A00
+0:100  0:000  non-usable FLEX_RATIO = 110000
+0:100  0:000  corrected FLEX_RATIO = 100000
+0:100  0:000  MSR 0x1B0             00000000
+0:100  0:000  FSBFrequency=100MHz DMIvalue=100000kHz
+0:100  0:000  Corrected FSBFrequency=100MHz
+0:100  0:000  Vendor/Model/Stepping: 0x756E6547/0x3A/0x9
+0:100  0:000  Family/ExtFamily: 0x6/0x0
+0:100  0:000  MaxDiv/MinDiv: 26.0/12
+0:100  0:000  Turbo: 30/30/30/32
+0:100  0:000  Features: 0xBFEBFBFF
+0:100  0:000  Threads: 4
+0:100  0:000  Cores: 2
+0:100  0:000  FSB: 100 MHz
+0:100  0:000  CPU: 2600 MHz
+0:100  0:000  TSC: 2600 MHz
+0:100  0:000  PIS: 400 MHz
+0:100  0:000  === [ GetDevices ] ========================================
+0:100  0:000  PCI (00|00:00.00) : 8086 0154 class=060000
+0:100  0:000  PCI (00|00:01.00) : 8086 0151 class=060400
+0:100  0:000  PCI (00|01:00.00) : 10DE 0FD1 class=030000
+0:100  0:000   - GFX: Model=Lenovo GeForce GT 650M family E7 (Nvidia)
+0:100  0:000  PCI (00|01:00.01) : 10DE 0E1B class=040300
+0:100  0:000   - HDMI Audio: 
+0:100  0:000  PCI (00|00:14.00) : 8086 1E31 class=0C0330
+0:100  0:000  PCI (00|00:16.00) : 8086 1E3A class=078000
+0:100  0:000  PCI (00|00:1A.00) : 8086 1E2D class=0C0320
+0:100  0:000  PCI (00|00:1B.00) : 8086 1E20 class=040300
+0:100  0:000  PCI (00|00:1C.00) : 8086 1E10 class=060400
+0:100  0:000  PCI (00|02:00.00) : 1969 1091 class=020000
+0:100  0:000   - LAN: 0 Vendor=Atheros
+0:100  0:000  PCI (00|00:1C.01) : 8086 1E12 class=060400
+0:100  0:000  PCI (00|03:00.00) : 168C 0032 class=028000
+0:100  0:000   - WIFI: Vendor=Atheros
+0:100  0:000  PCI (00|00:1C.03) : 8086 1E16 class=060400
+0:100  0:000  PCI (00|04:00.00) : 197B 2392 class=088000
+0:100  0:000  PCI (00|04:00.02) : 197B 2391 class=080501
+0:100  0:000  PCI (00|04:00.03) : 197B 2393 class=088000
+0:100  0:000  PCI (00|04:00.04) : 197B 2394 class=088000
+0:100  0:000  PCI (00|00:1D.00) : 8086 1E26 class=0C0320
+0:100  0:000  PCI (00|00:1F.00) : 8086 1E59 class=060100
+0:100  0:000  PCI (00|00:1F.02) : 8086 1E03 class=010601
+0:100  0:000  PCI (00|00:1F.03) : 8086 1E22 class=0C0500
+0:100  0:000  PCI (00|00:1F.06) : FFFF FFFF class=FFFFFF
+0:100  0:000  === [ GetDefaultSettings ] ================================
+0:100  0:000  Clover load options size = 2 bytes
+0:123  0:022  EFI\CLOVER\RC.plist not loaded with name from LoadOptions: Not Found
+0:128  0:005  EFI\CLOVER\config.plist loaded: Success
+0:128  0:000  === [ GetListOfThemes ] ===================================
+0:136  0:007  - [00]: metal
+0:148  0:011  === [ Found config plists ] ===============================
+0:148  0:000  - config.plist
+0:148  0:000  === [ GetEarlyUserSettings ] ==============================
+0:148  0:000  timeout set to 5
+0:148  0:000  Custom boot CUSTOM_BOOT_DISABLED (0x0)
+0:148  0:000  Default theme: metal
+0:148  0:000  Hiding entries with string mac
+0:148  0:000  === [ LoadDrivers ] =======================================
+0:159  0:011  Loading FSInject-64.efi  status=Success
+0:160  0:000  Loading OsxAptioFixDrv-64.efi  status=Success
+0:161  0:000  Loading OsxFatBinaryDrv-64.efi  status=Success
+0:161  0:000  Loading VBoxHfs-64.efi  status=Success
+0:161  0:000   - driver needs connecting
+0:161  0:000  1 drivers needs connecting ...
+0:161  0:000  PlatformDriverOverrideProtocol not found. Installing ... Success
+0:161  0:000  Searching for invalid DiskIo BY_DRIVER connects: not found, all ok
+0:423  0:262  === [ InitScreen ] ========================================
+0:423  0:000  SetScreenResolution: 1280x1024 - not found!
+0:423  0:000  SetMaxResolution: found best mode 0: 1366x768
+0:428  0:004  Video mode change to mode #0: Success
+0:428  0:000   - set
+0:428  0:000  Console modes reported: 4, available modes:
+0:428  0:000   - [01]: 80x25
+0:428  0:000   - [04]: 80x25 (current mode)
+0:428  0:000  SetScreenResolution: 1366x768 - already set
+0:482  0:054  reinit: self device path=PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(18,GPT,19009EC5-475E-43AD-9305-3919DF11DD2F,0x6CE0A800,0xFA000)
+0:483  0:000  Using embedded font: Success
+0:484  0:001  === [ GetMacAddress ] =====================================
+0:484  0:000  === [ ScanSPD ] ===========================================
+0:484  0:000  SMBus device : 8086 1E22 class=0C0500 status=Success
+0:484  0:000  SMBus CmdReg: 0x3
+0:484  0:000  Scanning SMBus [8086:1E22], mmio: 0xC3415004, ioport: 0x4000, hostc: 0x1
+0:484  0:000  Slots to scan [8]...
+0:485  0:000  SPD[0]: Type 11 @0x50
+0:504  0:018  DDR speed 1600MHz
+0:504  0:000  Slot: 0 Type 24 4096MB 1600MHz Vendor=Ramaxel Technology PartNo=RMT3160ED58E9W1600A SerialNo=040304020C0A070B
+0:504  0:000  SPD[2]: Type 11 @0x52
+0:523  0:018  DDR speed 1600MHz
+0:523  0:000  Slot: 2 Type 24 8192MB 1600MHz Vendor=Kingston PartNo=99P5471-002.AOOLF SerialNo=0200010200020006
+0:523  0:000  === [ GetAcpiTablesList ] =================================
+0:524  0:000  Get Acpi Tables List from RSDT:
+0:524  0:000   - [00]: FACP  CB-01    len=268
+0:524  0:000   - [01]: SLIC  CB-01    len=374
+0:524  0:000   - [02]: UEFI  CB-01    len=566
+0:524  0:000   - [03]: ASF!  CB-01    len=165
+0:524  0:000   - [04]: HPET  CB-01    len=56
+0:524  0:000   - [05]: APIC  CB-01    len=140
+0:524  0:000   - [06]: MCFG  CB-01    len=60
+0:524  0:000   - [07]: SSDT  CB-01    len=1790
+0:524  0:000   - [08]: BOOT  CB-01    len=40
+0:524  0:000   - [09]: ASPT  CB-01    len=52
+0:524  0:000   - [10]: DBGP  CB-01    len=52
+0:524  0:000   - [11]: FPDT  CB-01    len=68
+0:524  0:000   - [12]: MSDM  CB-01    len=85
+0:524  0:000   - [13]: SSDT  CB-01    len=2474
+0:524  0:000   - [14]: SSDT  CB-01    len=2850
+0:524  0:000   - [15]: SSDT  CB-01    len=4337
+0:524  0:000   - [16]: SSDT  CB-01    len=208
+0:524  0:000   - [17]: BGRT  CB-01    len=56
+0:524  0:000  Calibrated TSC frequency =2594105049 =2594MHz
+0:524  0:000  === [ GetUserSettings ] ===================================
+0:524  0:000  USB FixOwnership: yes
+0:524  0:000  Dropping 3 tables:
+0:524  0:000   - [00]: Drop table  signature="SSDT" (54445353) table-id="Cpu0Ist" (0074734930757043)
+0:524  0:000           - set table: 54445353,   74734930757043 to drop: no
+0:524  0:000   - [01]: Drop table  signature="DMAR" (52414D44)
+0:524  0:000           - set table: 52414D44,                0 to drop: no
+0:524  0:000   - [02]: Drop table  signature="SSDT" (54445353) table-id="CpuPm" (0000006D50757043)
+0:524  0:000           - set table: 54445353,       6D50757043 to drop: no
+0:524  0:000   - final DSDT Fix mask=9FC2F9D7
+0:540  0:015  === [ ScanVolumes ] =======================================
+0:540  0:000  Found 27 volumes with blockIO
+0:540  0:000  - [00]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x0,0x0,0x0)
+0:540  0:000  - [01]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)
+0:540  0:000  - [02]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x0,0x0,0x0)\HD(1,GPT,B374A1BE-6E8A-45B8-951B-8F925E4AED2D,0x22,0x40000)
+0:540  0:000  - [03]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x0,0x0,0x0)\HD(2,GPT,E0AB928C-62AB-4D7E-E1A3-0D097AF7AC89,0x41000,0xD5B19B3)
+0:541  0:000          Result of bootcode detection: bootable Windows (vista,win)
+0:541  0:000  - [04]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x0,0x0,0x0)\HD(3,GPT,CB9A05A2-65DB-40C9-B5B2-45BC160A7D43,0xD5F3800,0x1806800)
+0:542  0:000          Result of bootcode detection: bootable unknown (legacy)
+0:542  0:000  - [05]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x0,0x0,0x0)\HD(4,GPT,3301B111-3537-4489-8D42-82B12F10B73C,0xEDFA000,0x82000)
+0:542  0:000          Result of bootcode detection: bootable Windows (vista,win)
+0:542  0:000  - [06]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(1,GPT,79193597-C624-48FF-8830-F6D074F07CD9,0x800,0x1F4000)
+0:543  0:000          Result of bootcode detection: bootable Windows (vista,win)
+0:543  0:000  - [07]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(2,GPT,32E67C2D-037B-43A2-9FAC-0C47249F0172,0x1F4800,0x82000)
+0:543  0:000          Result of bootcode detection: bootable Windows (vista,win)
+0:543  0:000  - [08]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(3,GPT,952B81D9-1002-49CB-8E5D-CEA0085CC902,0x276800,0x1F4000)
+0:543  0:000          Result of bootcode detection: bootable Windows (vista,win)
+0:543  0:000  - [09]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(4,GPT,F17006F4-793E-446B-8A16-B8B9FDBFBCB5,0x46A800,0x40000)
+0:543  0:000  - [10]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(5,GPT,6568AD00-666C-4E41-943F-9DF778422AFC,0x4AA800,0x74E18CA)
+0:543  0:000          Result of bootcode detection: bootable Windows (vista,win)
+0:543  0:000  - [11]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(6,GPT,3DCDDDA6-075F-4B59-A676-DE36AD0E0B0C,0x798C800,0x18D800)
+0:543  0:000          Result of bootcode detection: bootable Windows (vista,win)
+0:543  0:000  - [12]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(7,GPT,23FD0954-FE26-4327-9064-5C8B275FB713,0x7B1A800,0x191000)
+0:544  0:000          Result of bootcode detection: bootable Windows (vista,win)
+0:544  0:000  - [13]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(8,GPT,13819605-B09E-4DE5-942D-E1EC3BBDDBF9,0x7CAB800,0x4E71800)
+0:544  0:000          Result of bootcode detection: bootable Windows (vista,win)
+0:544  0:000  - [14]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(9,GPT,DFB74339-3B4E-4638-A22F-8B1C73ED66DE,0xCB1D800,0xC6800)
+0:544  0:000          Result of bootcode detection: bootable Windows (vista,win)
+0:544  0:000  - [15]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(10,GPT,E4AB3FE9-16A4-4CF9-90BC-2484B97CEEFF,0xCBE4000,0xC6800)
+0:544  0:000          Result of bootcode detection: bootable Windows (vista,win)
+0:544  0:000  - [16]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(11,GPT,D8FABF78-280F-4DEE-9740-C19FB16584A1,0xCCAA800,0x181EF000)
+0:544  0:000          Result of bootcode detection: bootable Windows (vista,win)
+0:545  0:000  - [17]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(12,GPT,889E5395-E79D-4282-8437-20FAA0C45758,0x24E9A000,0x77FF800)
+0:545  0:000          Result of bootcode detection: bootable Windows (vista,win)
+0:545  0:000  - [18]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(13,GPT,712687F3-174A-4DEC-A3E5-1BAB79006C72,0x2C69A000,0x5000000)
+0:545  0:000          Result of bootcode detection: bootable Windows (vista,win)
+0:545  0:000  - [19]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(14,GPT,FCA8B8C8-F303-48EF-9135-50ECF2B3D29A,0x3169A800,0x1E647800)
+0:545  0:000          Result of bootcode detection: bootable Windows (vista,win)
+0:545  0:000  - [20]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(15,GPT,9ED3D3C0-1B64-4B2B-B89D-8385E940C595,0x4FCE2000,0x200000)
+0:545  0:000          Result of bootcode detection: bootable Windows (vista,win)
+0:545  0:000  - [21]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(16,GPT,80693199-25FF-452B-9491-6582A688EEE9,0x4FEE2000,0x1C276DA4)
+0:545  0:000          Result of bootcode detection: bootable Windows (vista,win)
+0:546  0:000  - [22]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(17,GPT,EACEB5F1-07C1-43C4-8CB9-E6420DE8D4C9,0x6C159000,0xC71800)
+0:546  0:000  - [23]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(18,GPT,19009EC5-475E-43AD-9305-3919DF11DD2F,0x6CE0A800,0xFA000)
+0:546  0:000          Result of bootcode detection: bootable Clover (clover)
+0:546  0:000          This is SelfVolume !!
+0:546  0:000  - [24]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(19,GPT,704B8B59-3BDF-4667-974C-B118B3D790CD,0x6CF04800,0x5001000)
+0:546  0:000          hiding this volume
+0:546  0:000  - [25]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(20,GPT,1212EDBA-7A76-42AE-82DF-05B709D80CCA,0x71F06800,0x2800000)
+0:547  0:000          Result of bootcode detection: bootable Windows (vista,win)
+0:547  0:000  - [26]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x2,0x0,0x0)
+0:547  0:000          Found optical drive
+0:547  0:000  === [ InitTheme ] =========================================
+0:547  0:000  Using theme 'metal' (EFI\CLOVER\themes\metal)
+0:561  0:013  Loading font from ThemeDir: Success
+0:562  0:000  Choosing theme metal
+0:562  0:000  after NVRAM boot-args=kext-dev-mode=1 rootless=0
+0:562  0:000  === [ Dump SMC keys from NVRAM ] ==========================
+0:562  0:000  no AppleSMC protocol
+0:564  0:002     fakesmc-key-NTOK-ui8:01 
+0:564  0:000     fakesmc-key-NATi-ui16:00 00 
+0:564  0:000     fakesmc-key-NATJ-ui8:00 
+0:564  0:000     fakesmc-key-CLKH-{clh:00 00 70 80 00 01 19 40 
+0:568  0:003     fakesmc-key-CLKT-ui32:00 00 A0 9E 
+0:568  0:000     fakesmc-key-MSDW-ui8:01 
+0:568  0:000  === [ ScanLoader ] ========================================
+0:568  0:000  - [05]: 'ESP'
+0:568  0:000          AddLoaderEntry for Volume Name=ESP
+0:576  0:007          [!] Icon 18 (icons\vol_internal_ntfs.icns) not found (path: EFI\CLOVER\themes\metal)
+0:583  0:006  - [07]: 'ESP'
+0:583  0:000          AddLoaderEntry for Volume Name=ESP
+0:588  0:004  - [08]: 'LRS_ESP'
+0:588  0:000          AddLoaderEntry for Volume Name=LRS_ESP
+0:621  0:032  - [22]: 'TSSR'
+0:626  0:004  - [23]: 'CLOVER'
+0:667  0:041  - [24]: 'mac', hidden
+0:667  0:000  Scanning legacy ...
+0:667  0:000   0: 'Whole Disc Boot' (legacy) not legacy
+0:667  0:000   1: 'Whole Disc Boot' (legacy) not legacy
+0:667  0:000   2: 'Legacy HD1' (legacy) not legacy
+0:667  0:000   3: 'Legacy HD2' (vista,win) add legacy
+0:668  0:001   added 'Boot Windows from Legacy HD2' OSType=2 Icon=vista,win
+0:668  0:000   4: 'Legacy HD3' (legacy) not legacy
+0:668  0:000   5: 'ESP' (vista,win) add legacy
+0:669  0:000   added 'Boot Windows from ESP' OSType=2 Icon=vista,win
+0:669  0:000   6: 'Legacy HD1' (vista,win) add legacy
+0:670  0:000   added 'Boot Windows from Legacy HD1' OSType=2 Icon=vista,win
+0:670  0:000   7: 'ESP' (vista,win) add legacy
+0:670  0:000   added 'Boot Windows from ESP' OSType=2 Icon=vista,win
+0:670  0:000   8: 'LRS_ESP' (vista,win) add legacy
+0:671  0:000   added 'Boot Windows from LRS_ESP' OSType=2 Icon=vista,win
+0:671  0:000   9: 'Legacy HD4' (legacy) not legacy
+0:671  0:000  10: 'Legacy HD5' (vista,win) add legacy
+0:671  0:000   added 'Boot Windows from Legacy HD5' OSType=2 Icon=vista,win
+0:671  0:000  11: 'Legacy HD6' (vista,win) add legacy
+0:672  0:000   added 'Boot Windows from Legacy HD6' OSType=2 Icon=vista,win
+0:672  0:000  12: 'Legacy HD7' (vista,win) add legacy
+0:673  0:000   added 'Boot Windows from Legacy HD7' OSType=2 Icon=vista,win
+0:673  0:000  13: 'Legacy HD8' (vista,win) add legacy
+0:673  0:000   added 'Boot Windows from Legacy HD8' OSType=2 Icon=vista,win
+0:673  0:000  14: 'Legacy HD9' (vista,win) add legacy
+0:674  0:000   added 'Boot Windows from Legacy HD9' OSType=2 Icon=vista,win
+0:674  0:000  15: 'Legacy HD10' (vista,win) add legacy
+0:675  0:000   added 'Boot Windows from Legacy HD10' OSType=2 Icon=vista,win
+0:675  0:000  16: 'Legacy HD11' (vista,win) add legacy
+0:675  0:000   added 'Boot Windows from Legacy HD11' OSType=2 Icon=vista,win
+0:675  0:000  17: 'Legacy HD12' (vista,win) add legacy
+0:676  0:000   added 'Boot Windows from Legacy HD12' OSType=2 Icon=vista,win
+0:676  0:000  18: 'Legacy HD13' (vista,win) add legacy
+0:676  0:000   added 'Boot Windows from Legacy HD13' OSType=2 Icon=vista,win
+0:676  0:000  19: 'Legacy HD14' (vista,win) add legacy
+0:677  0:000   added 'Boot Windows from Legacy HD14' OSType=2 Icon=vista,win
+0:677  0:000  20: 'Legacy HD15' (vista,win) add legacy
+0:678  0:000   added 'Boot Windows from Legacy HD15' OSType=2 Icon=vista,win
+0:678  0:000  21: 'Legacy HD16' (vista,win) add legacy
+0:678  0:000   added 'Boot Windows from Legacy HD16' OSType=2 Icon=vista,win
+0:678  0:000  22: 'TSSR' (legacy) not legacy
+0:678  0:000  23: 'CLOVER' (clover) add legacy
+0:680  0:001   added 'Boot Clover from CLOVER' OSType=3 Icon=clover
+0:680  0:000  24: 'mac' (legacy) not legacy
+0:680  0:000  25: 'Legacy HD20' (vista,win) add legacy
+0:680  0:000   added 'Boot Windows from Legacy HD20' OSType=2 Icon=vista,win
+0:680  0:000  26: 'Whole Disc Boot' (legacy) not legacy
+0:680  0:000  === [ AddCustomTool ] =====================================
+0:681  0:000  found tool \EFI\CLOVER\tools\Shell64U.efi
+0:681  0:000  Checking EFI partition Volume 5 for Clover
+0:681  0:000  Checking EFI partition Volume 7 for Clover
+0:696  0:015  === [ GetEfiBootDeviceFromNvram ] =========================
+0:696  0:000   - efi-boot-device-data: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(19,GPT,704B8B59-3BDF-4667-974C-B118B3D790CD,0x6CF04800,0x5001000)
+0:696  0:000    - Volume: 'PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(19,GPT,704B8B59-3BDF-4667-974C-B118B3D790CD,0x6CF04800,0x5001000)'
+0:696  0:000    - LoaderPath: '<null string>'
+0:696  0:000    - Guid = 704B8B59-3BDF-4667-974C-B118B3D790CD
+0:696  0:000  === [ FindStartupDiskVolume ] =============================
+0:696  0:000    - Volume: partition = PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(19,GPT,704B8B59-3BDF-4667-974C-B118B3D790CD,0x6CF04800,0x5001000)
+0:696  0:000     - searching for that partition
+0:696  0:000      - [!] not found
+0:696  0:000     - searching again, but comparing Media dev path nodes
+0:696  0:000      - [!] not found
+0:696  0:000  Default boot entry not found
+0:696  0:000  DefaultIndex=-1 and MainMenu.EntryCount=27
+0:696  0:000  Use anime=logo_3D frames=15
+1:095  0:399  GUI ready
+10:538  9:442  ReinitSelfLib after theme change
+10:538  0:000  reinit: self device path=PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(18,GPT,19009EC5-475E-43AD-9305-3919DF11DD2F,0x6CE0A800,0xFA000)
+10:538  0:000  === [ ScanVolumes ] =======================================
+10:538  0:000  Found 27 volumes with blockIO
+10:538  0:000  - [00]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x0,0x0,0x0)
+10:538  0:000  - [01]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)
+10:539  0:000  - [02]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x0,0x0,0x0)\HD(1,GPT,B374A1BE-6E8A-45B8-951B-8F925E4AED2D,0x22,0x40000)
+10:539  0:000  - [03]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x0,0x0,0x0)\HD(2,GPT,E0AB928C-62AB-4D7E-E1A3-0D097AF7AC89,0x41000,0xD5B19B3)
+10:540  0:000          Result of bootcode detection: bootable Windows (vista,win)
+10:540  0:000  - [04]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x0,0x0,0x0)\HD(3,GPT,CB9A05A2-65DB-40C9-B5B2-45BC160A7D43,0xD5F3800,0x1806800)
+10:541  0:000          Result of bootcode detection: bootable unknown (legacy)
+10:541  0:000  - [05]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x0,0x0,0x0)\HD(4,GPT,3301B111-3537-4489-8D42-82B12F10B73C,0xEDFA000,0x82000)
+10:541  0:000          Result of bootcode detection: bootable Windows (vista,win)
+10:541  0:000  - [06]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(1,GPT,79193597-C624-48FF-8830-F6D074F07CD9,0x800,0x1F4000)
+10:541  0:000          Result of bootcode detection: bootable Windows (vista,win)
+10:541  0:000  - [07]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(2,GPT,32E67C2D-037B-43A2-9FAC-0C47249F0172,0x1F4800,0x82000)
+10:542  0:000          Result of bootcode detection: bootable Windows (vista,win)
+10:542  0:000  - [08]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(3,GPT,952B81D9-1002-49CB-8E5D-CEA0085CC902,0x276800,0x1F4000)
+10:542  0:000          Result of bootcode detection: bootable Windows (vista,win)
+10:542  0:000  - [09]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(4,GPT,F17006F4-793E-446B-8A16-B8B9FDBFBCB5,0x46A800,0x40000)
+10:542  0:000  - [10]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(5,GPT,6568AD00-666C-4E41-943F-9DF778422AFC,0x4AA800,0x74E18CA)
+10:542  0:000          Result of bootcode detection: bootable Windows (vista,win)
+10:542  0:000  - [11]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(6,GPT,3DCDDDA6-075F-4B59-A676-DE36AD0E0B0C,0x798C800,0x18D800)
+10:542  0:000          Result of bootcode detection: bootable Windows (vista,win)
+10:542  0:000  - [12]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(7,GPT,23FD0954-FE26-4327-9064-5C8B275FB713,0x7B1A800,0x191000)
+10:543  0:000          Result of bootcode detection: bootable Windows (vista,win)
+10:543  0:000  - [13]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(8,GPT,13819605-B09E-4DE5-942D-E1EC3BBDDBF9,0x7CAB800,0x4E71800)
+10:543  0:000          Result of bootcode detection: bootable Windows (vista,win)
+10:543  0:000  - [14]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(9,GPT,DFB74339-3B4E-4638-A22F-8B1C73ED66DE,0xCB1D800,0xC6800)
+10:543  0:000          Result of bootcode detection: bootable Windows (vista,win)
+10:543  0:000  - [15]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(10,GPT,E4AB3FE9-16A4-4CF9-90BC-2484B97CEEFF,0xCBE4000,0xC6800)
+10:543  0:000          Result of bootcode detection: bootable Windows (vista,win)
+10:543  0:000  - [16]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(11,GPT,D8FABF78-280F-4DEE-9740-C19FB16584A1,0xCCAA800,0x181EF000)
+10:543  0:000          Result of bootcode detection: bootable Windows (vista,win)
+10:543  0:000  - [17]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(12,GPT,889E5395-E79D-4282-8437-20FAA0C45758,0x24E9A000,0x77FF800)
+10:544  0:000          Result of bootcode detection: bootable Windows (vista,win)
+10:544  0:000  - [18]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(13,GPT,712687F3-174A-4DEC-A3E5-1BAB79006C72,0x2C69A000,0x5000000)
+10:544  0:000          Result of bootcode detection: bootable Windows (vista,win)
+10:544  0:000  - [19]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(14,GPT,FCA8B8C8-F303-48EF-9135-50ECF2B3D29A,0x3169A800,0x1E647800)
+10:544  0:000          Result of bootcode detection: bootable Windows (vista,win)
+10:544  0:000  - [20]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(15,GPT,9ED3D3C0-1B64-4B2B-B89D-8385E940C595,0x4FCE2000,0x200000)
+10:544  0:000          Result of bootcode detection: bootable Windows (vista,win)
+10:544  0:000  - [21]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(16,GPT,80693199-25FF-452B-9491-6582A688EEE9,0x4FEE2000,0x1C276DA4)
+10:545  0:000          Result of bootcode detection: bootable Windows (vista,win)
+10:545  0:000  - [22]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(17,GPT,EACEB5F1-07C1-43C4-8CB9-E6420DE8D4C9,0x6C159000,0xC71800)
+10:545  0:000  - [23]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(18,GPT,19009EC5-475E-43AD-9305-3919DF11DD2F,0x6CE0A800,0xFA000)
+10:545  0:000          Result of bootcode detection: bootable Clover (clover)
+10:545  0:000          This is SelfVolume !!
+10:545  0:000  - [24]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(19,GPT,704B8B59-3BDF-4667-974C-B118B3D790CD,0x6CF04800,0x5001000)
+10:545  0:000          hiding this volume
+10:545  0:000  - [25]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(20,GPT,1212EDBA-7A76-42AE-82DF-05B709D80CCA,0x71F06800,0x2800000)
+10:545  0:000          Result of bootcode detection: bootable Windows (vista,win)
+10:545  0:000  - [26]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x2,0x0,0x0)
+10:545  0:000          Found optical drive
+10:545  0:000  Choosing theme metal
+10:545  0:000  after NVRAM boot-args=kext-dev-mode=1 rootless=0
+10:545  0:000  === [ Dump SMC keys from NVRAM ] ==========================
+10:545  0:000  no AppleSMC protocol
+10:548  0:002     fakesmc-key-NTOK-ui8:01 
+10:548  0:000     fakesmc-key-NATi-ui16:00 00 
+10:548  0:000     fakesmc-key-NATJ-ui8:00 
+10:548  0:000     fakesmc-key-CLKH-{clh:00 00 70 80 00 01 19 40 
+10:552  0:003     fakesmc-key-CLKT-ui32:00 00 A0 9E 
+10:552  0:000     fakesmc-key-MSDW-ui8:01 
+10:552  0:000  === [ ScanLoader ] ========================================
+10:552  0:000  - [05]: 'ESP'
+10:552  0:000          AddLoaderEntry for Volume Name=ESP
+10:557  0:005  - [07]: 'ESP'
+10:557  0:000          AddLoaderEntry for Volume Name=ESP
+10:562  0:004  - [08]: 'LRS_ESP'
+10:562  0:000          AddLoaderEntry for Volume Name=LRS_ESP
+10:567  0:004  - [22]: 'TSSR'
+10:571  0:004  - [23]: 'CLOVER'
+10:577  0:006  - [24]: 'mac', hidden
+10:577  0:000  Scanning legacy ...
+10:577  0:000   0: 'Whole Disc Boot' (legacy) not legacy
+10:577  0:000   1: 'Whole Disc Boot' (legacy) not legacy
+10:577  0:000   2: 'Legacy HD1' (legacy) not legacy
+10:577  0:000   3: 'Legacy HD2' (vista,win) add legacy
+10:578  0:000   added 'Boot Windows from Legacy HD2' OSType=2 Icon=vista,win
+10:578  0:000   4: 'Legacy HD3' (legacy) not legacy
+10:578  0:000   5: 'ESP' (vista,win) add legacy
+10:578  0:000   added 'Boot Windows from ESP' OSType=2 Icon=vista,win
+10:578  0:000   6: 'Legacy HD1' (vista,win) add legacy
+10:579  0:000   added 'Boot Windows from Legacy HD1' OSType=2 Icon=vista,win
+10:579  0:000   7: 'ESP' (vista,win) add legacy
+10:580  0:000   added 'Boot Windows from ESP' OSType=2 Icon=vista,win
+10:580  0:000   8: 'LRS_ESP' (vista,win) add legacy
+10:580  0:000   added 'Boot Windows from LRS_ESP' OSType=2 Icon=vista,win
+10:580  0:000   9: 'Legacy HD4' (legacy) not legacy
+10:580  0:000  10: 'Legacy HD5' (vista,win) add legacy
+10:581  0:000   added 'Boot Windows from Legacy HD5' OSType=2 Icon=vista,win
+10:581  0:000  11: 'Legacy HD6' (vista,win) add legacy
+10:582  0:000   added 'Boot Windows from Legacy HD6' OSType=2 Icon=vista,win
+10:582  0:000  12: 'Legacy HD7' (vista,win) add legacy
+10:582  0:000   added 'Boot Windows from Legacy HD7' OSType=2 Icon=vista,win
+10:582  0:000  13: 'Legacy HD8' (vista,win) add legacy
+10:583  0:000   added 'Boot Windows from Legacy HD8' OSType=2 Icon=vista,win
+10:583  0:000  14: 'Legacy HD9' (vista,win) add legacy
+10:583  0:000   added 'Boot Windows from Legacy HD9' OSType=2 Icon=vista,win
+10:583  0:000  15: 'Legacy HD10' (vista,win) add legacy
+10:584  0:000   added 'Boot Windows from Legacy HD10' OSType=2 Icon=vista,win
+10:584  0:000  16: 'Legacy HD11' (vista,win) add legacy
+10:585  0:000   added 'Boot Windows from Legacy HD11' OSType=2 Icon=vista,win
+10:585  0:000  17: 'Legacy HD12' (vista,win) add legacy
+10:585  0:000   added 'Boot Windows from Legacy HD12' OSType=2 Icon=vista,win
+10:585  0:000  18: 'Legacy HD13' (vista,win) add legacy
+10:586  0:000   added 'Boot Windows from Legacy HD13' OSType=2 Icon=vista,win
+10:586  0:000  19: 'Legacy HD14' (vista,win) add legacy
+10:587  0:000   added 'Boot Windows from Legacy HD14' OSType=2 Icon=vista,win
+10:587  0:000  20: 'Legacy HD15' (vista,win) add legacy
+10:587  0:000   added 'Boot Windows from Legacy HD15' OSType=2 Icon=vista,win
+10:587  0:000  21: 'Legacy HD16' (vista,win) add legacy
+10:588  0:000   added 'Boot Windows from Legacy HD16' OSType=2 Icon=vista,win
+10:588  0:000  22: 'TSSR' (legacy) not legacy
+10:588  0:000  23: 'CLOVER' (clover) add legacy
+10:589  0:000   added 'Boot Clover from CLOVER' OSType=3 Icon=clover
+10:589  0:000  24: 'mac' (legacy) not legacy
+10:589  0:000  25: 'Legacy HD20' (vista,win) add legacy
+10:589  0:000   added 'Boot Windows from Legacy HD20' OSType=2 Icon=vista,win
+10:589  0:000  26: 'Whole Disc Boot' (legacy) not legacy
+10:589  0:000  === [ AddCustomTool ] =====================================
+10:589  0:000  found tool \EFI\CLOVER\tools\Shell64U.efi
+10:589  0:000  Checking EFI partition Volume 5 for Clover
+10:589  0:000  Checking EFI partition Volume 7 for Clover
+10:589  0:000  === [ GetEfiBootDeviceFromNvram ] =========================
+10:589  0:000  === [ FindStartupDiskVolume ] =============================
+10:589  0:000    - Volume: partition = PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(19,GPT,704B8B59-3BDF-4667-974C-B118B3D790CD,0x6CF04800,0x5001000)
+10:589  0:000     - searching for that partition
+10:589  0:000      - [!] not found
+10:589  0:000     - searching again, but comparing Media dev path nodes
+10:589  0:000      - [!] not found
+10:589  0:000  Default boot entry not found
+10:589  0:000  DefaultIndex=-1 and MainMenu.EntryCount=27
+10:589  0:000  Use anime=logo_3D frames=15
+13:565  2:975  ReinitSelfLib after theme change
+13:565  0:000  reinit: self device path=PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(18,GPT,19009EC5-475E-43AD-9305-3919DF11DD2F,0x6CE0A800,0xFA000)
+13:565  0:000  === [ ScanVolumes ] =======================================
+13:565  0:000  Found 27 volumes with blockIO
+13:565  0:000  - [00]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x0,0x0,0x0)
+13:565  0:000  - [01]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)
+13:566  0:000  - [02]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x0,0x0,0x0)\HD(1,GPT,B374A1BE-6E8A-45B8-951B-8F925E4AED2D,0x22,0x40000)
+13:566  0:000  - [03]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x0,0x0,0x0)\HD(2,GPT,E0AB928C-62AB-4D7E-E1A3-0D097AF7AC89,0x41000,0xD5B19B3)
+13:566  0:000          Result of bootcode detection: bootable Windows (vista,win)
+13:566  0:000  - [04]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x0,0x0,0x0)\HD(3,GPT,CB9A05A2-65DB-40C9-B5B2-45BC160A7D43,0xD5F3800,0x1806800)
+13:567  0:000          Result of bootcode detection: bootable unknown (legacy)
+13:567  0:000  - [05]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x0,0x0,0x0)\HD(4,GPT,3301B111-3537-4489-8D42-82B12F10B73C,0xEDFA000,0x82000)
+13:568  0:000          Result of bootcode detection: bootable Windows (vista,win)
+13:568  0:000  - [06]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(1,GPT,79193597-C624-48FF-8830-F6D074F07CD9,0x800,0x1F4000)
+13:568  0:000          Result of bootcode detection: bootable Windows (vista,win)
+13:568  0:000  - [07]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(2,GPT,32E67C2D-037B-43A2-9FAC-0C47249F0172,0x1F4800,0x82000)
+13:568  0:000          Result of bootcode detection: bootable Windows (vista,win)
+13:568  0:000  - [08]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(3,GPT,952B81D9-1002-49CB-8E5D-CEA0085CC902,0x276800,0x1F4000)
+13:568  0:000          Result of bootcode detection: bootable Windows (vista,win)
+13:568  0:000  - [09]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(4,GPT,F17006F4-793E-446B-8A16-B8B9FDBFBCB5,0x46A800,0x40000)
+13:568  0:000  - [10]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(5,GPT,6568AD00-666C-4E41-943F-9DF778422AFC,0x4AA800,0x74E18CA)
+13:569  0:000          Result of bootcode detection: bootable Windows (vista,win)
+13:569  0:000  - [11]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(6,GPT,3DCDDDA6-075F-4B59-A676-DE36AD0E0B0C,0x798C800,0x18D800)
+13:569  0:000          Result of bootcode detection: bootable Windows (vista,win)
+13:569  0:000  - [12]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(7,GPT,23FD0954-FE26-4327-9064-5C8B275FB713,0x7B1A800,0x191000)
+13:569  0:000          Result of bootcode detection: bootable Windows (vista,win)
+13:569  0:000  - [13]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(8,GPT,13819605-B09E-4DE5-942D-E1EC3BBDDBF9,0x7CAB800,0x4E71800)
+13:569  0:000          Result of bootcode detection: bootable Windows (vista,win)
+13:569  0:000  - [14]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(9,GPT,DFB74339-3B4E-4638-A22F-8B1C73ED66DE,0xCB1D800,0xC6800)
+13:569  0:000          Result of bootcode detection: bootable Windows (vista,win)
+13:569  0:000  - [15]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(10,GPT,E4AB3FE9-16A4-4CF9-90BC-2484B97CEEFF,0xCBE4000,0xC6800)
+13:570  0:000          Result of bootcode detection: bootable Windows (vista,win)
+13:570  0:000  - [16]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(11,GPT,D8FABF78-280F-4DEE-9740-C19FB16584A1,0xCCAA800,0x181EF000)
+13:570  0:000          Result of bootcode detection: bootable Windows (vista,win)
+13:570  0:000  - [17]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(12,GPT,889E5395-E79D-4282-8437-20FAA0C45758,0x24E9A000,0x77FF800)
+13:570  0:000          Result of bootcode detection: bootable Windows (vista,win)
+13:570  0:000  - [18]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(13,GPT,712687F3-174A-4DEC-A3E5-1BAB79006C72,0x2C69A000,0x5000000)
+13:570  0:000          Result of bootcode detection: bootable Windows (vista,win)
+13:570  0:000  - [19]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(14,GPT,FCA8B8C8-F303-48EF-9135-50ECF2B3D29A,0x3169A800,0x1E647800)
+13:570  0:000          Result of bootcode detection: bootable Windows (vista,win)
+13:570  0:000  - [20]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(15,GPT,9ED3D3C0-1B64-4B2B-B89D-8385E940C595,0x4FCE2000,0x200000)
+13:571  0:000          Result of bootcode detection: bootable Windows (vista,win)
+13:571  0:000  - [21]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(16,GPT,80693199-25FF-452B-9491-6582A688EEE9,0x4FEE2000,0x1C276DA4)
+13:571  0:000          Result of bootcode detection: bootable Windows (vista,win)
+13:571  0:000  - [22]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(17,GPT,EACEB5F1-07C1-43C4-8CB9-E6420DE8D4C9,0x6C159000,0xC71800)
+13:571  0:000  - [23]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(18,GPT,19009EC5-475E-43AD-9305-3919DF11DD2F,0x6CE0A800,0xFA000)
+13:571  0:000          Result of bootcode detection: bootable Clover (clover)
+13:571  0:000          This is SelfVolume !!
+13:571  0:000  - [24]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(19,GPT,704B8B59-3BDF-4667-974C-B118B3D790CD,0x6CF04800,0x5001000)
+13:571  0:000          hiding this volume
+13:571  0:000  - [25]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(20,GPT,1212EDBA-7A76-42AE-82DF-05B709D80CCA,0x71F06800,0x2800000)
+13:571  0:000          Result of bootcode detection: bootable Windows (vista,win)
+13:571  0:000  - [26]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x2,0x0,0x0)
+13:571  0:000          Found optical drive
+13:572  0:000  Choosing theme metal
+13:572  0:000  after NVRAM boot-args=kext-dev-mode=1 rootless=0
+13:572  0:000  === [ Dump SMC keys from NVRAM ] ==========================
+13:572  0:000  no AppleSMC protocol
+13:574  0:002     fakesmc-key-NTOK-ui8:01 
+13:574  0:000     fakesmc-key-NATi-ui16:00 00 
+13:574  0:000     fakesmc-key-NATJ-ui8:00 
+13:574  0:000     fakesmc-key-CLKH-{clh:00 00 70 80 00 01 19 40 
+13:578  0:003     fakesmc-key-CLKT-ui32:00 00 A0 9E 
+13:578  0:000     fakesmc-key-MSDW-ui8:01 
+13:578  0:000  === [ ScanLoader ] ========================================
+13:578  0:000  - [05]: 'ESP'
+13:578  0:000          AddLoaderEntry for Volume Name=ESP
+13:583  0:005  - [07]: 'ESP'
+13:583  0:000          AddLoaderEntry for Volume Name=ESP
+13:588  0:004  - [08]: 'LRS_ESP'
+13:588  0:000          AddLoaderEntry for Volume Name=LRS_ESP
+13:593  0:004  - [22]: 'TSSR'
+13:597  0:004  - [23]: 'CLOVER'
+13:602  0:005  - [24]: 'mac', hidden
+13:602  0:000  Scanning legacy ...
+13:602  0:000   0: 'Whole Disc Boot' (legacy) not legacy
+13:602  0:000   1: 'Whole Disc Boot' (legacy) not legacy
+13:602  0:000   2: 'Legacy HD1' (legacy) not legacy
+13:602  0:000   3: 'Legacy HD2' (vista,win) add legacy
+13:603  0:000   added 'Boot Windows from Legacy HD2' OSType=2 Icon=vista,win
+13:603  0:000   4: 'Legacy HD3' (legacy) not legacy
+13:603  0:000   5: 'ESP' (vista,win) add legacy
+13:604  0:000   added 'Boot Windows from ESP' OSType=2 Icon=vista,win
+13:604  0:000   6: 'Legacy HD1' (vista,win) add legacy
+13:605  0:000   added 'Boot Windows from Legacy HD1' OSType=2 Icon=vista,win
+13:605  0:000   7: 'ESP' (vista,win) add legacy
+13:605  0:000   added 'Boot Windows from ESP' OSType=2 Icon=vista,win
+13:605  0:000   8: 'LRS_ESP' (vista,win) add legacy
+13:606  0:000   added 'Boot Windows from LRS_ESP' OSType=2 Icon=vista,win
+13:606  0:000   9: 'Legacy HD4' (legacy) not legacy
+13:606  0:000  10: 'Legacy HD5' (vista,win) add legacy
+13:607  0:000   added 'Boot Windows from Legacy HD5' OSType=2 Icon=vista,win
+13:607  0:000  11: 'Legacy HD6' (vista,win) add legacy
+13:607  0:000   added 'Boot Windows from Legacy HD6' OSType=2 Icon=vista,win
+13:607  0:000  12: 'Legacy HD7' (vista,win) add legacy
+13:608  0:000   added 'Boot Windows from Legacy HD7' OSType=2 Icon=vista,win
+13:608  0:000  13: 'Legacy HD8' (vista,win) add legacy
+13:608  0:000   added 'Boot Windows from Legacy HD8' OSType=2 Icon=vista,win
+13:608  0:000  14: 'Legacy HD9' (vista,win) add legacy
+13:609  0:000   added 'Boot Windows from Legacy HD9' OSType=2 Icon=vista,win
+13:609  0:000  15: 'Legacy HD10' (vista,win) add legacy
+13:610  0:000   added 'Boot Windows from Legacy HD10' OSType=2 Icon=vista,win
+13:610  0:000  16: 'Legacy HD11' (vista,win) add legacy
+13:610  0:000   added 'Boot Windows from Legacy HD11' OSType=2 Icon=vista,win
+13:610  0:000  17: 'Legacy HD12' (vista,win) add legacy
+13:611  0:000   added 'Boot Windows from Legacy HD12' OSType=2 Icon=vista,win
+13:611  0:000  18: 'Legacy HD13' (vista,win) add legacy
+13:612  0:000   added 'Boot Windows from Legacy HD13' OSType=2 Icon=vista,win
+13:612  0:000  19: 'Legacy HD14' (vista,win) add legacy
+13:612  0:000   added 'Boot Windows from Legacy HD14' OSType=2 Icon=vista,win
+13:612  0:000  20: 'Legacy HD15' (vista,win) add legacy
+13:613  0:000   added 'Boot Windows from Legacy HD15' OSType=2 Icon=vista,win
+13:613  0:000  21: 'Legacy HD16' (vista,win) add legacy
+13:613  0:000   added 'Boot Windows from Legacy HD16' OSType=2 Icon=vista,win
+13:613  0:000  22: 'TSSR' (legacy) not legacy
+13:613  0:000  23: 'CLOVER' (clover) add legacy
+13:614  0:000   added 'Boot Clover from CLOVER' OSType=3 Icon=clover
+13:614  0:000  24: 'mac' (legacy) not legacy
+13:614  0:000  25: 'Legacy HD20' (vista,win) add legacy
+13:615  0:000   added 'Boot Windows from Legacy HD20' OSType=2 Icon=vista,win
+13:615  0:000  26: 'Whole Disc Boot' (legacy) not legacy
+13:615  0:000  === [ AddCustomTool ] =====================================
+13:615  0:000  found tool \EFI\CLOVER\tools\Shell64U.efi
+13:615  0:000  Checking EFI partition Volume 5 for Clover
+13:615  0:000  Checking EFI partition Volume 7 for Clover
+13:615  0:000  === [ GetEfiBootDeviceFromNvram ] =========================
+13:615  0:000  === [ FindStartupDiskVolume ] =============================
+13:615  0:000    - Volume: partition = PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(19,GPT,704B8B59-3BDF-4667-974C-B118B3D790CD,0x6CF04800,0x5001000)
+13:615  0:000     - searching for that partition
+13:615  0:000      - [!] not found
+13:615  0:000     - searching again, but comparing Media dev path nodes
+13:615  0:000      - [!] not found
+13:615  0:000  Default boot entry not found
+13:615  0:000  DefaultIndex=-1 and MainMenu.EntryCount=27
+13:615  0:000  Use anime=logo_3D frames=15
+14:166  0:551  ReinitSelfLib after theme change
+14:166  0:000  reinit: self device path=PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(18,GPT,19009EC5-475E-43AD-9305-3919DF11DD2F,0x6CE0A800,0xFA000)
+14:166  0:000  === [ ScanVolumes ] =======================================
+14:166  0:000  Found 27 volumes with blockIO
+14:166  0:000  - [00]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x0,0x0,0x0)
+14:167  0:000  - [01]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)
+14:167  0:000  - [02]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x0,0x0,0x0)\HD(1,GPT,B374A1BE-6E8A-45B8-951B-8F925E4AED2D,0x22,0x40000)
+14:167  0:000  - [03]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x0,0x0,0x0)\HD(2,GPT,E0AB928C-62AB-4D7E-E1A3-0D097AF7AC89,0x41000,0xD5B19B3)
+14:168  0:000          Result of bootcode detection: bootable Windows (vista,win)
+14:168  0:000  - [04]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x0,0x0,0x0)\HD(3,GPT,CB9A05A2-65DB-40C9-B5B2-45BC160A7D43,0xD5F3800,0x1806800)
+14:169  0:000          Result of bootcode detection: bootable unknown (legacy)
+14:169  0:000  - [05]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x0,0x0,0x0)\HD(4,GPT,3301B111-3537-4489-8D42-82B12F10B73C,0xEDFA000,0x82000)
+14:169  0:000          Result of bootcode detection: bootable Windows (vista,win)
+14:169  0:000  - [06]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(1,GPT,79193597-C624-48FF-8830-F6D074F07CD9,0x800,0x1F4000)
+14:169  0:000          Result of bootcode detection: bootable Windows (vista,win)
+14:169  0:000  - [07]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(2,GPT,32E67C2D-037B-43A2-9FAC-0C47249F0172,0x1F4800,0x82000)
+14:170  0:000          Result of bootcode detection: bootable Windows (vista,win)
+14:170  0:000  - [08]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(3,GPT,952B81D9-1002-49CB-8E5D-CEA0085CC902,0x276800,0x1F4000)
+14:170  0:000          Result of bootcode detection: bootable Windows (vista,win)
+14:170  0:000  - [09]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(4,GPT,F17006F4-793E-446B-8A16-B8B9FDBFBCB5,0x46A800,0x40000)
+14:170  0:000  - [10]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(5,GPT,6568AD00-666C-4E41-943F-9DF778422AFC,0x4AA800,0x74E18CA)
+14:170  0:000          Result of bootcode detection: bootable Windows (vista,win)
+14:170  0:000  - [11]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(6,GPT,3DCDDDA6-075F-4B59-A676-DE36AD0E0B0C,0x798C800,0x18D800)
+14:170  0:000          Result of bootcode detection: bootable Windows (vista,win)
+14:170  0:000  - [12]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(7,GPT,23FD0954-FE26-4327-9064-5C8B275FB713,0x7B1A800,0x191000)
+14:171  0:000          Result of bootcode detection: bootable Windows (vista,win)
+14:171  0:000  - [13]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(8,GPT,13819605-B09E-4DE5-942D-E1EC3BBDDBF9,0x7CAB800,0x4E71800)
+14:171  0:000          Result of bootcode detection: bootable Windows (vista,win)
+14:171  0:000  - [14]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(9,GPT,DFB74339-3B4E-4638-A22F-8B1C73ED66DE,0xCB1D800,0xC6800)
+14:171  0:000          Result of bootcode detection: bootable Windows (vista,win)
+14:171  0:000  - [15]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(10,GPT,E4AB3FE9-16A4-4CF9-90BC-2484B97CEEFF,0xCBE4000,0xC6800)
+14:171  0:000          Result of bootcode detection: bootable Windows (vista,win)
+14:171  0:000  - [16]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(11,GPT,D8FABF78-280F-4DEE-9740-C19FB16584A1,0xCCAA800,0x181EF000)
+14:171  0:000          Result of bootcode detection: bootable Windows (vista,win)
+14:171  0:000  - [17]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(12,GPT,889E5395-E79D-4282-8437-20FAA0C45758,0x24E9A000,0x77FF800)
+14:172  0:000          Result of bootcode detection: bootable Windows (vista,win)
+14:172  0:000  - [18]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(13,GPT,712687F3-174A-4DEC-A3E5-1BAB79006C72,0x2C69A000,0x5000000)
+14:172  0:000          Result of bootcode detection: bootable Windows (vista,win)
+14:172  0:000  - [19]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(14,GPT,FCA8B8C8-F303-48EF-9135-50ECF2B3D29A,0x3169A800,0x1E647800)
+14:172  0:000          Result of bootcode detection: bootable Windows (vista,win)
+14:172  0:000  - [20]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(15,GPT,9ED3D3C0-1B64-4B2B-B89D-8385E940C595,0x4FCE2000,0x200000)
+14:172  0:000          Result of bootcode detection: bootable Windows (vista,win)
+14:172  0:000  - [21]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(16,GPT,80693199-25FF-452B-9491-6582A688EEE9,0x4FEE2000,0x1C276DA4)
+14:172  0:000          Result of bootcode detection: bootable Windows (vista,win)
+14:172  0:000  - [22]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(17,GPT,EACEB5F1-07C1-43C4-8CB9-E6420DE8D4C9,0x6C159000,0xC71800)
+14:172  0:000  - [23]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(18,GPT,19009EC5-475E-43AD-9305-3919DF11DD2F,0x6CE0A800,0xFA000)
+14:173  0:000          Result of bootcode detection: bootable Clover (clover)
+14:173  0:000          This is SelfVolume !!
+14:173  0:000  - [24]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(19,GPT,704B8B59-3BDF-4667-974C-B118B3D790CD,0x6CF04800,0x5001000)
+14:173  0:000          hiding this volume
+14:173  0:000  - [25]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(20,GPT,1212EDBA-7A76-42AE-82DF-05B709D80CCA,0x71F06800,0x2800000)
+14:173  0:000          Result of bootcode detection: bootable Windows (vista,win)
+14:173  0:000  - [26]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x2,0x0,0x0)
+14:173  0:000          Found optical drive
+14:173  0:000  Choosing theme metal
+14:173  0:000  after NVRAM boot-args=kext-dev-mode=1 rootless=0
+14:173  0:000  === [ Dump SMC keys from NVRAM ] ==========================
+14:173  0:000  no AppleSMC protocol
+14:175  0:002     fakesmc-key-NTOK-ui8:01 
+14:176  0:000     fakesmc-key-NATi-ui16:00 00 
+14:176  0:000     fakesmc-key-NATJ-ui8:00 
+14:176  0:000     fakesmc-key-CLKH-{clh:00 00 70 80 00 01 19 40 
+14:179  0:003     fakesmc-key-CLKT-ui32:00 00 A0 9E 
+14:180  0:000     fakesmc-key-MSDW-ui8:01 
+14:180  0:000  === [ ScanLoader ] ========================================
+14:180  0:000  - [05]: 'ESP'
+14:180  0:000          AddLoaderEntry for Volume Name=ESP
+14:185  0:005  - [07]: 'ESP'
+14:185  0:000          AddLoaderEntry for Volume Name=ESP
+14:190  0:004  - [08]: 'LRS_ESP'
+14:190  0:000          AddLoaderEntry for Volume Name=LRS_ESP
+14:194  0:004  - [22]: 'TSSR'
+14:198  0:004  - [23]: 'CLOVER'
+14:204  0:005  - [24]: 'mac', hidden
+14:204  0:000  Scanning legacy ...
+14:204  0:000   0: 'Whole Disc Boot' (legacy) not legacy
+14:204  0:000   1: 'Whole Disc Boot' (legacy) not legacy
+14:204  0:000   2: 'Legacy HD1' (legacy) not legacy
+14:204  0:000   3: 'Legacy HD2' (vista,win) add legacy
+14:205  0:000   added 'Boot Windows from Legacy HD2' OSType=2 Icon=vista,win
+14:205  0:000   4: 'Legacy HD3' (legacy) not legacy
+14:205  0:000   5: 'ESP' (vista,win) add legacy
+14:206  0:000   added 'Boot Windows from ESP' OSType=2 Icon=vista,win
+14:206  0:000   6: 'Legacy HD1' (vista,win) add legacy
+14:206  0:000   added 'Boot Windows from Legacy HD1' OSType=2 Icon=vista,win
+14:206  0:000   7: 'ESP' (vista,win) add legacy
+14:207  0:000   added 'Boot Windows from ESP' OSType=2 Icon=vista,win
+14:207  0:000   8: 'LRS_ESP' (vista,win) add legacy
+14:207  0:000   added 'Boot Windows from LRS_ESP' OSType=2 Icon=vista,win
+14:207  0:000   9: 'Legacy HD4' (legacy) not legacy
+14:207  0:000  10: 'Legacy HD5' (vista,win) add legacy
+14:208  0:000   added 'Boot Windows from Legacy HD5' OSType=2 Icon=vista,win
+14:208  0:000  11: 'Legacy HD6' (vista,win) add legacy
+14:209  0:000   added 'Boot Windows from Legacy HD6' OSType=2 Icon=vista,win
+14:209  0:000  12: 'Legacy HD7' (vista,win) add legacy
+14:209  0:000   added 'Boot Windows from Legacy HD7' OSType=2 Icon=vista,win
+14:209  0:000  13: 'Legacy HD8' (vista,win) add legacy
+14:210  0:000   added 'Boot Windows from Legacy HD8' OSType=2 Icon=vista,win
+14:210  0:000  14: 'Legacy HD9' (vista,win) add legacy
+14:211  0:000   added 'Boot Windows from Legacy HD9' OSType=2 Icon=vista,win
+14:211  0:000  15: 'Legacy HD10' (vista,win) add legacy
+14:211  0:000   added 'Boot Windows from Legacy HD10' OSType=2 Icon=vista,win
+14:211  0:000  16: 'Legacy HD11' (vista,win) add legacy
+14:212  0:000   added 'Boot Windows from Legacy HD11' OSType=2 Icon=vista,win
+14:212  0:000  17: 'Legacy HD12' (vista,win) add legacy
+14:212  0:000   added 'Boot Windows from Legacy HD12' OSType=2 Icon=vista,win
+14:212  0:000  18: 'Legacy HD13' (vista,win) add legacy
+14:213  0:000   added 'Boot Windows from Legacy HD13' OSType=2 Icon=vista,win
+14:213  0:000  19: 'Legacy HD14' (vista,win) add legacy
+14:214  0:000   added 'Boot Windows from Legacy HD14' OSType=2 Icon=vista,win
+14:214  0:000  20: 'Legacy HD15' (vista,win) add legacy
+14:214  0:000   added 'Boot Windows from Legacy HD15' OSType=2 Icon=vista,win
+14:214  0:000  21: 'Legacy HD16' (vista,win) add legacy
+14:215  0:000   added 'Boot Windows from Legacy HD16' OSType=2 Icon=vista,win
+14:215  0:000  22: 'TSSR' (legacy) not legacy
+14:215  0:000  23: 'CLOVER' (clover) add legacy
+14:216  0:000   added 'Boot Clover from CLOVER' OSType=3 Icon=clover
+14:216  0:000  24: 'mac' (legacy) not legacy
+14:216  0:000  25: 'Legacy HD20' (vista,win) add legacy
+14:216  0:000   added 'Boot Windows from Legacy HD20' OSType=2 Icon=vista,win
+14:216  0:000  26: 'Whole Disc Boot' (legacy) not legacy
+14:216  0:000  === [ AddCustomTool ] =====================================
+14:216  0:000  found tool \EFI\CLOVER\tools\Shell64U.efi
+14:216  0:000  Checking EFI partition Volume 5 for Clover
+14:216  0:000  Checking EFI partition Volume 7 for Clover
+14:216  0:000  === [ GetEfiBootDeviceFromNvram ] =========================
+14:216  0:000  === [ FindStartupDiskVolume ] =============================
+14:216  0:000    - Volume: partition = PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(19,GPT,704B8B59-3BDF-4667-974C-B118B3D790CD,0x6CF04800,0x5001000)
+14:216  0:000     - searching for that partition
+14:216  0:000      - [!] not found
+14:216  0:000     - searching again, but comparing Media dev path nodes
+14:217  0:000      - [!] not found
+14:217  0:000  Default boot entry not found
+14:217  0:000  DefaultIndex=-1 and MainMenu.EntryCount=27
+14:217  0:000  Use anime=logo_3D frames=15
+14:722  0:505  ReinitSelfLib after theme change
+14:722  0:000  reinit: self device path=PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(18,GPT,19009EC5-475E-43AD-9305-3919DF11DD2F,0x6CE0A800,0xFA000)
+14:722  0:000  === [ ScanVolumes ] =======================================
+14:722  0:000  Found 27 volumes with blockIO
+14:722  0:000  - [00]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x0,0x0,0x0)
+14:722  0:000  - [01]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)
+14:722  0:000  - [02]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x0,0x0,0x0)\HD(1,GPT,B374A1BE-6E8A-45B8-951B-8F925E4AED2D,0x22,0x40000)
+14:722  0:000  - [03]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x0,0x0,0x0)\HD(2,GPT,E0AB928C-62AB-4D7E-E1A3-0D097AF7AC89,0x41000,0xD5B19B3)
+14:723  0:000          Result of bootcode detection: bootable Windows (vista,win)
+14:723  0:000  - [04]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x0,0x0,0x0)\HD(3,GPT,CB9A05A2-65DB-40C9-B5B2-45BC160A7D43,0xD5F3800,0x1806800)
+14:724  0:000          Result of bootcode detection: bootable unknown (legacy)
+14:724  0:000  - [05]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x0,0x0,0x0)\HD(4,GPT,3301B111-3537-4489-8D42-82B12F10B73C,0xEDFA000,0x82000)
+14:724  0:000          Result of bootcode detection: bootable Windows (vista,win)
+14:724  0:000  - [06]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(1,GPT,79193597-C624-48FF-8830-F6D074F07CD9,0x800,0x1F4000)
+14:725  0:000          Result of bootcode detection: bootable Windows (vista,win)
+14:725  0:000  - [07]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(2,GPT,32E67C2D-037B-43A2-9FAC-0C47249F0172,0x1F4800,0x82000)
+14:725  0:000          Result of bootcode detection: bootable Windows (vista,win)
+14:725  0:000  - [08]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(3,GPT,952B81D9-1002-49CB-8E5D-CEA0085CC902,0x276800,0x1F4000)
+14:725  0:000          Result of bootcode detection: bootable Windows (vista,win)
+14:725  0:000  - [09]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(4,GPT,F17006F4-793E-446B-8A16-B8B9FDBFBCB5,0x46A800,0x40000)
+14:725  0:000  - [10]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(5,GPT,6568AD00-666C-4E41-943F-9DF778422AFC,0x4AA800,0x74E18CA)
+14:725  0:000          Result of bootcode detection: bootable Windows (vista,win)
+14:725  0:000  - [11]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(6,GPT,3DCDDDA6-075F-4B59-A676-DE36AD0E0B0C,0x798C800,0x18D800)
+14:726  0:000          Result of bootcode detection: bootable Windows (vista,win)
+14:726  0:000  - [12]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(7,GPT,23FD0954-FE26-4327-9064-5C8B275FB713,0x7B1A800,0x191000)
+14:726  0:000          Result of bootcode detection: bootable Windows (vista,win)
+14:726  0:000  - [13]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(8,GPT,13819605-B09E-4DE5-942D-E1EC3BBDDBF9,0x7CAB800,0x4E71800)
+14:726  0:000          Result of bootcode detection: bootable Windows (vista,win)
+14:726  0:000  - [14]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(9,GPT,DFB74339-3B4E-4638-A22F-8B1C73ED66DE,0xCB1D800,0xC6800)
+14:726  0:000          Result of bootcode detection: bootable Windows (vista,win)
+14:726  0:000  - [15]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(10,GPT,E4AB3FE9-16A4-4CF9-90BC-2484B97CEEFF,0xCBE4000,0xC6800)
+14:726  0:000          Result of bootcode detection: bootable Windows (vista,win)
+14:726  0:000  - [16]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(11,GPT,D8FABF78-280F-4DEE-9740-C19FB16584A1,0xCCAA800,0x181EF000)
+14:727  0:000          Result of bootcode detection: bootable Windows (vista,win)
+14:727  0:000  - [17]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(12,GPT,889E5395-E79D-4282-8437-20FAA0C45758,0x24E9A000,0x77FF800)
+14:727  0:000          Result of bootcode detection: bootable Windows (vista,win)
+14:727  0:000  - [18]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(13,GPT,712687F3-174A-4DEC-A3E5-1BAB79006C72,0x2C69A000,0x5000000)
+14:727  0:000          Result of bootcode detection: bootable Windows (vista,win)
+14:727  0:000  - [19]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(14,GPT,FCA8B8C8-F303-48EF-9135-50ECF2B3D29A,0x3169A800,0x1E647800)
+14:727  0:000          Result of bootcode detection: bootable Windows (vista,win)
+14:727  0:000  - [20]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(15,GPT,9ED3D3C0-1B64-4B2B-B89D-8385E940C595,0x4FCE2000,0x200000)
+14:727  0:000          Result of bootcode detection: bootable Windows (vista,win)
+14:727  0:000  - [21]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(16,GPT,80693199-25FF-452B-9491-6582A688EEE9,0x4FEE2000,0x1C276DA4)
+14:728  0:000          Result of bootcode detection: bootable Windows (vista,win)
+14:728  0:000  - [22]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(17,GPT,EACEB5F1-07C1-43C4-8CB9-E6420DE8D4C9,0x6C159000,0xC71800)
+14:728  0:000  - [23]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(18,GPT,19009EC5-475E-43AD-9305-3919DF11DD2F,0x6CE0A800,0xFA000)
+14:728  0:000          Result of bootcode detection: bootable Clover (clover)
+14:728  0:000          This is SelfVolume !!
+14:728  0:000  - [24]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(19,GPT,704B8B59-3BDF-4667-974C-B118B3D790CD,0x6CF04800,0x5001000)
+14:728  0:000          hiding this volume
+14:728  0:000  - [25]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(20,GPT,1212EDBA-7A76-42AE-82DF-05B709D80CCA,0x71F06800,0x2800000)
+14:728  0:000          Result of bootcode detection: bootable Windows (vista,win)
+14:728  0:000  - [26]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x2,0x0,0x0)
+14:728  0:000          Found optical drive
+14:728  0:000  Choosing theme metal
+14:728  0:000  after NVRAM boot-args=kext-dev-mode=1 rootless=0
+14:728  0:000  === [ Dump SMC keys from NVRAM ] ==========================
+14:728  0:000  no AppleSMC protocol
+14:731  0:002     fakesmc-key-NTOK-ui8:01 
+14:731  0:000     fakesmc-key-NATi-ui16:00 00 
+14:731  0:000     fakesmc-key-NATJ-ui8:00 
+14:731  0:000     fakesmc-key-CLKH-{clh:00 00 70 80 00 01 19 40 
+14:735  0:003     fakesmc-key-CLKT-ui32:00 00 A0 9E 
+14:735  0:000     fakesmc-key-MSDW-ui8:01 
+14:735  0:000  === [ ScanLoader ] ========================================
+14:735  0:000  - [05]: 'ESP'
+14:735  0:000          AddLoaderEntry for Volume Name=ESP
+14:740  0:005  - [07]: 'ESP'
+14:740  0:000          AddLoaderEntry for Volume Name=ESP
+14:745  0:004  - [08]: 'LRS_ESP'
+14:745  0:000          AddLoaderEntry for Volume Name=LRS_ESP
+14:749  0:004  - [22]: 'TSSR'
+14:753  0:004  - [23]: 'CLOVER'
+14:759  0:005  - [24]: 'mac', hidden
+14:759  0:000  Scanning legacy ...
+14:759  0:000   0: 'Whole Disc Boot' (legacy) not legacy
+14:759  0:000   1: 'Whole Disc Boot' (legacy) not legacy
+14:759  0:000   2: 'Legacy HD1' (legacy) not legacy
+14:759  0:000   3: 'Legacy HD2' (vista,win) add legacy
+14:760  0:000   added 'Boot Windows from Legacy HD2' OSType=2 Icon=vista,win
+14:760  0:000   4: 'Legacy HD3' (legacy) not legacy
+14:760  0:000   5: 'ESP' (vista,win) add legacy
+14:761  0:000   added 'Boot Windows from ESP' OSType=2 Icon=vista,win
+14:761  0:000   6: 'Legacy HD1' (vista,win) add legacy
+14:761  0:000   added 'Boot Windows from Legacy HD1' OSType=2 Icon=vista,win
+14:761  0:000   7: 'ESP' (vista,win) add legacy
+14:762  0:000   added 'Boot Windows from ESP' OSType=2 Icon=vista,win
+14:762  0:000   8: 'LRS_ESP' (vista,win) add legacy
+14:763  0:000   added 'Boot Windows from LRS_ESP' OSType=2 Icon=vista,win
+14:763  0:000   9: 'Legacy HD4' (legacy) not legacy
+14:763  0:000  10: 'Legacy HD5' (vista,win) add legacy
+14:763  0:000   added 'Boot Windows from Legacy HD5' OSType=2 Icon=vista,win
+14:763  0:000  11: 'Legacy HD6' (vista,win) add legacy
+14:764  0:000   added 'Boot Windows from Legacy HD6' OSType=2 Icon=vista,win
+14:764  0:000  12: 'Legacy HD7' (vista,win) add legacy
+14:764  0:000   added 'Boot Windows from Legacy HD7' OSType=2 Icon=vista,win
+14:764  0:000  13: 'Legacy HD8' (vista,win) add legacy
+14:765  0:000   added 'Boot Windows from Legacy HD8' OSType=2 Icon=vista,win
+14:765  0:000  14: 'Legacy HD9' (vista,win) add legacy
+14:766  0:000   added 'Boot Windows from Legacy HD9' OSType=2 Icon=vista,win
+14:766  0:000  15: 'Legacy HD10' (vista,win) add legacy
+14:766  0:000   added 'Boot Windows from Legacy HD10' OSType=2 Icon=vista,win
+14:766  0:000  16: 'Legacy HD11' (vista,win) add legacy
+14:767  0:000   added 'Boot Windows from Legacy HD11' OSType=2 Icon=vista,win
+14:767  0:000  17: 'Legacy HD12' (vista,win) add legacy
+14:768  0:000   added 'Boot Windows from Legacy HD12' OSType=2 Icon=vista,win
+14:768  0:000  18: 'Legacy HD13' (vista,win) add legacy
+14:768  0:000   added 'Boot Windows from Legacy HD13' OSType=2 Icon=vista,win
+14:768  0:000  19: 'Legacy HD14' (vista,win) add legacy
+14:769  0:000   added 'Boot Windows from Legacy HD14' OSType=2 Icon=vista,win
+14:769  0:000  20: 'Legacy HD15' (vista,win) add legacy
+14:769  0:000   added 'Boot Windows from Legacy HD15' OSType=2 Icon=vista,win
+14:769  0:000  21: 'Legacy HD16' (vista,win) add legacy
+14:770  0:000   added 'Boot Windows from Legacy HD16' OSType=2 Icon=vista,win
+14:770  0:000  22: 'TSSR' (legacy) not legacy
+14:770  0:000  23: 'CLOVER' (clover) add legacy
+14:771  0:000   added 'Boot Clover from CLOVER' OSType=3 Icon=clover
+14:771  0:000  24: 'mac' (legacy) not legacy
+14:771  0:000  25: 'Legacy HD20' (vista,win) add legacy
+14:772  0:000   added 'Boot Windows from Legacy HD20' OSType=2 Icon=vista,win
+14:772  0:000  26: 'Whole Disc Boot' (legacy) not legacy
+14:772  0:000  === [ AddCustomTool ] =====================================
+14:772  0:000  found tool \EFI\CLOVER\tools\Shell64U.efi
+14:772  0:000  Checking EFI partition Volume 5 for Clover
+14:772  0:000  Checking EFI partition Volume 7 for Clover
+14:772  0:000  === [ GetEfiBootDeviceFromNvram ] =========================
+14:772  0:000  === [ FindStartupDiskVolume ] =============================
+14:772  0:000    - Volume: partition = PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(19,GPT,704B8B59-3BDF-4667-974C-B118B3D790CD,0x6CF04800,0x5001000)
+14:772  0:000     - searching for that partition
+14:772  0:000      - [!] not found
+14:772  0:000     - searching again, but comparing Media dev path nodes
+14:772  0:000      - [!] not found
+14:772  0:000  Default boot entry not found
+14:772  0:000  DefaultIndex=-1 and MainMenu.EntryCount=27
+14:772  0:000  Use anime=logo_3D frames=15
+27:662  12:889  ReinitSelfLib after theme change
+27:662  0:000  reinit: self device path=PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(18,GPT,19009EC5-475E-43AD-9305-3919DF11DD2F,0x6CE0A800,0xFA000)
+27:662  0:000  === [ ScanVolumes ] =======================================
+27:662  0:000  Found 27 volumes with blockIO
+27:662  0:000  - [00]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x0,0x0,0x0)
+27:675  0:012  - [01]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)
+27:675  0:000  - [02]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x0,0x0,0x0)\HD(1,GPT,B374A1BE-6E8A-45B8-951B-8F925E4AED2D,0x22,0x40000)
+27:675  0:000  - [03]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x0,0x0,0x0)\HD(2,GPT,E0AB928C-62AB-4D7E-E1A3-0D097AF7AC89,0x41000,0xD5B19B3)
+27:676  0:000          Result of bootcode detection: bootable Windows (vista,win)
+27:676  0:000  - [04]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x0,0x0,0x0)\HD(3,GPT,CB9A05A2-65DB-40C9-B5B2-45BC160A7D43,0xD5F3800,0x1806800)
+27:677  0:000          Result of bootcode detection: bootable unknown (legacy)
+27:677  0:000  - [05]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x0,0x0,0x0)\HD(4,GPT,3301B111-3537-4489-8D42-82B12F10B73C,0xEDFA000,0x82000)
+27:677  0:000          Result of bootcode detection: bootable Windows (vista,win)
+27:677  0:000  - [06]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(1,GPT,79193597-C624-48FF-8830-F6D074F07CD9,0x800,0x1F4000)
+27:678  0:000          Result of bootcode detection: bootable Windows (vista,win)
+27:678  0:000  - [07]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(2,GPT,32E67C2D-037B-43A2-9FAC-0C47249F0172,0x1F4800,0x82000)
+27:678  0:000          Result of bootcode detection: bootable Windows (vista,win)
+27:678  0:000  - [08]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(3,GPT,952B81D9-1002-49CB-8E5D-CEA0085CC902,0x276800,0x1F4000)
+27:678  0:000          Result of bootcode detection: bootable Windows (vista,win)
+27:678  0:000  - [09]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(4,GPT,F17006F4-793E-446B-8A16-B8B9FDBFBCB5,0x46A800,0x40000)
+27:678  0:000  - [10]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(5,GPT,6568AD00-666C-4E41-943F-9DF778422AFC,0x4AA800,0x74E18CA)
+27:678  0:000          Result of bootcode detection: bootable Windows (vista,win)
+27:678  0:000  - [11]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(6,GPT,3DCDDDA6-075F-4B59-A676-DE36AD0E0B0C,0x798C800,0x18D800)
+27:678  0:000          Result of bootcode detection: bootable Windows (vista,win)
+27:679  0:000  - [12]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(7,GPT,23FD0954-FE26-4327-9064-5C8B275FB713,0x7B1A800,0x191000)
+27:679  0:000          Result of bootcode detection: bootable Windows (vista,win)
+27:679  0:000  - [13]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(8,GPT,13819605-B09E-4DE5-942D-E1EC3BBDDBF9,0x7CAB800,0x4E71800)
+27:679  0:000          Result of bootcode detection: bootable Windows (vista,win)
+27:679  0:000  - [14]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(9,GPT,DFB74339-3B4E-4638-A22F-8B1C73ED66DE,0xCB1D800,0xC6800)
+27:679  0:000          Result of bootcode detection: bootable Windows (vista,win)
+27:679  0:000  - [15]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(10,GPT,E4AB3FE9-16A4-4CF9-90BC-2484B97CEEFF,0xCBE4000,0xC6800)
+27:679  0:000          Result of bootcode detection: bootable Windows (vista,win)
+27:679  0:000  - [16]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(11,GPT,D8FABF78-280F-4DEE-9740-C19FB16584A1,0xCCAA800,0x181EF000)
+27:680  0:000          Result of bootcode detection: bootable Windows (vista,win)
+27:680  0:000  - [17]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(12,GPT,889E5395-E79D-4282-8437-20FAA0C45758,0x24E9A000,0x77FF800)
+27:680  0:000          Result of bootcode detection: bootable Windows (vista,win)
+27:680  0:000  - [18]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(13,GPT,712687F3-174A-4DEC-A3E5-1BAB79006C72,0x2C69A000,0x5000000)
+27:680  0:000          Result of bootcode detection: bootable Windows (vista,win)
+27:680  0:000  - [19]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(14,GPT,FCA8B8C8-F303-48EF-9135-50ECF2B3D29A,0x3169A800,0x1E647800)
+27:680  0:000          Result of bootcode detection: bootable Windows (vista,win)
+27:680  0:000  - [20]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(15,GPT,9ED3D3C0-1B64-4B2B-B89D-8385E940C595,0x4FCE2000,0x200000)
+27:680  0:000          Result of bootcode detection: bootable Windows (vista,win)
+27:680  0:000  - [21]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(16,GPT,80693199-25FF-452B-9491-6582A688EEE9,0x4FEE2000,0x1C276DA4)
+27:681  0:000          Result of bootcode detection: bootable Windows (vista,win)
+27:681  0:000  - [22]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(17,GPT,EACEB5F1-07C1-43C4-8CB9-E6420DE8D4C9,0x6C159000,0xC71800)
+27:681  0:000  - [23]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(18,GPT,19009EC5-475E-43AD-9305-3919DF11DD2F,0x6CE0A800,0xFA000)
+27:681  0:000          Result of bootcode detection: bootable Clover (clover)
+27:681  0:000          This is SelfVolume !!
+27:681  0:000  - [24]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(19,GPT,704B8B59-3BDF-4667-974C-B118B3D790CD,0x6CF04800,0x5001000)
+27:681  0:000          hiding this volume
+27:681  0:000  - [25]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(20,GPT,1212EDBA-7A76-42AE-82DF-05B709D80CCA,0x71F06800,0x2800000)
+27:681  0:000          Result of bootcode detection: bootable Windows (vista,win)
+27:681  0:000  - [26]: Volume: PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x2,0x0,0x0)
+27:681  0:000          Found optical drive
+27:681  0:000  Choosing theme metal
+27:681  0:000  after NVRAM boot-args=kext-dev-mode=1 rootless=0
+27:681  0:000  === [ Dump SMC keys from NVRAM ] ==========================
+27:681  0:000  no AppleSMC protocol
+27:684  0:002     fakesmc-key-NTOK-ui8:01 
+27:684  0:000     fakesmc-key-NATi-ui16:00 00 
+27:684  0:000     fakesmc-key-NATJ-ui8:00 
+27:684  0:000     fakesmc-key-CLKH-{clh:00 00 70 80 00 01 19 40 
+27:688  0:004     fakesmc-key-CLKT-ui32:00 00 A0 9E 
+27:688  0:000     fakesmc-key-MSDW-ui8:01 
+27:688  0:000  === [ ScanLoader ] ========================================
+27:688  0:000  - [05]: 'ESP'
+27:688  0:000          AddLoaderEntry for Volume Name=ESP
+27:693  0:005  - [07]: 'ESP'
+27:693  0:000          AddLoaderEntry for Volume Name=ESP
+27:698  0:004  - [08]: 'LRS_ESP'
+27:698  0:000          AddLoaderEntry for Volume Name=LRS_ESP
+27:703  0:004  - [22]: 'TSSR'
+27:707  0:004  - [23]: 'CLOVER'
+27:712  0:005  - [24]: 'mac', hidden
+27:712  0:000  Scanning legacy ...
+27:712  0:000   0: 'Whole Disc Boot' (legacy) not legacy
+27:712  0:000   1: 'Whole Disc Boot' (legacy) not legacy
+27:712  0:000   2: 'Legacy HD1' (legacy) not legacy
+27:712  0:000   3: 'Legacy HD2' (vista,win) add legacy
+27:713  0:000   added 'Boot Windows from Legacy HD2' OSType=2 Icon=vista,win
+27:713  0:000   4: 'Legacy HD3' (legacy) not legacy
+27:713  0:000   5: 'ESP' (vista,win) add legacy
+27:714  0:000   added 'Boot Windows from ESP' OSType=2 Icon=vista,win
+27:714  0:000   6: 'Legacy HD1' (vista,win) add legacy
+27:715  0:000   added 'Boot Windows from Legacy HD1' OSType=2 Icon=vista,win
+27:715  0:000   7: 'ESP' (vista,win) add legacy
+27:715  0:000   added 'Boot Windows from ESP' OSType=2 Icon=vista,win
+27:715  0:000   8: 'LRS_ESP' (vista,win) add legacy
+27:716  0:000   added 'Boot Windows from LRS_ESP' OSType=2 Icon=vista,win
+27:716  0:000   9: 'Legacy HD4' (legacy) not legacy
+27:716  0:000  10: 'Legacy HD5' (vista,win) add legacy
+27:717  0:000   added 'Boot Windows from Legacy HD5' OSType=2 Icon=vista,win
+27:717  0:000  11: 'Legacy HD6' (vista,win) add legacy
+27:717  0:000   added 'Boot Windows from Legacy HD6' OSType=2 Icon=vista,win
+27:717  0:000  12: 'Legacy HD7' (vista,win) add legacy
+27:718  0:000   added 'Boot Windows from Legacy HD7' OSType=2 Icon=vista,win
+27:718  0:000  13: 'Legacy HD8' (vista,win) add legacy
+27:719  0:000   added 'Boot Windows from Legacy HD8' OSType=2 Icon=vista,win
+27:719  0:000  14: 'Legacy HD9' (vista,win) add legacy
+27:719  0:000   added 'Boot Windows from Legacy HD9' OSType=2 Icon=vista,win
+27:719  0:000  15: 'Legacy HD10' (vista,win) add legacy
+27:720  0:000   added 'Boot Windows from Legacy HD10' OSType=2 Icon=vista,win
+27:720  0:000  16: 'Legacy HD11' (vista,win) add legacy
+27:720  0:000   added 'Boot Windows from Legacy HD11' OSType=2 Icon=vista,win
+27:720  0:000  17: 'Legacy HD12' (vista,win) add legacy
+27:721  0:000   added 'Boot Windows from Legacy HD12' OSType=2 Icon=vista,win
+27:721  0:000  18: 'Legacy HD13' (vista,win) add legacy
+27:722  0:000   added 'Boot Windows from Legacy HD13' OSType=2 Icon=vista,win
+27:722  0:000  19: 'Legacy HD14' (vista,win) add legacy
+27:722  0:000   added 'Boot Windows from Legacy HD14' OSType=2 Icon=vista,win
+27:722  0:000  20: 'Legacy HD15' (vista,win) add legacy
+27:723  0:000   added 'Boot Windows from Legacy HD15' OSType=2 Icon=vista,win
+27:723  0:000  21: 'Legacy HD16' (vista,win) add legacy
+27:724  0:000   added 'Boot Windows from Legacy HD16' OSType=2 Icon=vista,win
+27:724  0:000  22: 'TSSR' (legacy) not legacy
+27:724  0:000  23: 'CLOVER' (clover) add legacy
+27:724  0:000   added 'Boot Clover from CLOVER' OSType=3 Icon=clover
+27:724  0:000  24: 'mac' (legacy) not legacy
+27:724  0:000  25: 'Legacy HD20' (vista,win) add legacy
+27:725  0:000   added 'Boot Windows from Legacy HD20' OSType=2 Icon=vista,win
+27:725  0:000  26: 'Whole Disc Boot' (legacy) not legacy
+27:725  0:000  === [ AddCustomTool ] =====================================
+27:725  0:000  found tool \EFI\CLOVER\tools\Shell64U.efi
+27:725  0:000  Checking EFI partition Volume 5 for Clover
+27:725  0:000  Checking EFI partition Volume 7 for Clover
+27:725  0:000  === [ GetEfiBootDeviceFromNvram ] =========================
+27:725  0:000  === [ FindStartupDiskVolume ] =============================
+27:725  0:000    - Volume: partition = PciRoot(0x0)\Pci(0x1F,0x2)\Sata(0x1,0x0,0x0)\HD(19,GPT,704B8B59-3BDF-4667-974C-B118B3D790CD,0x6CF04800,0x5001000)
+27:725  0:000     - searching for that partition
+27:725  0:000      - [!] not found
+27:725  0:000     - searching again, but comparing Media dev path nodes
+27:725  0:000      - [!] not found
+27:725  0:000  Default boot entry not found
+27:725  0:000  DefaultIndex=-1 and MainMenu.EntryCount=27
+27:725  0:000  Use anime=logo_3D frames=15

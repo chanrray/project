@@ -1,0 +1,5 @@
+<!--pages/index/xuanxiang.wxml-->
+<!--<text>pages/index/xuanxiang.wxml</text>-->
+<view class="chishenme" bindtap='tianjia'><button>添加</button></view>
+  <view class="chishenme" bindtap='qingkong'><button>清空</button></view> 
+<view class="option">{{codes}}</view>

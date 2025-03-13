@@ -1,0 +1,1 @@
+mail sending test tool for windows server 2008 .net 4.0

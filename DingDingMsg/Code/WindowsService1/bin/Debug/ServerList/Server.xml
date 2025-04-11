@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Local是本地服务器IP地址，Server是需要测试连通性的服务器 -->
+<ServerList>
+	<Local>
+		<LocalAddress>192.168.0.2</LocalAddress>
+		<LocalLoc>本地服务器备注</LocalLoc>
+	</Local>
+	<Server>
+		<ServerAddress>192.168.0.3</ServerAddress>
+		<ServerLoc>远程服务器1</ServerLoc>
+	</Server>
+	<Server>
+		<ServerAddress>192.168.0.4</ServerAddress>
+		<ServerLoc>远程服务器2</ServerLoc>
+	</Server>
+</ServerList>

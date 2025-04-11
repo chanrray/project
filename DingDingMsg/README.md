@@ -1,0 +1,1 @@
+ping server and send DingDing robot message for windows server 2008 .net 4.5.2

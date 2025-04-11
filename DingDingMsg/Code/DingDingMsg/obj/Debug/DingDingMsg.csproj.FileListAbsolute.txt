@@ -1,0 +1,12 @@
+E:\DingDingMsg\Code\DingDingMsg\bin\Debug\ServerList\Api.xml
+E:\DingDingMsg\Code\DingDingMsg\bin\Debug\ServerList\Server.xml
+E:\DingDingMsg\Code\DingDingMsg\bin\Debug\DingDingMsg.exe.config
+E:\DingDingMsg\Code\DingDingMsg\bin\Debug\DingDingMsg.exe
+E:\DingDingMsg\Code\DingDingMsg\bin\Debug\DingDingMsg.pdb
+E:\DingDingMsg\Code\DingDingMsg\obj\Debug\DingDingMsg.csproj.AssemblyReference.cache
+E:\DingDingMsg\Code\DingDingMsg\obj\Debug\DingDingMsg.Form1.resources
+E:\DingDingMsg\Code\DingDingMsg\obj\Debug\DingDingMsg.Properties.Resources.resources
+E:\DingDingMsg\Code\DingDingMsg\obj\Debug\DingDingMsg.csproj.GenerateResource.cache
+E:\DingDingMsg\Code\DingDingMsg\obj\Debug\DingDingMsg.csproj.CoreCompileInputs.cache
+E:\DingDingMsg\Code\DingDingMsg\obj\Debug\DingDingMsg.exe
+E:\DingDingMsg\Code\DingDingMsg\obj\Debug\DingDingMsg.pdb

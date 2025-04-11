@@ -1,0 +1,6 @@
+<ApiConfig>
+	<DingTalk>
+		<BaseUrl>https://oapi.dingtalk.com/robot/send</BaseUrl>
+		<AccessToken>填写钉钉机器人token</AccessToken>
+	</DingTalk>
+</ApiConfig>

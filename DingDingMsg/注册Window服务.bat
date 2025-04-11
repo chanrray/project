@@ -1,0 +1,1 @@
+sc create E_DingDingMsg binpath= E:\DingDingMsg\WindowsService1.exe type= own start= auto displayname= DingDing_NetWorkPing

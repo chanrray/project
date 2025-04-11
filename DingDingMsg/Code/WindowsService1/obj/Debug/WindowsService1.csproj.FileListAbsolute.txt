@@ -1,0 +1,13 @@
+E:\DingDingMsg\Code\WindowsService1\bin\Debug\ServerList\Api.xml
+E:\DingDingMsg\Code\WindowsService1\bin\Debug\ServerList\Server.xml
+E:\DingDingMsg\Code\WindowsService1\bin\Debug\WindowsService1.exe.config
+E:\DingDingMsg\Code\WindowsService1\bin\Debug\WindowsService1.exe
+E:\DingDingMsg\Code\WindowsService1\bin\Debug\WindowsService1.pdb
+E:\DingDingMsg\Code\WindowsService1\bin\Debug\DingDingMsg.exe
+E:\DingDingMsg\Code\WindowsService1\bin\Debug\DingDingMsg.pdb
+E:\DingDingMsg\Code\WindowsService1\bin\Debug\DingDingMsg.exe.config
+E:\DingDingMsg\Code\WindowsService1\obj\Debug\WindowsService1.csproj.AssemblyReference.cache
+E:\DingDingMsg\Code\WindowsService1\obj\Debug\WindowsService1.csproj.CoreCompileInputs.cache
+E:\DingDingMsg\Code\WindowsService1\obj\Debug\WindowsS.24B08AB2.Up2Date
+E:\DingDingMsg\Code\WindowsService1\obj\Debug\WindowsService1.exe
+E:\DingDingMsg\Code\WindowsService1\obj\Debug\WindowsService1.pdb

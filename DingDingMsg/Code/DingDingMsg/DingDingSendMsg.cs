@@ -29,7 +29,7 @@ namespace DingDingMsg
         }
         public static string PostDingDing(string sMsg, Dictionary<string, string> headers = null)
         {
-            LoadDingTalkConfig();  //api.xml可优化成只读取一次配置文件而不是每次都读取，server.xml则支持实时修改和生效。
+            LoadDingTalkConfig();    //api.xml可优化成只读取一次配置文件而不是每次都读取，server.xml则支持实时修改和生效。
             string apiurl = $"{_baseUrl}?access_token={_accessToken}";
             WebRequest request = WebRequest.Create(@apiurl);
             request.Method = "POST";

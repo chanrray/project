@@ -76,7 +76,7 @@ namespace DingDingMsg
             List<string> errorMessages = new List<string>();
             List<Serverinfo> currentFailedServers = new List<Serverinfo>(servers);
             int attempts = 0;
-            while (attempts < 3 && currentFailedServers.Count > 0)  //ping三次测试
+            while (attempts < 3 && currentFailedServers.Count > 0)    //ping三次测试
             {
                 List<Serverinfo> nextAttemptFailedServers = new List<Serverinfo>();
                 foreach (var server in currentFailedServers)
@@ -89,7 +89,7 @@ namespace DingDingMsg
                 currentFailedServers = nextAttemptFailedServers;
                 attempts++;
             }
-            foreach (var server in currentFailedServers)  //对高延迟追加一次测试并给出ping延迟时间
+            foreach (var server in currentFailedServers)    //对高延迟追加一次测试并给出ping延迟时间
             {
 
                 if (TryPingServer(server, 2000, out string message))
@@ -112,7 +112,7 @@ namespace DingDingMsg
                 byte[] buffer = Encoding.ASCII.GetBytes(data);
                 PingOptions options = new PingOptions { DontFragment = true };
                 PingReply reply = pingSender.Send(server.ServerIP, timeout, buffer, options);
-                //此处本意是用不同timeout来限定RTT时间得到成功或超时结果，较高延迟机器经常得到错误结果与预期不一致。经过详细分析反编译、WPR分析内核和查阅资料得知是WINAPI IcmpSendEcho2的bug：timeout低于1000会间歇性返回错误结果。
+                //此处本意是用不同timeout来限定RTT时间得到成功或超时结果，高延迟机器经常得到错误结果与预期不一致。经过反编译、WPR分析内核和查阅资料得知是WINAPI“IcmpSendEcho2”的bug：timeout低于1000会间歇性返回错误结果。
                 if (reply.Status == IPStatus.Success)
                 {
                     resultMessage = $"服务器【{LocalIP}】-【{LocalLoc}】 ping【{server.ServerIP}】-【{server.ServerLoc}】，延时为【{reply.RoundtripTime}】毫秒！";

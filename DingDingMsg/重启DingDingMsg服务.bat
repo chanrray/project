@@ -1,3 +1,3 @@
-sc stop E_DingDingMsg
+sc stop DingDing_Ping
 choice /t 5 /d y /n >nul
-sc start E_DingDingMsg
+sc start DingDing_Ping

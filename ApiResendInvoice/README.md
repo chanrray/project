@@ -1,0 +1,1 @@
+api get method for resend invoice email when don't want to change dns or hosts

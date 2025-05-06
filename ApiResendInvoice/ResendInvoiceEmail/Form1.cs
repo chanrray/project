@@ -18,8 +18,11 @@ namespace ResendInvoiceEmail
         public Form1()
         {
             InitializeComponent();
+            textBox_domain.Text = "api.prod.vmb";
+            textBox_ip.Text = "192.168.100.116";
+            textBox_apiurl.Text = "请输入完整的apiurl";
             // 创建自定义HttpClient，强制将域名解析到指定IP
-            _httpClient = new HttpClient(new CustomDnsHandler("domain", "IP"));
+            _httpClient = new HttpClient(new CustomDnsHandler(textBox_domain.Text.Trim(), textBox_ip.Text.Trim()));
         }
         private async void Button1_Click(object sender, EventArgs e)
         {
@@ -47,7 +50,7 @@ namespace ResendInvoiceEmail
                     try
                     {
                         // 发送GET请求
-                        var response = await _httpClient.GetAsync($"http://apiurl?id={orderNumber.Trim()}");
+                        var response = await _httpClient.GetAsync($"{textBox_apiurl.Text.Trim()}{orderNumber.Trim()}");
 
                         // 读取响应内容
                         var content = await response.Content.ReadAsStringAsync();
@@ -119,5 +122,9 @@ namespace ResendInvoiceEmail
 
         }
 
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -24,19 +24,21 @@ namespace ResendInvoiceEmail
             // 创建自定义HttpClient，强制将域名解析到指定IP
             _httpClient = new HttpClient(new CustomDnsHandler(textBox_domain.Text.Trim(), textBox_ip.Text.Trim()));
         }
-        private async void Button1_Click(object sender, EventArgs e)
+        private async void Button_send_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(TextBox1.Text))
+            if (string.IsNullOrWhiteSpace(TextBox_num.Text))
             {
                 MessageBox.Show("请输入至少一个单号", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-
-            button1.Enabled = false;
+            // 禁用按钮以防止重复点击
+            button_send.Enabled = false;
+            // 添加一个标志来跟踪是否有失败的请求
+            bool allSuccessful = true;
             try
             {
                 // 获取所有单号（按行分割）
-                var orderNumbers = TextBox1.Text.Split(new[] { "\r\n", "\n" }, StringSplitOptions.RemoveEmptyEntries);
+                var orderNumbers = TextBox_num.Text.Split(new[] { "\r\n", "\n" }, StringSplitOptions.RemoveEmptyEntries);
 
                 // 用于收集所有结果的字符串
                 var resultBuilder = new StringBuilder();
@@ -65,19 +67,26 @@ namespace ResendInvoiceEmail
                         resultBuilder.AppendLine($"单号: {orderNumber} 请求失败");
                         resultBuilder.AppendLine($"错误: {ex.Message}");
                         resultBuilder.AppendLine("---------------------");
+                        // 如果发生异常，设置标志为false
+                        allSuccessful = false;
                     }
                 }
-
                 // 显示所有结果
-                MessageBox.Show(resultBuilder.ToString(), "请求结果", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                text_log.Text = resultBuilder.ToString();
+                if (allSuccessful)
+                {
+                    MessageBox.Show("全部成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("部分失败", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
             }
             finally
             {
-                button1.Enabled = true;
+                button_send.Enabled = true;
             }
         }
-
-
         // 自定义HttpClientHandler，用于强制解析特定域名到指定IP
         public class CustomDnsHandler : HttpClientHandler
         {
@@ -90,7 +99,7 @@ namespace ResendInvoiceEmail
                 _targetIp = targetIp;
 
                 // 忽略证书验证（如果是HTTPS），暂时不需要此功能
-                
+                // this.ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => true;
             }
 
             protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, System.Threading.CancellationToken cancellationToken)
@@ -112,19 +121,10 @@ namespace ResendInvoiceEmail
             }
         }
 
-        private void TextBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void Form1_Load(object sender, EventArgs e)
         {
 
         }
 
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

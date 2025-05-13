@@ -79,7 +79,7 @@ namespace ResendInvoiceEmail
                 }
                 else
                 {
-                    MessageBox.Show("部分失败", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("注意失败", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
             finally

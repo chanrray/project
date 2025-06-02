@@ -1,1 +1,0 @@
-Chrome extension:Preview images from links on hover for caoliu.

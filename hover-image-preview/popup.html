@@ -66,14 +66,15 @@
   </style>
 </head>
 <body>
-  <div class="switch-container">
-    <span id="statusText" class="status-text enabled">图片预览已启用</span>
+  <!-- Container initially hidden -->
+  <div class="switch-container" id="switchContainer" style="display: none;">
+    <span id="statusText" class="status-text"></span>
     <label class="switch">
-      <input type="checkbox" id="toggleSwitch" checked>
+      <!-- No initial state -->
+      <input type="checkbox" id="toggleSwitch">
       <span class="slider"></span>
     </label>
   </div>
-  
   <script src="popup.js"></script>
 </body>
 </html>

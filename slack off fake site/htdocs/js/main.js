@@ -260,41 +260,117 @@
     });
 
     // ==================== Stock Data ====================
-    const stockDatabase = [
-    ];
 
-    let watchlistStocks = [{
-            code: '300139',
-            name: '晓程科技',
-            price: 46.12,
-            change: -1.44,
-            changePct: -3.03
-        }, {
-            code: '601212',
-            name: '白银有色',
-            price: 5.44,
-            change: -0.05,
-            changePct: -0.91
-        }, {
-            code: '000603',
-            name: '盛达资源',
-            price: 31.98,
-            change: -0.23,
-            changePct: -0.71
-        }
-    ];
+    const STORAGE_KEY = 'moyu_watchlist';
+    let watchlistStocks = [];
 
     const stockSearchInput = document.getElementById('stockSearchInput');
     const stockSearchBtn = document.getElementById('stockSearchBtn');
     const stockRefreshBtn = document.getElementById('stockRefreshBtn');
     const stockListEl = document.getElementById('stockList');
 
+    function parseStockData(raw) {
+        try {
+            const fields = raw.split('~');
+            if (fields.length < 35)
+                return null;
+            return {
+                code: fields[2] || '',
+                name: fields[1] || 'unknow',
+                price: parseFloat(fields[3]) || 0,
+                lastClose: parseFloat(fields[4]) || 0,
+                open: parseFloat(fields[5]) || 0,
+                volume: parseInt(fields[6]) || 0,
+                high: parseFloat(fields[33]) || 0,
+                low: parseFloat(fields[34]) || 0,
+                change: parseFloat(fields[31]) || 0,
+                changePct: parseFloat(fields[32]) || 0,
+                turnover: parseFloat(fields[38]) || 0,
+                pe: parseFloat(fields[39]) || 0,
+                marketCap: parseFloat(fields[45]) || 0,
+                updateTime: fields[30] || ''
+            };
+        } catch (e) {
+            console.error('Parse error:', e);
+            return null;
+        }
+    }
+
+    //JSONP avoid cors error
+    function fetchStockDataJSONP(code) {
+        return new Promise((resolve) => {
+            const callbackName = 'jsonp_callback_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5);
+            const script = document.createElement('script');
+            const url = `https://qt.gtimg.cn/q=${code}&cb=${callbackName}`;
+            window[callbackName] = function (rawData) {
+                delete window[callbackName];
+                document.body.removeChild(script);
+                const parsed = parseStockData(rawData);
+                resolve(parsed);
+            };
+            script.onerror = function () {
+                delete window[callbackName];
+                document.body.removeChild(script);
+                resolve(null);
+            };
+
+            script.src = url;
+            document.body.appendChild(script);
+        });
+    }
+
+    async function fetchMultipleStocksJSONP(codes) {
+        if (codes.length === 0)
+            return [];
+        const promises = codes.map(code => fetchStockDataJSONP(code));
+        const results = await Promise.all(promises);
+        return results.filter(item => item !== null);
+    }
+
+    function getMarketPrefix(code) {
+        const clean = code.trim();
+        if (clean.startsWith('6'))
+            return 'sh';
+        if (clean.startsWith('0') || clean.startsWith('3'))
+            return 'sz';
+        if (clean.startsWith('8') || clean.startsWith('4'))
+            return 'bj';
+        return 'hk';
+    }
+
+    function isValidStockCode(input) {
+        return /^\d{6}$/.test(input.trim());
+    }
+
+    //localStorage saving
+    function saveWatchlist() {
+        try {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(watchlistStocks));
+        } catch (e) {
+            console.warn('Save failed:', e);
+        }
+    }
+
+    function loadWatchlist() {
+        try {
+            const data = localStorage.getItem(STORAGE_KEY);
+            if (data) {
+                watchlistStocks = JSON.parse(data);
+                return true;
+            }
+        } catch (e) {
+            console.warn('Load failed:', e);
+        }
+        return false;
+    }
+
     function renderStockList() {
         if (watchlistStocks.length === 0) {
             stockListEl.innerHTML =
-                '<div style="text-align:center; padding:16px; font-size:12px; color:#999;">暂无自选股票，请输入代码搜索添加</div>';
+                '<div style="text-align:center; padding:16px; font-size:12px; color:#999;">📭 empty list,please add</div>';
             return;
         }
+
         stockListEl.innerHTML = watchlistStocks.map(function (stock) {
             const isUp = stock.change >= 0;
             const changeClass = isUp ? 'price-up' : 'price-down';
@@ -312,11 +388,10 @@
             '</div>' +
             '</div>' +
             '<button class="remove-icon" data-code="' + escapeHtml(stock.code) +
-            '" title="删除自选股">✕</button>' +
+            '" title="delete from list">✕</button>' +
             '</div>';
         }).join('');
 
-        // Attach remove handlers
         stockListEl.querySelectorAll('.remove-icon').forEach(function (btn) {
             btn.addEventListener('click', function (e) {
                 e.stopPropagation();
@@ -333,53 +408,100 @@
         if (idx > -1) {
             const name = watchlistStocks[idx].name;
             watchlistStocks.splice(idx, 1);
+            saveWatchlist();
             renderStockList();
-            showToast('🗑️ 已删除「' + name + '」');
+            showToast('🗑️ Deleted「' + name + '」');
         }
     }
 
-    function addStock(code) {
-        const trimmedCode = code.trim();
-        if (!trimmedCode) {
-            showToast('⚠️ 请输入股票代码');
+    async function addStock(input) {
+        const trimmed = input.trim();
+        if (!isValidStockCode(trimmed)) {
+            showToast('⚠️ Please input code');
             return;
         }
-        // Check if already in watchlist
-        if (watchlistStocks.some(function (s) {
-                return s.code === trimmedCode;
-            })) {
-            showToast('⚠️ 该股票已在自选列表中');
+
+        if (watchlistStocks.some(s => s.code === trimmed)) {
+            showToast('⚠️ ' + trimmed + ' already in list');
+            stockSearchInput.value = '';
             return;
         }
-        // Search in database
-        const stock = stockDatabase.find(function (s) {
-            return s.code === trimmedCode;
-        });
-        if (stock) {
+
+        const prefix = getMarketPrefix(trimmed);
+        const fullCode = prefix + trimmed;
+
+        showToast('⏳ Searching ' + trimmed + ' ...');
+        const data = await fetchStockDataJSONP(fullCode);
+
+        if (data && data.name && data.name !== 'unknow') {
             watchlistStocks.push({
-                ...stock
+                code: trimmed,
+                name: data.name,
+                price: data.price,
+                change: data.change,
+                changePct: data.changePct,
+                high: data.high,
+                low: data.low,
+                volume: data.volume,
+                turnover: data.turnover,
+                pe: data.pe,
+                marketCap: data.marketCap,
+                updateTime: data.updateTime
             });
+            saveWatchlist();
             renderStockList();
-            showToast('✅ 已添加「' + stock.name + '」到自选股');
+            showToast('✅ Added「' + data.name + '」（' + trimmed + '）');
+            stockSearchInput.value = '';
         } else {
-            // Simulate adding a new stock with random data
-            const newStock = {
-                code: trimmedCode,
-                name: '股票' + trimmedCode,
-                price:  + (Math.random() * 100 + 5).toFixed(2),
-                change:  + (Math.random() * 4 - 2).toFixed(2),
-                changePct:  + (Math.random() * 8 - 4).toFixed(2)
-            };
-            watchlistStocks.push(newStock);
-            renderStockList();
-            showToast('✅ 已添加股票代码 ' + trimmedCode);
+            showToast('❌ unalbe to find ' + trimmed + '，please try again later');
         }
-        stockSearchInput.value = '';
+    }
+
+    async function refreshAllStocks() {
+        if (watchlistStocks.length === 0) {
+            showToast('📭 empty list,no need to flash');
+            return;
+        }
+
+        showToast('🔄 Flashing...');
+        const fullCodes = watchlistStocks.map(function (stock) {
+            return getMarketPrefix(stock.code) + stock.code;
+        });
+
+        const results = await fetchMultipleStocksJSONP(fullCodes);
+
+        if (results.length === 0) {
+            showToast('⚠️ Flash failed，please try again later');
+            return;
+        }
+
+        let updatedCount = 0;
+        for (const newData of results) {
+            const existing = watchlistStocks.find(s => s.code === newData.code);
+            if (existing) {
+                existing.price = newData.price;
+                existing.change = newData.change;
+                existing.changePct = newData.changePct;
+                existing.high = newData.high;
+                existing.low = newData.low;
+                existing.volume = newData.volume;
+                existing.turnover = newData.turnover;
+                existing.pe = newData.pe;
+                existing.marketCap = newData.marketCap;
+                existing.updateTime = newData.updateTime;
+                updatedCount++;
+            }
+        }
+
+        saveWatchlist();
+        renderStockList();
+        showToast('✅ Flashed sucessed');
     }
 
     stockSearchBtn.addEventListener('click', function () {
         addStock(stockSearchInput.value);
     });
+
     stockSearchInput.addEventListener('keydown', function (e) {
         if (e.key === 'Enter') {
             e.preventDefault();
@@ -387,24 +509,19 @@
         }
     });
 
-    stockRefreshBtn.addEventListener('click', function () {
-        // Simulate price refresh with random fluctuations
-        watchlistStocks = watchlistStocks.map(function (stock) {
-            const drift = (Math.random() - 0.5) * 0.8;
-            const newPrice = Math.max(0.01, stock.price + drift);
-            const newChange =  + (stock.change + drift * 0.3).toFixed(2);
-            const newPct =  + ((drift / stock.price) * 100).toFixed(2);
-            return {
-                ...stock,
-                price: +newPrice.toFixed(2),
-                change: newChange,
-                changePct: newPct
-            };
-        });
-        renderStockList();
-        showToast('🔄 股票价格已刷新');
-    });
+    stockRefreshBtn.addEventListener('click', refreshAllStocks);
 
+    if (!loadWatchlist() || watchlistStocks.length === 0) {
+        // default watchlist
+        watchlistStocks = [];
+        saveWatchlist();
+    }
+
+    renderStockList();
+
+    setTimeout(refreshAllStocks, 500);
+
+    console.log('✅ Stock module initialized (JSONP + localStorage)');
     // ==================== Holiday Countdown ====================
     let nearestHoliday = null; // Currently nearest holiday { date, name }
     let holidayCache = []; // Cached holiday data for current year

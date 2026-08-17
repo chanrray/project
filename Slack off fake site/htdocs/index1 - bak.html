@@ -1,0 +1,2217 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="light">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5.0">
+    <title>专业开发者工具|知识管理平台</title>
+    <meta name="renderer" content="webkit">
+    <meta name="theme-color" content="#fc5531">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+    <style>
+        :root {
+            --el-color-primary: #fc5531;
+            --el-color-primary-light-3: #fd7b5f;
+            --el-color-primary-light-5: #fea692;
+            --el-color-primary-light-7: #fed0c4;
+            --el-color-primary-light-8: #ffe4de;
+            --el-color-primary-light-9: #fff2ef;
+            --el-color-primary-dark-2: #ca4427;
+            --el-color-danger: #f56c6c;
+            --el-color-info: #909399;
+            --el-color-success: #67c23a;
+            --el-color-warning: #e6a23c;
+            --el-border-radius-base: 4px;
+            --el-border-color: #dcdfe6;
+            --el-border-color-light: #e4e7ed;
+            --el-text-color-primary: #303133;
+            --el-text-color-regular: #606266;
+            --el-text-color-secondary: #909399;
+            --el-text-color-placeholder: #a8abb2;
+            --el-bg-color: #ffffff;
+            --el-bg-color-page: #f4f4f4;
+            --el-font-size-base: 14px;
+            --el-font-size-small: 13px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB',
+                'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-size: 14px;
+            color: var(--el-text-color-primary);
+            background-color: #f4f4f4;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        button {
+            cursor: pointer;
+            font-family: inherit;
+        }
+        button:disabled {
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
+
+        /* ============ Header ============ */
+        .csdn-header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: #ffffff;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+            height: 60px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 24px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            min-width: 0;
+            flex-shrink: 1;
+        }
+
+        .logo-link {
+            display: flex;
+            align-items: center;
+            flex-shrink: 0;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #fc5531;
+            letter-spacing: -0.5px;
+            cursor: pointer;
+            white-space: nowrap;
+            user-select: none;
+        }
+
+        .main-nav {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            flex-wrap: nowrap;
+            overflow: hidden;
+        }
+
+        .nav-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 8px 12px;
+            font-size: 14px;
+            color: #555;
+            border-radius: 4px;
+            cursor: pointer;
+            border: none;
+            background: none;
+            white-space: nowrap;
+            transition: color 0.2s, background 0.2s;
+            user-select: none;
+        }
+        .nav-item:hover {
+            color: #fc5531;
+            background: #fff5f2;
+        }
+        .nav-item.active {
+            color: #fc5531;
+            font-weight: 600;
+        }
+        .nav-item-highlight {
+            color: #fc5531;
+            font-weight: 600;
+            background: #fff5f2;
+            border: 1px solid #fed0c4;
+            border-radius: 20px;
+            padding: 4px 14px;
+        }
+        .nav-item-group {
+            cursor: default;
+        }
+
+        .el-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 1em;
+            height: 1em;
+            font-size: inherit;
+            flex-shrink: 0;
+        }
+        .el-icon svg {
+            width: 1em;
+            height: 1em;
+            fill: currentColor;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+
+        .toolbelt {
+            display: flex;
+            align-items: center;
+            gap: 2px;
+        }
+
+        .action-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 6px 10px;
+            font-size: 13px;
+            color: #666;
+            border: none;
+            background: none;
+            border-radius: 4px;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: color 0.2s, background 0.2s;
+            user-select: none;
+        }
+        .action-item:hover {
+            color: #fc5531;
+            background: #f5f5f5;
+        }
+
+        .theme-toggle-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            padding: 0;
+            font-size: 16px;
+            color: #666;
+            border: none;
+            background: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: color 0.2s, background 0.2s;
+            user-select: none;
+        }
+        .theme-toggle-btn:hover {
+            color: #fc5531;
+            background: #f5f5f5;
+        }
+
+        .user-actions {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* ============ Container ============ */
+        .csdn-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px 24px;
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            min-height: calc(100vh - 60px - 100px);
+        }
+
+        /* ============ Sidebar ============ */
+        .csdn-left-sidebar,
+        .csdn-right-sidebar {
+            width: 310px;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .widget {
+            background: #ffffff;
+            border-radius: 8px;
+            border: 1px solid #f0f0f0;
+            overflow: hidden;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+        }
+
+        .widget-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 16px;
+            border-bottom: 1px solid #f5f5f5;
+            background: #fafafa;
+        }
+
+        .widget-title {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 15px;
+            font-weight: 600;
+            color: #333;
+        }
+        .section-icon {
+            font-size: 16px;
+        }
+
+        .widget-content {
+            padding: 16px;
+        }
+        .widget-content.no-padding {
+            padding: 0;
+        }
+
+        .el-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 8px 16px;
+            font-size: 13px;
+            font-weight: 500;
+            line-height: 1;
+            border-radius: 4px;
+            border: 1px solid transparent;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s;
+            user-select: none;
+            background: none;
+            color: #606266;
+        }
+        .el-button--primary {
+            background: #fc5531;
+            border-color: #fc5531;
+            color: #fff;
+        }
+        .el-button--primary:hover {
+            background: #fd7b5f;
+            border-color: #fd7b5f;
+        }
+        .el-button--primary.is-plain {
+            background: #fff2ef;
+            border-color: #fed0c4;
+            color: #fc5531;
+        }
+        .el-button--primary.is-plain:hover {
+            background: #fc5531;
+            border-color: #fc5531;
+            color: #fff;
+        }
+        .el-button--danger {
+            background: #f56c6c;
+            border-color: #f56c6c;
+            color: #fff;
+        }
+        .el-button--danger.is-plain {
+            background: #fef0f0;
+            border-color: #fbc4c4;
+            color: #f56c6c;
+        }
+        .el-button--small {
+            padding: 6px 10px;
+            font-size: 12px;
+            border-radius: 3px;
+        }
+        .el-button--text {
+            border: none;
+            background: none;
+            color: #fc5531;
+            padding: 4px 8px;
+        }
+        .el-button--text:hover {
+            background: #f5f5f5;
+        }
+        .el-button.is-plain {
+            background: transparent;
+            border-color: #dcdfe6;
+            color: #606266;
+        }
+        .el-button.is-plain:hover {
+            background: #fc5531;
+            border-color: #fc5531;
+            color: #fff;
+        }
+        .el-button[block] {
+            width: 100%;
+            display: flex;
+        }
+
+        .collapse-toggle-btn {
+            padding: 4px;
+            color: #999;
+            font-size: 14px;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+        .collapse-toggle-btn:hover {
+            color: #333;
+        }
+
+        /* ============ Workspace Widget ============ */
+        .user-card-workspace {
+            padding: 12px 16px;
+        }
+        .user-logged-card .logged-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+        .logged-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #fc5531;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: 600;
+            position: relative;
+            flex-shrink: 0;
+        }
+        .vip-badge {
+            position: absolute;
+            bottom: -2px;
+            right: -2px;
+            font-size: 8px;
+            background: #ff9800;
+            color: #fff;
+            padding: 1px 3px;
+            border-radius: 4px;
+            font-weight: 700;
+        }
+        .logged-info {
+            flex: 1;
+            min-width: 0;
+        }
+        .logged-name {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 600;
+            font-size: 14px;
+            color: #333;
+        }
+        .username-text {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .checkin-btn {
+            padding: 3px 8px;
+            font-size: 11px;
+            border-radius: 10px;
+        }
+        .level-switcher {
+            display: flex;
+            gap: 10px;
+            margin-top: 2px;
+            font-size: 12px;
+            color: #999;
+        }
+        .level-text {
+            cursor: default;
+            user-select: none;
+        }
+
+        .logged-actions {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+
+        /* ============ Search Widget ============ */
+        .search-panel-compact .search-mode-switch {
+            margin-bottom: 10px;
+        }
+        .el-radio-group {
+            display: inline-flex;
+            border: 1px solid #dcdfe6;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .el-radio-button {
+            display: inline-flex;
+            position: relative;
+        }
+        .el-radio-button__original-radio {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+        }
+        .el-radio-button__inner {
+            display: inline-flex;
+            align-items: center;
+            padding: 6px 14px;
+            font-size: 12px;
+            color: #606266;
+            background: #fff;
+            cursor: pointer;
+            border-right: 1px solid #dcdfe6;
+            transition: all 0.2s;
+            user-select: none;
+        }
+        .el-radio-button:last-child .el-radio-button__inner {
+            border-right: none;
+        }
+        .el-radio-button.is-active .el-radio-button__inner {
+            background: #fc5531;
+            color: #fff;
+            border-color: #fc5531;
+        }
+
+        .search-input-group {
+            display: flex;
+        }
+        .el-input {
+            flex: 1;
+            display: inline-flex;
+            align-items: stretch;
+        }
+        .el-input__wrapper {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            padding: 6px 10px;
+            border: 1px solid #dcdfe6;
+            border-radius: 4px 0 0 4px;
+            background: #fff;
+            transition: border-color 0.2s;
+            min-height: 32px;
+        }
+        .el-input__wrapper:focus-within {
+            border-color: #fc5531;
+        }
+        .el-input__inner {
+            border: none;
+            outline: none;
+            font-size: 13px;
+            color: #333;
+            background: none;
+            width: 100%;
+            flex: 1;
+        }
+        .el-input__inner::placeholder {
+            color: #a8abb2;
+        }
+        .el-input-group__append {
+            display: flex;
+            align-items: center;
+        }
+        .el-input-group__append .el-button {
+            border-radius: 0 4px 4px 0;
+            height: 100%;
+            min-height: 32px;
+        }
+
+        /* ============ Author Card ============ */
+        .author-card {
+            text-align: center;
+        }
+        .author-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #fc5531;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin: 0 auto 8px;
+            font-weight: 600;
+        }
+        .author-name {
+            font-weight: 600;
+            font-size: 15px;
+            color: #333;
+            margin-bottom: 4px;
+        }
+        .author-info {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            font-size: 12px;
+            color: #999;
+            margin-bottom: 12px;
+        }
+        .author-stats {
+            display: flex;
+            border-top: 1px solid #f0f0f0;
+            padding-top: 12px;
+        }
+        .stat-item {
+            flex: 1;
+            text-align: center;
+            cursor: default;
+            user-select: none;
+        }
+        .stat-number {
+            display: block;
+            font-weight: 700;
+            font-size: 16px;
+            color: #333;
+        }
+        .stat-label {
+            display: block;
+            font-size: 11px;
+            color: #999;
+        }
+
+        /* ============ Article List ============ */
+        .article-list {
+            list-style: none;
+        }
+        .article-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 0;
+            border-bottom: 1px solid #f5f5f5;
+            font-size: 13px;
+        }
+        .article-item:last-child {
+            border-bottom: none;
+        }
+        .article-tag {
+            font-size: 11px;
+            padding: 1px 4px;
+            border-radius: 2px;
+            flex-shrink: 0;
+            font-weight: 600;
+        }
+        .article-tag.hot {
+            color: #fc5531;
+            background: #fff5f2;
+        }
+        .article-tag.new {
+            color: #67c23a;
+            background: #f0f9eb;
+        }
+        .article-link {
+            flex: 1;
+            text-align: left;
+            background: none;
+            border: none;
+            color: #333;
+            font-size: 13px;
+            cursor: default;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            user-select: none;
+        }
+        .article-link:hover {
+            color: #fc5531;
+        }
+        .article-views {
+            flex-shrink: 0;
+            font-size: 11px;
+            color: #999;
+        }
+        .view-more {
+            display: inline-block;
+            margin-top: 8px;
+            font-size: 12px;
+            color: #fc5531;
+            cursor: default;
+            user-select: none;
+        }
+
+        /* ============ Article ============ */
+        .csdn-article {
+            flex: 1;
+            min-width: 0;
+            background: #ffffff;
+            border-radius: 8px;
+            border: 1px solid #f0f0f0;
+            padding: 32px 40px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+        }
+
+        .article-title {
+            font-size: 26px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 12px;
+            line-height: 1.4;
+            word-break: break-word;
+        }
+
+        .article-meta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            font-size: 13px;
+            color: #999;
+            margin-bottom: 12px;
+            border-bottom: 1px solid #f5f5f5;
+            padding-bottom: 12px;
+        }
+        .meta-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .meta-item.original {
+            color: #fc5531;
+            font-weight: 600;
+            background: #fff5f2;
+            padding: 2px 6px;
+            border-radius: 2px;
+            font-size: 12px;
+        }
+        .meta-item.license {
+            cursor: default;
+            user-select: none;
+        }
+
+        .article-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+        }
+        .tag-item {
+            font-size: 12px;
+            color: #666;
+            background: #f5f5f5;
+            padding: 4px 10px;
+            border-radius: 16px;
+            cursor: default;
+            user-select: none;
+        }
+
+        .column-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 16px;
+            padding: 10px 14px;
+            background: #fafafa;
+            border-radius: 6px;
+        }
+        .column-content {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex: 1;
+        }
+        .column-icon {
+            font-size: 18px;
+        }
+        .column-name {
+            font-weight: 500;
+            font-size: 14px;
+            color: #333;
+            flex: 1;
+        }
+        .subscribe-btn {
+            background: #fc5531;
+            color: #fff;
+            border: none;
+            padding: 5px 14px;
+            border-radius: 4px;
+            font-size: 12px;
+            cursor: pointer;
+        }
+        .subscribe-btn:hover {
+            background: #fd7b5f;
+        }
+
+        .external-links {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .link-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 6px 12px;
+            font-size: 12px;
+            color: #fc5531;
+            background: #fff5f2;
+            border: 1px solid #fed0c4;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .link-item:hover {
+            background: #fc5531;
+            color: #fff;
+        }
+        .link-icon {
+            font-size: 14px;
+        }
+
+        .article-content {
+            font-size: 15px;
+            line-height: 1.8;
+            color: #333;
+            word-break: break-word;
+            min-height: 200px;
+        }
+        .article-content p {
+            margin-bottom: 16px;
+        }
+        .article-content .blog-para {
+            text-indent: 0;
+        }
+
+        .article-footer {
+            border-top: 1px solid #f0f0f0;
+            padding-top: 20px;
+            margin-top: 30px;
+        }
+        .author-snippet {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+        .author-avatar-small {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #fc5531;
+            object-fit: cover;
+        }
+        .author-info-small {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex: 1;
+        }
+        .author-name-small {
+            font-weight: 500;
+            font-size: 14px;
+            color: #333;
+        }
+        .follow-btn-small {
+            background: #fc5531;
+            color: #fff;
+            border: none;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            cursor: pointer;
+        }
+        .follow-btn-small:hover {
+            background: #fd7b5f;
+        }
+
+        .interaction-btns {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .interaction-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 6px 14px;
+            font-size: 13px;
+            color: #666;
+            border: 1px solid #e5e5e5;
+            background: #fff;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+            user-select: none;
+        }
+        .interaction-btn:hover {
+            border-color: #fc5531;
+            color: #fc5531;
+            background: #fff5f2;
+        }
+        .btn-icon {
+            font-size: 14px;
+        }
+
+        /* ============ Right Sidebar - Settings ============ */
+        .settings-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .setting-item {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .setting-label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            color: #555;
+            font-weight: 500;
+        }
+        .setting-label .el-icon {
+            color: #667eea;
+            font-size: 16px;
+        }
+        .setting-select {
+            width: 100%;
+        }
+        .el-select {
+            display: inline-flex;
+            width: 100%;
+            position: relative;
+        }
+        .el-select__wrapper {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            padding: 6px 10px;
+            border: 1px solid #dcdfe6;
+            border-radius: 4px;
+            background: #fff;
+            cursor: pointer;
+            min-height: 32px;
+            transition: border-color 0.2s;
+        }
+        .el-select__wrapper:hover {
+            border-color: #c0c4cc;
+        }
+        .el-select__selection {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            min-width: 0;
+        }
+        .el-select__placeholder {
+            color: #999;
+            font-size: 13px;
+        }
+        .el-select__placeholder span {
+            color: #333;
+        }
+        .el-select__suffix {
+            display: flex;
+            align-items: center;
+            color: #999;
+            font-size: 12px;
+        }
+        .setting-hint {
+            font-size: 11px;
+            color: #999;
+        }
+        .manage-template-btn {
+            align-self: flex-start;
+            padding: 4px 8px;
+            font-size: 12px;
+        }
+
+        .email-verification-status {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 12px;
+            background: #fafafa;
+            border-radius: 6px;
+            border: 1px solid #f0f0f0;
+        }
+        .status-header {
+            display: flex;
+            gap: 8px;
+        }
+        .status-icon .el-icon {
+            font-size: 18px;
+            color: #e6a23c;
+        }
+        .status-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #333;
+        }
+        .status-desc {
+            font-size: 12px;
+            color: #999;
+            margin-top: 2px;
+        }
+        .action-section {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        /* ============ Upload Widget ============ */
+        .reader-panel-compact .upload-btn {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            padding: 10px;
+            font-size: 14px;
+        }
+        .upload-btn .el-icon {
+            font-size: 16px;
+        }
+
+        /* ============ Farm QPet Countdown ============ */
+        .farm-qpet-countdown-widget .fqc-grid {
+            display: flex;
+            gap: 4px;
+        }
+        .fqc-cell {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 8px 4px;
+            border-radius: 6px;
+            text-decoration: none;
+            cursor: default;
+            user-select: none;
+            transition: transform 0.2s;
+        }
+        .fqc-cell:hover {
+            transform: translateY(-2px);
+        }
+        .fqc-cell--community {
+            background: #fff5f2;
+            color: #fc5531;
+        }
+        .fqc-cell--farm {
+            background: #f0f9eb;
+            color: #67c23a;
+        }
+        .fqc-cell--qpet {
+            background: #f4f0ff;
+            color: #7c3aed;
+        }
+        .fqc-name {
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .fqc-meta {
+            font-size: 11px;
+            opacity: 0.7;
+        }
+
+        /* ============ GBA Widget ============ */
+        .gba-widget {
+            padding: 12px;
+        }
+        .gba-widget-lead {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 8px;
+            flex-wrap: wrap;
+        }
+        .gba-widget-icon {
+            font-size: 12px;
+            font-weight: 700;
+            color: #7c3aed;
+        }
+        .console-select {
+            flex: 1;
+            padding: 4px 8px;
+            border: 1px solid #dcdfe6;
+            border-radius: 4px;
+            font-size: 12px;
+            color: #333;
+            background: #fff;
+            cursor: pointer;
+            min-width: 60px;
+        }
+        .library-toggle {
+            padding: 4px 8px;
+            font-size: 11px;
+            border: 1px solid #dcdfe6;
+            background: #fff;
+            border-radius: 4px;
+            color: #666;
+            cursor: pointer;
+        }
+        .local-rom-input {
+            font-size: 11px;
+            max-width: 80px;
+        }
+        .import-rom {
+            padding: 4px 8px;
+            font-size: 11px;
+            border: 1px solid #dcdfe6;
+            background: #fff;
+            border-radius: 4px;
+            color: #666;
+            cursor: pointer;
+        }
+        .gba-library-search {
+            display: flex;
+            gap: 4px;
+            margin-bottom: 8px;
+        }
+        .gba-library-search input {
+            flex: 1;
+            padding: 4px 8px;
+            border: 1px solid #dcdfe6;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+        .gba-library-search button {
+            padding: 4px 8px;
+            font-size: 11px;
+            border: 1px solid #dcdfe6;
+            background: #fff;
+            border-radius: 4px;
+            color: #666;
+            cursor: pointer;
+        }
+        .gba-widget-status {
+            font-size: 12px;
+            color: #999;
+            text-align: center;
+            padding: 8px;
+            background: #fafafa;
+            border-radius: 4px;
+        }
+
+        /* ============ Stock Widget ============ */
+        .stock-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .stock-section .search-container {
+            margin-bottom: 8px;
+        }
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+        .section-header h4 {
+            font-size: 13px;
+            font-weight: 600;
+            color: #333;
+        }
+        .stock-list {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .stock-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 12px;
+            border-radius: 6px;
+            background: #fafafa;
+            border: 1px solid #f0f0f0;
+            transition: background 0.2s;
+        }
+        .stock-item:hover {
+            background: #f5f5f5;
+        }
+        .stock-main-info {
+            flex-shrink: 0;
+            min-width: 80px;
+        }
+        .stock-symbol {
+            font-weight: 700;
+            font-size: 13px;
+            color: #333;
+        }
+        .stock-name {
+            font-size: 11px;
+            color: #666;
+        }
+        .stock-price-info {
+            flex: 1;
+            text-align: right;
+        }
+        .current-price {
+            font-weight: 700;
+            font-size: 14px;
+            color: #333;
+        }
+        .price-change {
+            font-size: 11px;
+            font-weight: 500;
+        }
+        .price-up {
+            color: #e53935;
+        }
+        .price-down {
+            color: #43a047;
+        }
+        .change-icon {
+            font-size: 10px;
+        }
+        .remove-icon {
+            color: #ccc;
+            font-size: 14px;
+            cursor: pointer;
+            flex-shrink: 0;
+            padding: 2px;
+            border: none;
+            background: none;
+        }
+        .remove-icon:hover {
+            color: #f56c6c;
+        }
+
+        /* ============ Holiday Countdown ============ */
+        .holiday-countdown-2026 .countdown-hero {
+            text-align: center;
+            padding: 12px;
+            background: #fff8f0;
+            border-radius: 6px;
+            margin-bottom: 10px;
+        }
+        .hero-label {
+            display: block;
+            font-size: 12px;
+            color: #999;
+        }
+        .hero-value {
+            display: block;
+            font-size: 18px;
+            font-weight: 700;
+            color: #ff9800;
+            margin-top: 2px;
+        }
+        .moyu-progress-section {
+            padding: 8px 4px;
+        }
+        .moyu-progress-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 4px;
+        }
+        .moyu-percent {
+            font-weight: 600;
+            color: #ff9800;
+        }
+        .moyu-progress-track {
+            height: 8px;
+            background: #f0f0f0;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .moyu-progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff9800, #ffc107);
+            border-radius: 4px;
+            transition: width 0.5s;
+        }
+
+        /* ============ Footer ============ */
+        .site-footer {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px 24px;
+            text-align: center;
+            font-size: 12px;
+            color: #999;
+            border-top: 1px solid #e5e5e5;
+        }
+        .beian-info p {
+            margin-bottom: 6px;
+        }
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .footer-links a {
+            color: #999;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .footer-links a:hover {
+            color: #fc5531;
+        }
+        .link-separator {
+            color: #ddd;
+        }
+
+        /* ============ Hidden file input ============ */
+        .hidden-file-input {
+            display: none;
+        }
+
+        /* ============ Responsive ============ */
+        @media (max-width: 1200px) {
+            .csdn-left-sidebar {
+                width: 260px;
+            }
+            .csdn-right-sidebar {
+                width: 260px;
+            }
+            .csdn-article {
+                padding: 24px;
+            }
+        }
+        @media (max-width: 900px) {
+            .csdn-container {
+                flex-direction: column;
+                padding: 12px;
+            }
+            .csdn-left-sidebar,
+            .csdn-right-sidebar {
+                width: 100%;
+                flex-direction: column;
+            }
+            .csdn-article {
+                order: -1;
+                width: 100%;
+            }
+            .header-container {
+                padding: 0 12px;
+                flex-wrap: wrap;
+                height: auto;
+                padding-top: 8px;
+                padding-bottom: 8px;
+            }
+            .main-nav {
+                display: none;
+            }
+            .csdn-header {
+                height: auto;
+                min-height: 50px;
+            }
+        }
+
+        /* ============ Utility ============ */
+        .text-ellipsis {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .mt-8 {
+            margin-top: 8px;
+        }
+        .mt-12 {
+            margin-top: 12px;
+        }
+        .mt-16 {
+            margin-top: 16px;
+        }
+
+        /* ============ Toast ============ */
+        .toast {
+            position: fixed;
+            top: 70px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #333;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 13px;
+            z-index: 99999;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+        .toast.show {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div id="app" class="csdn">
+        <!-- ==================== Header ==================== -->
+        <header class="csdn-header">
+            <div class="header-container">
+                <div class="header-left">
+                    <a class="logo-link" href="#" onclick="return false;">
+                        <div class="logo">moyu</div>
+                    </a>
+                    <nav class="main-nav" aria-label="主导航">
+                        <a class="nav-item active" href="#" onclick="return false;"><span>首页</span></a>
+                        <a class="nav-item" href="#" onclick="return false;"><span>技术博客</span></a>
+                        <a class="nav-item" href="#" onclick="return false;"><span>技术交流</span></a>
+                        <a class="nav-item" href="#" onclick="return false;"><span>农场</span></a>
+                        <a class="nav-item" href="#" onclick="return false;"><span>灵宠</span></a>
+                        <a class="nav-item" href="#" onclick="return false;"><span>小法庭</span></a>
+                        <a class="nav-item nav-item-highlight" href="#" onclick="return false;"><span>邀请好礼</span></a>
+                        <button class="nav-item nav-item-group" onclick="return false;">
+                            <span>更多</span>
+                        </button>
+                    </nav>
+                </div>
+                <div class="header-right">
+                    <div class="toolbelt">
+                        <button class="action-item" onclick="return false;">引导</button>
+                        <button class="theme-toggle-btn" title="自定义头部菜单" onclick="return false;">⚙</button>
+                        <button class="theme-toggle-btn" title="自定义侧边栏" onclick="return false;">📋</button>
+                        <button class="theme-toggle-btn" title="排行榜" onclick="return false;">🏆</button>
+                        <button class="theme-toggle-btn" title="邀请排行榜" onclick="return false;">🎁</button>
+                        <button class="theme-toggle-btn" title="切换到深色模式" onclick="return false;">🌙</button>
+                        <button class="action-item" onclick="return false;">
+                            <span>分享</span>
+                        </button>
+                    </div>
+                    <div class="user-actions">
+                        <a class="action-item" href="#" onclick="return false;">
+                            <span>我的主页</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- ==================== Main ==================== -->
+        <main class="csdn-container">
+            <!-- ===== Left Sidebar ===== -->
+            <aside class="csdn-left-sidebar">
+                <!-- Workspace Widget -->
+                <div class="widget workspace-widget">
+                    <div class="widget-header">
+                        <h3 class="widget-title"><span class="section-icon">⚙️</span> 我的工作台</h3>
+                        <button class="collapse-toggle-btn" title="收起" onclick="return false;">▲</button>
+                    </div>
+                    <div class="widget-content user-card-workspace">
+                        <div class="user-logged-card">
+                            <div class="logged-header">
+                                <div class="logged-avatar">游<span class="vip-badge">VIP</span></div>
+                                <div class="logged-info">
+                                    <div class="logged-name">
+                                        <span class="username-text">游客8trc9n</span>
+                                        <button class="el-button el-button--primary el-button--small is-plain checkin-btn" onclick="return false;">签到</button>
+                                    </div>
+                                    <div class="level-switcher">
+                                        <span class="level-text" style="color: #CD7F32;">农场 Lv11</span>
+                                        <span class="level-text" style="color: #808080;">社区 Lv1</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="logged-actions">
+                                <button class="el-button el-button--small is-plain" onclick="return false;">主页</button>
+                                <button class="el-button el-button--small is-plain" onclick="return false;">设置</button>
+                                <button class="el-button el-button--small is-plain" onclick="return false;">书架</button>
+                                <button class="el-button el-button--danger el-button--small is-plain" onclick="return false;">⏻</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Novel Search Widget -->
+                <div class="widget novel-search-widget">
+                    <div class="widget-header">
+                        <h3 class="widget-title"><span class="section-icon">🔎</span> 小说搜索</h3>
+                    </div>
+                    <div class="widget-content">
+                        <div class="search-panel-compact">
+                            <div class="search-mode-switch">
+                                <div class="el-radio-group" role="radiogroup">
+                                    <label class="el-radio-button is-active" style="display:inline-flex;">
+                                        <input class="el-radio-button__original-radio" type="radio" name="searchMode" value="name" checked>
+                                        <span class="el-radio-button__inner">名称</span>
+                                    </label>
+                                    <label class="el-radio-button" style="display:inline-flex;">
+                                        <input class="el-radio-button__original-radio" type="radio" name="searchMode" value="content">
+                                        <span class="el-radio-button__inner">内容</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="search-input-group">
+                                <div class="el-input el-input--small el-input-group el-input--suffix el-input-group--append">
+                                    <div class="el-input__wrapper">
+                                        <input class="el-input__inner" type="text" id="novelSearchInput" placeholder="搜索博客名称..." autocomplete="off">
+                                    </div>
+                                    <div class="el-input-group__append">
+                                        <button class="el-button el-button--primary el-button--small" id="novelSearchBtn">搜索</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Uploaded novels list -->
+                            <div id="uploadedNovelList" style="display:none; margin-top: 12px;">
+                                <div style="font-size:11px; color:#999; margin-bottom:4px;">📂 已上传小说：</div>
+                                <div id="novelListItems" style="display:flex; flex-direction:column; gap:4px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Author Card Widget -->
+                <div class="widget author-card-widget">
+                    <div class="widget-header">
+                        <h3 class="widget-title">作者信息</h3>
+                        <button class="collapse-toggle-btn" title="收起" onclick="return false;">▲</button>
+                    </div>
+                    <div class="widget-content">
+                        <div class="author-card">
+                            <div class="author-avatar">游</div>
+                            <div class="author-name">游客8trc9n</div>
+                            <div class="author-info">
+                                <span class="blog-level">博客等级：神话</span>
+                                <span class="coding-years">码龄：0年</span>
+                            </div>
+                            <div class="author-stats">
+                                <div class="stat-item"><span class="stat-number">0</span><span class="stat-label">原创</span></div>
+                                <div class="stat-item"><span class="stat-number">0</span><span class="stat-label">点赞</span></div>
+                                <div class="stat-item"><span class="stat-number">0</span><span class="stat-label">收藏</span></div>
+                                <div class="stat-item"><span class="stat-number">0</span><span class="stat-label">粉丝</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recommended Widget -->
+                <div class="widget recommended-widget">
+                    <div class="widget-header">
+                        <h3 class="widget-title">TA的精选</h3>
+                        <button class="collapse-toggle-btn" title="收起" onclick="return false;">▲</button>
+                    </div>
+                    <div class="widget-content">
+                        <ul class="article-list">
+                            <li class="article-item"><span class="article-tag hot">热</span><button class="article-link" onclick="return false;">社区论坛等级正式上线</button><span class="article-views">911 阅读</span></li>
+                            <li class="article-item"><span class="article-tag new">新</span><button class="article-link" onclick="return false;">游戏大厅更新公告（比大小）</button><span class="article-views">799 阅读</span></li>
+                            <li class="article-item"><span class="article-tag hot">热</span><button class="article-link" onclick="return false;">等级、经验、地块、幻境对战等数据关系</button><span class="article-views">13167 阅读</span></li>
+                            <li class="article-item"><span class="article-tag hot">热</span><button class="article-link" onclick="return false;">【摸鱼攻略】每日上线必做！6000+经验</button><span class="article-views">3889 阅读</span></li>
+                        </ul>
+                        <a class="view-more" href="#" onclick="return false;">查看更多&gt;</a>
+                    </div>
+                </div>
+
+                <!-- Popular Widget -->
+                <div class="widget popular-widget">
+                    <div class="widget-header">
+                        <h3 class="widget-title">大家在看</h3>
+                        <button class="collapse-toggle-btn" title="收起" onclick="return false;">▲</button>
+                    </div>
+                    <div class="widget-content">
+                        <ul class="article-list">
+                            <li class="article-item"><span class="article-tag hot">热</span><button class="article-link" onclick="return false;">社区论坛等级正式上线</button><span class="article-views">911 阅读</span></li>
+                            <li class="article-item"><span class="article-tag hot">热</span><button class="article-link" onclick="return false;">游戏大厅更新公告（比大小）</button><span class="article-views">799 阅读</span></li>
+                            <li class="article-item"><span class="article-tag hot">热</span><button class="article-link" onclick="return false;">CSDN伪装阅读模式 - 最强办公室摸鱼神器</button><span class="article-views">37719 阅读</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- ===== Article Area ===== -->
+            <article class="csdn-article">
+                <h1 class="article-title" id="articleTitle">📖 欢迎使用阅读工具</h1>
+                <div class="article-meta">
+                    <span class="meta-item original">原创</span>
+                    <span class="meta-item">已于2026-08-11 18:04:55 修改</span>
+                    <span class="meta-item" id="readCount">184 阅读</span>
+                    <span class="meta-item">24 点赞</span>
+                    <span class="meta-item">129 收藏</span>
+                    <span class="meta-item license">CC 4.0 BY-SA版权</span>
+                </div>
+                <div class="article-tags">
+                    <span class="tag-item">#阅读</span>
+                    <span class="tag-item">#小说</span>
+                    <span class="tag-item">#摸鱼</span>
+                    <span class="tag-item">#CSDN</span>
+                    <span class="tag-item">#工具</span>
+                </div>
+                <div class="column-info">
+                    <div class="column-content">
+                        <span class="column-icon">📚</span>
+                        <span class="column-name">我的小说书架</span>
+                        <button class="subscribe-btn" onclick="return false;">订阅专栏</button>
+                    </div>
+                </div>
+                <div class="external-links">
+                    <button class="link-item" onclick="return false;">🔗 项目地址</button>
+                    <button class="link-item" onclick="return false;">📄 arxiv</button>
+                    <button class="link-item" onclick="return false;">⬇️ 下载和使用</button>
+                </div>
+                <div class="article-content" id="articleContent">
+                    <p>👆 点击右侧「上传文档」按钮，选择TXT格式的小说文件即可开始阅读。</p>
+                    <p>上传后小说内容将在此区域显示，左侧搜索框可以搜索已上传的小说。</p>
+                    <p>本页面完全仿照CSDN风格布局，仅保留上传小说和查看股票两个核心功能。</p>
+                </div>
+                <div class="article-footer">
+                    <div class="author-snippet">
+                        <img class="author-avatar-small" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Crect width='40' height='40' rx='20' fill='%23fc5531'/%3E%3Ctext x='20' y='26' text-anchor='middle' font-size='16' fill='white' font-family='sans-serif'%3E游%3C/text%3E%3C/svg%3E" alt="作者头像">
+                        <div class="author-info-small">
+                            <div class="author-name-small">CoookeCola</div>
+                            <button class="follow-btn-small" onclick="return false;">关注</button>
+                        </div>
+                    </div>
+                    <div class="interaction-btns">
+                        <button class="interaction-btn" onclick="return false;"><span class="btn-icon">👍</span><span class="btn-text">点赞 (24)</span></button>
+                        <button class="interaction-btn" onclick="return false;"><span class="btn-icon">⭐</span><span class="btn-text">收藏 (129)</span></button>
+                        <button class="interaction-btn" onclick="return false;"><span class="btn-icon">💬</span><span class="btn-text">技术交流</span></button>
+                        <button class="interaction-btn" onclick="return false;"><span class="btn-icon">🔗</span><span class="btn-text">分享</span></button>
+                        <button class="interaction-btn" onclick="return false;"><span class="btn-icon">📑</span><span class="btn-text">专栏目录</span></button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- ===== Right Sidebar ===== -->
+            <aside class="csdn-right-sidebar">
+                <!-- Settings Widget -->
+                <div class="widget settings-widget">
+                    <div class="widget-header">
+                        <h3 class="widget-title">⚙️ 博客</h3>
+                        <button class="collapse-toggle-btn" title="收起" onclick="return false;">▲</button>
+                    </div>
+                    <div class="widget-content">
+                        <div class="settings-panel">
+                            <div class="setting-item">
+                                <div class="setting-label">🎨 界面主题</div>
+                                <div class="el-select el-select--small setting-select">
+                                    <div class="el-select__wrapper" onclick="return false;">
+                                        <div class="el-select__selection">
+                                            <div class="el-select__placeholder"><span>CSDN风格</span></div>
+                                        </div>
+                                        <div class="el-select__suffix">▼</div>
+                                    </div>
+                                </div>
+                                <span style="font-size:11px; color:#999;">专业的技术博客布局</span>
+                            </div>
+                            <div class="setting-item">
+                                <div class="setting-label">📄 博客内容</div>
+                                <div class="el-select el-select--small setting-select">
+                                    <div class="el-select__wrapper" onclick="return false;">
+                                        <div class="el-select__selection">
+                                            <div class="el-select__placeholder"><span>1</span></div>
+                                        </div>
+                                        <div class="el-select__suffix">▼</div>
+                                    </div>
+                                </div>
+                                <button class="el-button el-button--primary el-button--small is-text manage-template-btn" onclick="return false;">管理我的模板</button>
+                            </div>
+                            <div class="setting-item">
+                                <div class="email-verification-status">
+                                    <div class="status-header">
+                                        <div class="status-icon">⚠️</div>
+                                        <div class="status-info">
+                                            <h4 class="status-title">邮箱未验证</h4>
+                                            <p class="status-desc">邮箱 guest_1772699170456@guest.local 尚未验证</p>
+                                        </div>
+                                    </div>
+                                    <div class="action-section">
+                                        <button class="el-button el-button--primary el-button--small" onclick="return false;">立即验证</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Upload Widget (Core Function) -->
+                <div class="widget upload-widget" id="uploadWidget">
+                    <div class="widget-header">
+                        <h3 class="widget-title">📤 上传文档</h3>
+                        <button class="collapse-toggle-btn" title="收起" onclick="return false;">▲</button>
+                    </div>
+                    <div class="widget-content">
+                        <div class="reader-panel-compact">
+                            <button class="el-button el-button--primary upload-btn" id="uploadBtn" block>
+                                📤 上传文档
+                            </button>
+                            <p style="font-size:11px; color:#999; margin-top:8px; text-align:center;">
+                                支持TXT格式，自动编码检测
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Farm QPet Countdown Widget -->
+                <div class="widget farm-qpet-countdown-widget">
+                    <div class="widget-header">
+                        <h3 class="widget-title">⏱ 加油站补给</h3>
+                        <button class="collapse-toggle-btn" title="收起" onclick="return false;">▲</button>
+                    </div>
+                    <div class="widget-content" style="padding:8px 10px;">
+                        <div class="farm-qpet-countdown-widget">
+                            <div class="fqc-grid">
+                                <a class="fqc-cell fqc-cell--community" href="#" onclick="return false;">
+                                    <span class="fqc-name">社区</span>
+                                    <span class="fqc-meta">...</span>
+                                </a>
+                                <a class="fqc-cell fqc-cell--farm" href="#" onclick="return false;">
+                                    <span class="fqc-name">农场</span>
+                                    <span class="fqc-meta">...</span>
+                                </a>
+                                <a class="fqc-cell fqc-cell--qpet" href="#" onclick="return false;">
+                                    <span class="fqc-name">幻境对战</span>
+                                    <span class="fqc-meta">...</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- GBA Console Widget -->
+                <div class="widget gba-console-widget">
+                    <div class="widget-content no-padding">
+                        <div class="gba-widget">
+                            <div class="gba-widget-lead">
+                                <span class="gba-widget-icon">游戏</span>
+                                <select class="console-select" aria-label="选择游戏平台" onchange="return false;">
+                                    <option value="gba" selected>GBA</option>
+                                    <option value="gb">GB</option>
+                                    <option value="gbc">GBC</option>
+                                    <option value="nes">FC/NES</option>
+                                    <option value="snes">SNES</option>
+                                    <option value="genesis">MD</option>
+                                    <option value="n64">N64</option>
+                                    <option value="nds">NDS</option>
+                                </select>
+                                <button class="library-toggle" onclick="return false;">收起</button>
+                                <input class="local-rom-input" type="file" accept=".gba" style="display:none;">
+                                <button class="import-rom" onclick="return false;">导入</button>
+                            </div>
+                            <form class="gba-library-search" onsubmit="return false;">
+                                <input placeholder="筛选本地 GBA 游戏" aria-label="筛选本地 GBA 游戏">
+                                <button onclick="return false;">筛选</button>
+                            </form>
+                            <div class="gba-widget-status">游戏库暂时没有可运行的GBA ROM。</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stock Widget (Core Function) -->
+                <div class="widget stock-widget" id="stockWidget">
+                    <div class="widget-header">
+                        <h3 class="widget-title">📈 股票</h3>
+                        <button class="collapse-toggle-btn" title="收起" onclick="return false;">▲</button>
+                    </div>
+                    <div class="widget-content" style="padding:12px;">
+                        <div class="stock-panel">
+                            <div class="stock-section">
+                                <div class="search-container">
+                                    <div class="el-input el-input--prefix el-input--suffix">
+                                        <div class="el-input__wrapper" style="border-radius:4px;">
+                                            <input class="el-input__inner" type="text" id="stockSearchInput" placeholder="输入股票代码..." autocomplete="off">
+                                            <span id="stockSearchBtn" style="cursor:pointer; color:#999; font-size:14px;">🔍</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="stock-section">
+                                <div class="section-header">
+                                    <h4>📈 自选股票</h4>
+                                    <button class="el-button el-button--small" id="stockRefreshBtn" title="刷新">🔄</button>
+                                </div>
+                                <div class="stock-list" id="stockList">
+                                    <!-- Stock items will be rendered here by JS -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Holiday Countdown Widget -->
+                <div class="widget holiday-countdown-2026-widget">
+                    <div class="widget-header">
+                        <h3 class="widget-title">📆 假期余额监测仪</h3>
+                        <button class="collapse-toggle-btn" title="收起" onclick="return false;">▲</button>
+                    </div>
+                    <div class="widget-content" style="padding:12px;">
+                        <div class="holiday-countdown-2026">
+                            <div class="countdown-hero">
+                                <span class="hero-label">距离 中秋节 还有</span>
+                                <span class="hero-value" id="holidayCountdown">计算中...</span>
+                            </div>
+                            <div class="moyu-progress-section">
+                                <div class="moyu-progress-header">
+                                    <span class="moyu-label">摸鱼进度条</span>
+                                    <span class="moyu-percent" id="moyuPercent">56%</span>
+                                </div>
+                                <div class="moyu-progress-track">
+                                    <div class="moyu-progress-fill" id="moyuProgressFill" style="width: 56%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </main>
+
+        <!-- ==================== Footer ==================== -->
+        <footer class="site-footer">
+            <div class="beian-info">
+                <p>本站所有小说为转载作品，所有章节均由网友上传，转载至本站只是为了宣传本书让更多读者欣赏。</p>
+                <div class="footer-links">
+                    <a href="#" onclick="return false;">皖ICP备2025101392号</a>
+                    <span class="link-separator">|</span>
+                    <a href="#" onclick="return false;">隐私政策</a>
+                    <span class="link-separator">|</span>
+                    <a href="#" onclick="return false;">服务条款</a>
+                    <span class="link-separator">|</span>
+                    <a href="#" onclick="return false;">联系我们</a>
+                    <span class="link-separator">|</span>
+                    <a href="#" onclick="return false;">版权申诉</a>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Hidden file input for novel upload -->
+        <input type="file" accept=".txt" id="novelFileInput" class="hidden-file-input">
+
+        <!-- Toast notification -->
+        <div class="toast" id="toast"></div>
+    </div>
+
+    <script>
+        (function() {
+            'use strict';
+
+            // ==================== Toast Utility ====================
+            let toastTimeout;
+            function showToast(message, duration) {
+                duration = duration || 2000;
+                const toastEl = document.getElementById('toast');
+                toastEl.textContent = message;
+                toastEl.classList.add('show');
+                clearTimeout(toastTimeout);
+                toastTimeout = setTimeout(function() {
+                    toastEl.classList.remove('show');
+                }, duration);
+            }
+
+            // ==================== Novel Data ====================
+            const uploadedNovels = [];
+            const novelFileInput = document.getElementById('novelFileInput');
+            const uploadBtn = document.getElementById('uploadBtn');
+            const articleTitle = document.getElementById('articleTitle');
+            const articleContent = document.getElementById('articleContent');
+            const readCountEl = document.getElementById('readCount');
+            const novelSearchInput = document.getElementById('novelSearchInput');
+            const novelSearchBtn = document.getElementById('novelSearchBtn');
+            const uploadedNovelList = document.getElementById('uploadedNovelList');
+            const novelListItems = document.getElementById('novelListItems');
+
+            let currentNovelId = null;
+
+            // ==================== File Upload ====================
+            uploadBtn.addEventListener('click', function() {
+                novelFileInput.click();
+            });
+
+            novelFileInput.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (!file) return;
+
+                // Check if it's a .txt file
+                if (!file.name.toLowerCase().endsWith('.txt')) {
+                    showToast('⚠️ 请选择TXT格式的文件');
+                    novelFileInput.value = '';
+                    return;
+                }
+
+                // Check file size (limit to 10MB)
+                if (file.size > 10 * 1024 * 1024) {
+                    showToast('⚠️ 文件过大，请选择10MB以下的文件');
+                    novelFileInput.value = '';
+                    return;
+                }
+
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    let content = event.target.result;
+                    // Try to decode as UTF-8
+                    try {
+                        content = new TextDecoder('utf-8').decode(new TextEncoder().encode(content));
+                    } catch (e) {
+                        // fallback to default string
+                    }
+
+                    if (!content || content.trim().length === 0) {
+                        showToast('⚠️ 文件内容为空');
+                        novelFileInput.value = '';
+                        return;
+                    }
+
+                    const novelName = file.name.replace(/\.txt$/i, '');
+                    const novel = {
+                        id: Date.now().toString(),
+                        name: novelName,
+                        content: content,
+                        uploadTime: new Date().toLocaleString(),
+                        readCount: Math.floor(Math.random() * 500) + 50
+                    };
+
+                    uploadedNovels.push(novel);
+                    currentNovelId = novel.id;
+
+                    // Display content
+                    displayNovel(novel);
+                    updateNovelList();
+                    showToast('✅ 小说「' + novelName + '」上传成功！');
+
+                    novelFileInput.value = '';
+                };
+
+                reader.onerror = function() {
+                    showToast('⚠️ 文件读取失败，请重试');
+                    novelFileInput.value = '';
+                };
+
+                reader.readAsText(file, 'utf-8');
+            });
+
+            function displayNovel(novel) {
+                articleTitle.textContent = '📖 ' + novel.name;
+                // Split content into paragraphs
+                const paragraphs = novel.content.split(/\n{2,}|\r\n{2,}/).filter(function(p) {
+                    return p.trim().length > 0;
+                });
+                if (paragraphs.length === 0) {
+                    const lines = novel.content.split(/\n|\r\n/).filter(function(l) { return l.trim().length > 0;
+                        });
+                    articleContent.innerHTML = lines.map(function(line) {
+                        return '<p class="blog-para">' + escapeHtml(line.trim()) + '</p>';
+                    }).join('');
+                } else {
+                    articleContent.innerHTML = paragraphs.map(function(para) {
+                        return '<p class="blog-para">' + escapeHtml(para.trim()) + '</p>';
+                    }).join('');
+                }
+                readCountEl.textContent = novel.readCount + ' 阅读';
+                showToast('📖 正在阅读：' + novel.name);
+            }
+
+            function escapeHtml(text) {
+                const div = document.createElement('div');
+                div.textContent = text;
+                return div.innerHTML;
+            }
+
+            function updateNovelList() {
+                if (uploadedNovels.length === 0) {
+                    uploadedNovelList.style.display = 'none';
+                    return;
+                }
+                uploadedNovelList.style.display = 'block';
+                novelListItems.innerHTML = uploadedNovels.map(function(novel) {
+                    return '<div style="display:flex; align-items:center; gap:6px; padding:6px 8px;' +
+                        'background:#fafafa; border-radius:4px; font-size:12px; cursor:pointer;" ' +
+                        'onclick="window._openNovel(\'' + novel.id + '\')" title="点击阅读">' +
+                        '<span>📄</span>' +
+                        '<span style="flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">' +
+                        escapeHtml(novel.name) + '</span>' +
+                        '<span style="color:#999; font-size:10px;">' + novel.uploadTime + '</span>' +
+                        '<span style="color:#f56c6c; cursor:pointer;" onclick="event.stopPropagation(); window._deleteNovel(\'' +
+                        novel.id + '\')" title="删除">✕</span>' +
+                        '</div>';
+                }).join('');
+            }
+
+            // Expose functions globally for inline onclick
+            window._openNovel = function(id) {
+                const novel = uploadedNovels.find(function(n) { return n.id === id; });
+                if (novel) {
+                    currentNovelId = id;
+                    displayNovel(novel);
+                }
+            };
+
+            window._deleteNovel = function(id) {
+                const idx = uploadedNovels.findIndex(function(n) { return n.id === id; });
+                if (idx > -1) {
+                    const name = uploadedNovels[idx].name;
+                    uploadedNovels.splice(idx, 1);
+                    updateNovelList();
+                    if (currentNovelId === id) {
+                        if (uploadedNovels.length > 0) {
+                            displayNovel(uploadedNovels[0]);
+                            currentNovelId = uploadedNovels[0].id;
+                        } else {
+                            articleTitle.textContent = '📖 欢迎使用阅读工具';
+                            articleContent.innerHTML = '<p>👆 点击右侧「上传文档」按钮，选择TXT格式的小说文件即可开始阅读。</p>' +
+                                '<p>上传后小说内容将在此区域显示，左侧搜索框可以搜索已上传的小说。</p>';
+                            currentNovelId = null;
+                        }
+                    }
+                    showToast('🗑️ 已删除「' + name + '」');
+                }
+            };
+
+            // ==================== Novel Search ====================
+            function performNovelSearch() {
+                const query = novelSearchInput.value.trim().toLowerCase();
+                if (!query) {
+                    showToast('⚠️ 请输入搜索关键词');
+                    return;
+                }
+                if (uploadedNovels.length === 0) {
+                    showToast('📭 尚未上传任何小说');
+                    return;
+                }
+
+                const modeRadios = document.querySelectorAll('input[name="searchMode"]');
+                let mode = 'name';
+                modeRadios.forEach(function(radio) {
+                    if (radio.checked) mode = radio.value;
+                });
+
+                const results = uploadedNovels.filter(function(novel) {
+                    if (mode === 'name') {
+                        return novel.name.toLowerCase().includes(query);
+                    } else {
+                        return novel.content.toLowerCase().includes(query);
+                    }
+                });
+
+                if (results.length === 0) {
+                    showToast('🔍 未找到包含「' + query + '」的小说');
+                    return;
+                }
+                if (results.length === 1) {
+                    displayNovel(results[0]);
+                    currentNovelId = results[0].id;
+                    showToast('✅ 找到1本匹配的小说');
+                } else {
+                    // Show list of matches
+                    showToast('✅ 找到' + results.length + '本匹配的小说，点击左侧列表阅读');
+                    // Highlight in the list - scroll to list
+                    uploadedNovelList.style.display = 'block';
+                    // Re-render with highlights
+                    novelListItems.innerHTML = uploadedNovels.map(function(novel) {
+                        const isMatch = results.some(function(r) { return r.id === novel.id; });
+                        return '<div style="display:flex; align-items:center; gap:6px; padding:6px 8px;' +
+                            'background:' + (isMatch ? '#fff5f2' : '#fafafa') + '; border-radius:4px;' +
+                            (isMatch ? 'border:1px solid #fed0c4;' : '') +
+                            'font-size:12px; cursor:pointer;" ' +
+                            'onclick="window._openNovel(\'' + novel.id + '\')" title="点击阅读">' +
+                            '<span>' + (isMatch ? '⭐' : '📄') + '</span>' +
+                            '<span style="flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">' +
+                            escapeHtml(novel.name) + '</span>' +
+                            '<span style="color:#999; font-size:10px;">' + novel.uploadTime + '</span>' +
+                            '<span style="color:#f56c6c; cursor:pointer;" onclick="event.stopPropagation(); window._deleteNovel(\'' +
+                            novel.id + '\')" title="删除">✕</span>' +
+                            '</div>';
+                    }).join('');
+                }
+            }
+
+            novelSearchBtn.addEventListener('click', performNovelSearch);
+            novelSearchInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    performNovelSearch();
+                }
+            });
+
+            // Radio button click handling
+            document.querySelectorAll('input[name="searchMode"]').forEach(function(radio) {
+                radio.addEventListener('change', function() {
+                    document.querySelectorAll('.el-radio-button').forEach(function(label) {
+                        label.classList.remove('is-active');
+                    });
+                    if (radio.checked) {
+                        radio.closest('.el-radio-button').classList.add('is-active');
+                    }
+                });
+            });
+
+            // ==================== Stock Data ====================
+            const stockDatabase = [
+                { code: '300139', name: '晓程科技', price: 46.12, change: -1.44, changePct: -3.03 },
+                { code: '601212', name: '白银有色', price: 5.44, change: -0.05, changePct: -0.91 },
+                { code: '000603', name: '盛达资源', price: 31.98, change: -0.23, changePct: -0.71 },
+                { code: '600519', name: '贵州茅台', price: 1688.00, change: 12.50, changePct: 0.75 },
+                { code: '000858', name: '五粮液', price: 138.50, change: 2.10, changePct: 1.54 },
+                { code: '601318', name: '中国平安', price: 52.30, change: -0.45, changePct: -0.85 },
+                { code: '002594', name: '比亚迪', price: 305.60, change: 5.80, changePct: 1.93 },
+                { code: '688981', name: '中芯国际', price: 95.20, change: 3.15, changePct: 3.42 },
+                { code: '300750', name: '宁德时代', price: 256.80, change: -2.30, changePct: -0.89 },
+                { code: '603259', name: '药明康德', price: 78.90, change: 1.20, changePct: 1.54 },
+                { code: '002415', name: '海康威视', price: 32.45, change: -0.35, changePct: -1.07 },
+                { code: '000001', name: '平安银行', price: 12.15, change: 0.08, changePct: 0.66 },
+                { code: '601988', name: '中国银行', price: 5.68, change: 0.03, changePct: 0.53 },
+                { code: '600036', name: '招商银行', price: 42.35, change: 0.65, changePct: 1.56 },
+                { code: '601668', name: '中国建筑', price: 6.42, change: -0.04, changePct: -0.62 },
+                { code: '601857', name: '中国石油', price: 8.95, change: 0.12, changePct: 1.36 },
+                { code: '600028', name: '中国石化', price: 6.78, change: 0.05, changePct: 0.74 },
+                { code: '002230', name: '科大讯飞', price: 52.40, change: 1.85, changePct: 3.66 },
+                { code: '300059', name: '东方财富', price: 18.75, change: -0.20, changePct: -1.06 },
+                { code: '688111', name: '金山办公', price: 320.50, change: 8.90, changePct: 2.86 }
+            ];
+
+            let watchlistStocks = [
+                { code: '300139', name: '晓程科技', price: 46.12, change: -1.44, changePct: -3.03 },
+                { code: '601212', name: '白银有色', price: 5.44, change: -0.05, changePct: -0.91 },
+                { code: '000603', name: '盛达资源', price: 31.98, change: -0.23, changePct: -0.71 }
+            ];
+
+            const stockSearchInput = document.getElementById('stockSearchInput');
+            const stockSearchBtn = document.getElementById('stockSearchBtn');
+            const stockRefreshBtn = document.getElementById('stockRefreshBtn');
+            const stockListEl = document.getElementById('stockList');
+
+            function renderStockList() {
+                if (watchlistStocks.length === 0) {
+                    stockListEl.innerHTML =
+                        '<div style="text-align:center; padding:16px; font-size:12px; color:#999;">暂无自选股票，请输入代码搜索添加</div>';
+                    return;
+                }
+                stockListEl.innerHTML = watchlistStocks.map(function(stock) {
+                    const isUp = stock.change >= 0;
+                    const changeClass = isUp ? 'price-up' : 'price-down';
+                    const arrowIcon = isUp ? '▲' : '▼';
+                    const changeStr = (isUp ? '+' : '') + stock.change.toFixed(2) + ' (' +
+                        (isUp ? '+' : '') + stock.changePct.toFixed(2) + '%)';
+                    return '<div class="stock-item">' +
+                        '<div class="stock-main-info">' +
+                        '<div class="stock-symbol">' + escapeHtml(stock.code) + '</div>' +
+                        '<div class="stock-name">' + escapeHtml(stock.name) + '</div>' +
+                        '</div>' +
+                        '<div class="stock-price-info">' +
+                        '<div class="current-price">' + stock.price.toFixed(2) + '</div>' +
+                        '<div class="price-change ' + changeClass + '">' + arrowIcon + ' ' + changeStr +
+                        '</div>' +
+                        '</div>' +
+                        '<button class="remove-icon" data-code="' + escapeHtml(stock.code) +
+                        '" title="删除自选股">✕</button>' +
+                        '</div>';
+                }).join('');
+
+                // Attach remove handlers
+                stockListEl.querySelectorAll('.remove-icon').forEach(function(btn) {
+                    btn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        const code = btn.getAttribute('data-code');
+                        removeStock(code);
+                    });
+                });
+            }
+
+            function removeStock(code) {
+                const idx = watchlistStocks.findIndex(function(s) { return s.code === code; });
+                if (idx > -1) {
+                    const name = watchlistStocks[idx].name;
+                    watchlistStocks.splice(idx, 1);
+                    renderStockList();
+                    showToast('🗑️ 已删除「' + name + '」');
+                }
+            }
+
+            function addStock(code) {
+                const trimmedCode = code.trim();
+                if (!trimmedCode) {
+                    showToast('⚠️ 请输入股票代码');
+                    return;
+                }
+                // Check if already in watchlist
+                if (watchlistStocks.some(function(s) { return s.code === trimmedCode; })) {
+                    showToast('⚠️ 该股票已在自选列表中');
+                    return;
+                }
+                // Search in database
+                const stock = stockDatabase.find(function(s) { return s.code === trimmedCode; });
+                if (stock) {
+                    watchlistStocks.push({ ...stock });
+                    renderStockList();
+                    showToast('✅ 已添加「' + stock.name + '」到自选股');
+                } else {
+                    // Simulate adding a new stock with random data
+                    const newStock = {
+                        code: trimmedCode,
+                        name: '股票' + trimmedCode,
+                        price: +(Math.random() * 100 + 5).toFixed(2),
+                        change: +(Math.random() * 4 - 2).toFixed(2),
+                        changePct: +(Math.random() * 8 - 4).toFixed(2)
+                    };
+                    watchlistStocks.push(newStock);
+                    renderStockList();
+                    showToast('✅ 已添加股票代码 ' + trimmedCode);
+                }
+                stockSearchInput.value = '';
+            }
+
+            stockSearchBtn.addEventListener('click', function() {
+                addStock(stockSearchInput.value);
+            });
+            stockSearchInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    addStock(stockSearchInput.value);
+                }
+            });
+
+            stockRefreshBtn.addEventListener('click', function() {
+                // Simulate price refresh with random fluctuations
+                watchlistStocks = watchlistStocks.map(function(stock) {
+                    const drift = (Math.random() - 0.5) * 0.8;
+                    const newPrice = Math.max(0.01, stock.price + drift);
+                    const newChange = +(stock.change + drift * 0.3).toFixed(2);
+                    const newPct = +((drift / stock.price) * 100).toFixed(2);
+                    return {
+                        ...stock,
+                        price: +newPrice.toFixed(2),
+                        change: newChange,
+                        changePct: newPct
+                    };
+                });
+                renderStockList();
+                showToast('🔄 股票价格已刷新');
+            });
+
+            // ==================== Holiday Countdown ====================
+            function updateHolidayCountdown() {
+                const now = new Date();
+                // Mid-Autumn Festival 2026 is around Sep 25, 2026
+                const target = new Date('2026-09-25T00:00:00+08:00');
+                const diff = target - now;
+                if (diff <= 0) {
+                    document.getElementById('holidayCountdown').textContent = '🎉 中秋节到了！';
+                    return;
+                }
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+                document.getElementById('holidayCountdown').textContent =
+                    days + '天 ' + hours + '时 ' + minutes + '分 ' + seconds + '秒';
+            }
+            updateHolidayCountdown();
+            setInterval(updateHolidayCountdown, 1000);
+
+            // ==================== Init ====================
+            renderStockList();
+            updateNovelList();
+
+            // Auto demo: simulate a pre-loaded novel
+            const demoNovel = {
+                id: 'demo001',
+                name: 'README',
+                content: '欢迎使用摸鱼阅读工具\n\n这是一个完全仿照CSDN风格的个人阅读平台。\n\n📖 核心功能：\n1. 上传TXT小说：点击右侧「上传文档」按钮，选择本地TXT文件即可阅读。\n2. 搜索小说：在左侧搜索框输入关键词，可搜索已上传小说的名称或内容。\n3. 查看股票：右侧股票面板支持搜索添加自选股，可删除和刷新。\n\n💡 使用提示：\n- 上传的小说会显示在左侧列表中\n- 点击小说名称可切换阅读\n- 股票面板支持代码搜索添加\n\n其他所有按钮仅保留样式，功能已禁用。\n\n祝您摸鱼愉快！🐟',
+                uploadTime: '2026-08-14 04:51',
+                readCount: 184
+            };
+            uploadedNovels.push(demoNovel);
+            currentNovelId = 'demo001';
+            displayNovel(demoNovel);
+            updateNovelList();
+
+            console.log('✅ 页面初始化完成 - 核心功能：上传小说 + 查看股票');
+        })();
+    </script>
+</body>
+</html>

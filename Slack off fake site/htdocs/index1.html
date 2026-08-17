@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="light">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5.0">
+    <title>专业开发者工具|知识管理平台</title>
+    <meta name="renderer" content="webkit">
+    <meta name="theme-color" content="#fc5531">
+	<link rel="stylesheet" href="css/main.css"/>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+</head>
+<body>
+    <div id="app" class="csdn">
+        <!-- ==================== Header ==================== -->
+        <header class="csdn-header">
+            <div class="header-container">
+                <div class="header-left">
+                    <a class="logo-link" href="#" onclick="return false;">
+                        <div class="logo">OSDN</div>
+                    </a>
+                    <nav class="main-nav" aria-label="主导航">
+                        <a class="nav-item active" href="#" onclick="return false;"><span>首页</span></a>
+                        <a class="nav-item" href="#" onclick="return false;"><span>博客</span></a>
+                        <a class="nav-item" href="#" onclick="return false;"><span>技术栈</span></a>
+                        <a class="nav-item" href="#" onclick="return false;"><span>新闻</span></a>
+                        <a class="nav-item" href="#" onclick="return false;"><span>博问</span></a>
+                        <a class="nav-item" href="#" onclick="return false;"><span>论坛</span></a>
+                        <a class="nav-item" href="#" onclick="return false;"><span>邀请好礼</span></a>
+                        <button class="nav-item nav-item-group" onclick="return false;">
+                            <span>更多</span>
+                        </button>
+                    </nav>
+                </div>
+                <div class="header-right">
+                    <div class="toolbelt">
+                        <button class="action-item" onclick="return false;">引导</button>
+                        <button class="theme-toggle-btn" title="自定义头部菜单" onclick="return false;">⚙</button>
+                        <button class="theme-toggle-btn" title="自定义侧边栏" onclick="return false;">📋</button>
+                        <button class="theme-toggle-btn" title="排行榜" onclick="return false;">🏆</button>
+                        <button class="theme-toggle-btn" title="邀请好礼" onclick="return false;">🎁</button>
+                        <button class="theme-toggle-btn" title="切换到深色模式" onclick="return false;">🌙</button>
+                        <button class="action-item" onclick="return false;">
+                            <span>分享</span>
+                        </button>
+                    </div>
+                    <div class="user-actions">
+                        <a class="action-item" href="#" onclick="return false;">
+                            <span>我的主页</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- ==================== Main ==================== -->
+        <main class="csdn-container">
+            <!-- ===== Left Sidebar ===== -->
+            <aside class="csdn-left-sidebar">
+                <!-- Workspace Widget -->
+                <div class="widget workspace-widget">
+                    <div class="widget-header">
+                        <h3 class="widget-title"><span class="section-icon">⚙️</span> 我的工作台</h3>
+                        <button class="collapse-toggle-btn" title="收起" onclick="return false;">▲</button>
+                    </div>
+                    <div class="widget-content user-card-workspace">
+                        <div class="user-logged-card">
+                            <div class="logged-header">
+                                <div class="logged-avatar">游客<span class="vip-badge">VIP</span></div>
+                                <div class="logged-info">
+                                    <div class="logged-name">
+                                        <span class="username-text">游客8trc9n</span>
+                                        <button class="el-button el-button--primary el-button--small is-plain checkin-btn" onclick="return false;">签到</button>
+                                    </div>
+                                    <div class="level-switcher">
+                                        <span class="level-text" style="color: #CD7F32;">农场 Lv11</span>
+                                        <span class="level-text" style="color: #808080;">社区 Lv1</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="logged-actions">
+                                <button class="el-button el-button--small is-plain" onclick="return false;">主页</button>
+                                <button class="el-button el-button--small is-plain" onclick="return false;">设置</button>
+                                <button class="el-button el-button--small is-plain" onclick="return false;">收藏</button>
+                                <button class="el-button el-button--danger el-button--small is-plain" onclick="return false;">⏻</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Novel Search Widget -->
+                <div class="widget novel-search-widget">
+                    <div class="widget-header">
+                        <h3 class="widget-title"><span class="section-icon">🔎</span> 文档搜索</h3>
+                    </div>
+                    <div class="widget-content">
+                        <div class="search-panel-compact">
+                            <div class="search-mode-switch">
+                                <div class="el-radio-group" role="radiogroup">
+                                    <label class="el-radio-button is-active" style="display:inline-flex;">
+                                        <input class="el-radio-button__original-radio" type="radio" name="searchMode" value="name" checked>
+                                        <span class="el-radio-button__inner">名称</span>
+                                    </label>
+                                    <label class="el-radio-button" style="display:inline-flex;">
+                                        <input class="el-radio-button__original-radio" type="radio" name="searchMode" value="content">
+                                        <span class="el-radio-button__inner">内容</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="search-input-group">
+                                <div class="el-input el-input--small el-input-group el-input--suffix el-input-group--append">
+                                    <div class="el-input__wrapper">
+                                        <input class="el-input__inner" type="text" id="novelSearchInput" placeholder="搜索博客名称..." autocomplete="off">
+                                    </div>
+                                    <div class="el-input-group__append">
+                                        <button class="el-button el-button--primary el-button--small" id="novelSearchBtn">搜索</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Uploaded novels list -->
+                            <div id="uploadedNovelList" style="display:none; margin-top: 12px;">
+                                <div style="font-size:11px; color:#999; margin-bottom:4px;">📂 已上传文档：</div>
+                                <div id="novelListItems" style="display:flex; flex-direction:column; gap:4px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Author Card Widget -->
+                <div class="widget author-card-widget">
+                    <div class="widget-header">
+                        <h3 class="widget-title">作者信息</h3>
+                        <button class="collapse-toggle-btn" title="收起" onclick="return false;">▲</button>
+                    </div>
+                    <div class="widget-content">
+                        <div class="author-card">
+                            <div class="author-avatar">作者</div>
+                            <div class="author-name">作者Wackysoft</div>
+                            <div class="author-info">
+                                <span class="blog-level">博客等级：神话</span>
+                                <span class="coding-years">码龄：10年</span>
+                            </div>
+                            <div class="author-stats">
+                                <div class="stat-item"><span class="stat-number">17</span><span class="stat-label">原创</span></div>
+                                <div class="stat-item"><span class="stat-number">91</span><span class="stat-label">点赞</span></div>
+                                <div class="stat-item"><span class="stat-number">35</span><span class="stat-label">收藏</span></div>
+                                <div class="stat-item"><span class="stat-number">67</span><span class="stat-label">粉丝</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recommended Widget -->
+                <div class="widget recommended-widget">
+                    <div class="widget-header">
+                        <h3 class="widget-title">TA的精选</h3>
+                        <button class="collapse-toggle-btn" title="收起" onclick="return false;">▲</button>
+                    </div>
+                    <div class="widget-content">
+                        <ul class="article-list">
+                            <li class="article-item"><span class="article-tag hot">热</span><button class="article-link" onclick="return false;">CRM产品与实践</button><span class="article-views">911 阅读</span></li>
+                            <li class="article-item"><span class="article-tag new">新</span><button class="article-link" onclick="return false;">Oracle专题深入讨论</button><span class="article-views">799 阅读</span></li>
+                            <li class="article-item"><span class="article-tag hot">热</span><button class="article-link" onclick="return false;">PLM/PDM产品与实践</button><span class="article-views">13167 阅读</span></li>
+                            <li class="article-item"><span class="article-tag hot">热</span><button class="article-link" onclick="return false;">Java web开发及框架技术</button><span class="article-views">3889 阅读</span></li>
+                        </ul>
+                        <a class="view-more" href="#" onclick="return false;">查看更多&gt;</a>
+                    </div>
+                </div>
+
+                <!-- Popular Widget -->
+                <div class="widget popular-widget">
+                    <div class="widget-header">
+                        <h3 class="widget-title">大家在看</h3>
+                        <button class="collapse-toggle-btn" title="收起" onclick="return false;">▲</button>
+                    </div>
+                    <div class="widget-content">
+                        <ul class="article-list">
+                            <li class="article-item"><span class="article-tag hot">热</span><button class="article-link" onclick="return false;">DeepSeek Harness ：Agent 自我改进</button><span class="article-views">911 阅读</span></li>
+                            <li class="article-item"><span class="article-tag hot">热</span><button class="article-link" onclick="return false;">.NET工控概念科普——SCADA、MES、ERP</button><span class="article-views">799 阅读</span></li>
+                            <li class="article-item"><span class="article-tag hot">热</span><button class="article-link" onclick="return false;">MSDTC 分布式事务处理协调器</button><span class="article-views">37719 阅读</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- ===== Article Area ===== -->
+            <article class="csdn-article">
+                <h1 class="article-title" id="articleTitle">📖 欢迎使用阅读工具</h1>
+                <div class="article-meta">
+                    <span class="meta-item original">原创</span>
+                    <span class="meta-item">已于2026-08-11 18:04:55 修改</span>
+                    <span class="meta-item" id="readCount">184 阅读</span>
+                    <span class="meta-item">24 点赞</span>
+                    <span class="meta-item">129 收藏</span>
+                    <span class="meta-item license">CC 4.0 BY-SA版权</span>
+                </div>
+                <div class="article-tags">
+                    <span class="tag-item">#算法讨论与研究</span>
+                    <span class="tag-item">#系统设计与建模</span>
+                    <span class="tag-item">#深度学习</span>
+                    <span class="tag-item">#神经网络</span>
+                    <span class="tag-item">#嵌入式及移动开发</span>
+                </div>
+                <div class="column-info">
+                    <div class="column-content">
+                        <span class="column-icon">📚</span>
+                        <span class="column-name">我的收藏书架</span>
+                        <button class="subscribe-btn" onclick="return false;">订阅专栏</button>
+                    </div>
+                </div>
+                <div class="external-links">
+                    <button class="link-item" onclick="return false;">🔗 项目地址</button>
+                    <button class="link-item" onclick="return false;">📄 arxiv</button>
+                    <button class="link-item" onclick="return false;">⬇️ 下载和使用</button>
+                </div>
+                <div class="article-content" id="articleContent">
+                    <p>👆 点击右侧「上传文档」按钮，选择TXT格式的小说文件即可开始阅读。</p>
+                    <p>上传后小说内容将在此区域显示，左侧搜索框可以搜索已上传的小说。</p>
+                    <p>本页面完全仿照CSDN风格布局，仅保留上传小说和查看股票两个核心功能。</p>
+                </div>
+                <div class="article-footer">
+                    <div class="author-snippet">
+                        <img class="author-avatar-small" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Crect width='40' height='40' rx='20' fill='%23fc5531'/%3E%3Ctext x='20' y='26' text-anchor='middle' font-size='14' fill='white' font-family='sans-serif'%3E作者%3C/text%3E%3C/svg%3E" alt="作者头像">
+                        <div class="author-info-small">
+                            <div class="author-name-small">Wackysoft</div>
+                            <button class="follow-btn-small" onclick="return false;">关注</button>
+                        </div>
+                    </div>
+                    <div class="interaction-btns">
+                        <button class="interaction-btn" onclick="return false;"><span class="btn-icon">👍</span><span class="btn-text">点赞 (24)</span></button>
+                        <button class="interaction-btn" onclick="return false;"><span class="btn-icon">⭐</span><span class="btn-text">收藏 (129)</span></button>
+                        <button class="interaction-btn" onclick="return false;"><span class="btn-icon">💬</span><span class="btn-text">技术交流</span></button>
+                        <button class="interaction-btn" onclick="return false;"><span class="btn-icon">🔗</span><span class="btn-text">分享</span></button>
+                        <button class="interaction-btn" onclick="return false;"><span class="btn-icon">📑</span><span class="btn-text">专栏目录</span></button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- ===== Right Sidebar ===== -->
+            <aside class="csdn-right-sidebar">
+                <!-- Settings Widget -->
+                <div class="widget settings-widget">
+                    <div class="widget-header">
+                        <h3 class="widget-title">⚙️ 博客</h3>
+                        <button class="collapse-toggle-btn" title="收起" onclick="return false;">▲</button>
+                    </div>
+                    <div class="widget-content">
+                        <div class="settings-panel">
+                            <div class="setting-item">
+                                <div class="setting-label">🎨 界面主题</div>
+                                <div class="el-select el-select--small setting-select">
+                                    <div class="el-select__wrapper" onclick="return false;">
+                                        <div class="el-select__selection">
+                                            <div class="el-select__placeholder"><span>OSDN风格</span></div>
+                                        </div>
+                                        <div class="el-select__suffix">▼</div>
+                                    </div>
+                                </div>
+                                <span style="font-size:11px; color:#999;">专业的技术博客布局</span>
+                            </div>
+                            <div class="setting-item">
+                                <div class="setting-label">📄 博客内容</div>
+                                <div class="el-select el-select--small setting-select">
+                                    <div class="el-select__wrapper" onclick="return false;">
+                                        <div class="el-select__selection">
+                                            <div class="el-select__placeholder"><span>1</span></div>
+                                        </div>
+                                        <div class="el-select__suffix">▼</div>
+                                    </div>
+                                </div>
+                                <button class="el-button el-button--primary el-button--small is-text manage-template-btn" onclick="return false;">管理我的模板</button>
+                            </div>
+                            <div class="setting-item">
+                                <div class="email-verification-status">
+                                    <div class="status-header">
+                                        <div class="status-icon">⚠️</div>
+                                        <div class="status-info">
+                                            <h4 class="status-title">邮箱未验证</h4>
+                                            <p class="status-desc">邮箱 guest_1772699170456@guest.local 尚未验证</p>
+                                        </div>
+                                    </div>
+                                    <div class="action-section">
+                                        <button class="el-button el-button--primary el-button--small" onclick="return false;">立即验证</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Upload Widget (Core Function) -->
+                <div class="widget upload-widget" id="uploadWidget">
+                    <div class="widget-header">
+                        <h3 class="widget-title">📤 上传文档</h3>
+                        <button class="collapse-toggle-btn" title="收起" onclick="return false;">▲</button>
+                    </div>
+                    <div class="widget-content">
+                        <div class="reader-panel-compact">
+                            <button class="el-button el-button--primary upload-btn" id="uploadBtn" block>
+                                📤 上传文档
+                            </button>
+                            <p style="font-size:11px; color:#999; margin-top:8px; text-align:center;">
+                                支持TXT格式，自动编码检测
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Farm QPet Countdown Widget -->
+                <div class="widget farm-qpet-countdown-widget">
+                    <div class="widget-header">
+                        <h3 class="widget-title">⏱ 板块分类</h3>
+                        <button class="collapse-toggle-btn" title="收起" onclick="return false;">▲</button>
+                    </div>
+                    <div class="widget-content" style="padding:8px 10px;">
+                        <div class="farm-qpet-countdown-widget">
+                            <div class="fqc-grid">
+                                <a class="fqc-cell fqc-cell--community" href="#" onclick="return false;">
+                                    <span class="fqc-name">社区</span>
+                                    <span class="fqc-meta">...</span>
+                                </a>
+                                <a class="fqc-cell fqc-cell--farm" href="#" onclick="return false;">
+                                    <span class="fqc-name">论坛</span>
+                                    <span class="fqc-meta">...</span>
+                                </a>
+                                <a class="fqc-cell fqc-cell--qpet" href="#" onclick="return false;">
+                                    <span class="fqc-name">足迹</span>
+                                    <span class="fqc-meta">...</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- GBA Console Widget -->
+                <div class="widget gba-console-widget">
+                    <div class="widget-content no-padding">
+                        <div class="gba-widget">
+                            <div class="gba-widget-lead">
+                                <span class="gba-widget-icon">Game</span>
+                                <select class="console-select" aria-label="选择Game平台" onchange="return false;">
+                                    <option value="gba" selected>GBA</option>
+                                    <option value="gb">GB</option>
+                                    <option value="gbc">GBC</option>
+                                    <option value="nes">FC/NES</option>
+                                    <option value="snes">SNES</option>
+                                    <option value="genesis">MD</option>
+                                    <option value="n64">N64</option>
+                                    <option value="nds">NDS</option>
+                                </select>
+                                <button class="library-toggle" onclick="return false;">收起</button>
+                                <input class="local-rom-input" type="file" accept=".gba" style="display:none;">
+                                <button class="import-rom" onclick="return false;">导入</button>
+                            </div>
+                            <form class="gba-library-search" onsubmit="return false;">
+                                <input placeholder="筛选本地 GBA game" aria-label="筛选本地 GBA game">
+                                <button onclick="return false;">筛选</button>
+                            </form>
+                            <div class="gba-widget-status">Game库暂时没有可运行的GBA ROM。</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stock Widget (Core Function) -->
+                <div class="widget stock-widget" id="stockWidget">
+                    <div class="widget-header">
+                        <h3 class="widget-title">Stock</h3>
+                        <button class="collapse-toggle-btn" title="收起" onclick="return false;">▲</button>
+                    </div>
+                    <div class="widget-content" style="padding:12px;">
+                        <div class="stock-panel">
+                            <div class="stock-section">
+                                <div class="search-container">
+                                    <div class="el-input el-input--prefix el-input--suffix">
+                                        <div class="el-input__wrapper" style="border-radius:4px;">
+                                            <input class="el-input__inner" type="text" id="stockSearchInput" placeholder="输入Stock代码..." autocomplete="off">
+                                            <span id="stockSearchBtn" style="cursor:pointer; color:#999; font-size:14px;">🔍</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="stock-section">
+                                <div class="section-header">
+                                    <h4>📈 My Stock</h4>
+                                    <button class="el-button el-button--small" id="stockRefreshBtn" title="刷新">🔄</button>
+                                </div>
+                                <div class="stock-list" id="stockList">
+                                    <!-- Stock items will be rendered here by JS -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Holiday Countdown Widget -->
+                <div class="widget holiday-countdown-2026-widget">
+                    <div class="widget-header">
+                        <h3 class="widget-title">📆 假期余额监测仪</h3>
+                        <button class="collapse-toggle-btn" title="收起" onclick="return false;">▲</button>
+                    </div>
+                    <div class="widget-content" style="padding:12px;">
+                        <div class="holiday-countdown-2026">
+                            <div class="countdown-hero">
+                                <span class="hero-label">距离 中秋节 还有</span>
+                                <span class="hero-value" id="holidayCountdown">计算中...</span>
+                            </div>
+                            <div class="moyu-progress-section">
+                                <div class="moyu-progress-header">
+                                    <span class="moyu-label">进度条</span>
+                                    <span class="moyu-percent" id="moyuPercent">56%</span>
+                                </div>
+                                <div class="moyu-progress-track">
+                                    <div class="moyu-progress-fill" id="moyuProgressFill" style="width: 56%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </main>
+
+        <!-- ==================== Footer ==================== -->
+        <footer class="site-footer">
+            <div class="beian-info">
+                <p>本站所有小说为转载作品，所有章节均由网友上传，转载至本站只是为了宣传本书让更多读者欣赏。</p>
+                <div class="footer-links">
+                    <a href="#" onclick="return false;">隐私政策</a>
+                    <span class="link-separator">|</span>
+                    <a href="#" onclick="return false;">服务条款</a>
+                    <span class="link-separator">|</span>
+                    <a href="#" onclick="return false;">联系我们</a>
+                    <span class="link-separator">|</span>
+                    <a href="#" onclick="return false;">版权申诉</a>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Hidden file input for novel upload -->
+        <input type="file" accept=".txt" id="novelFileInput" class="hidden-file-input">
+
+        <!-- Toast notification -->
+        <div class="toast" id="toast"></div>
+    </div>
+	<script type="text/javascript" src="js/main.js"></script>
+</body>
+</html>

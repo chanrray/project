@@ -765,9 +765,6 @@
             background: #fc5531;
             color: #fff;
         }
-        .link-icon {
-            font-size: 14px;
-        }
 
         .article-content {
             font-size: 15px;
@@ -778,9 +775,6 @@
         }
         .article-content p {
             margin-bottom: 16px;
-        }
-        .article-content .blog-para {
-            text-indent: 0;
         }
 
         .article-footer {
@@ -872,10 +866,6 @@
             color: #555;
             font-weight: 500;
         }
-        .setting-label .el-icon {
-            color: #667eea;
-            font-size: 16px;
-        }
         .setting-select {
             width: 100%;
         }
@@ -942,8 +932,8 @@
             display: flex;
             gap: 8px;
         }
-        .status-icon .el-icon {
-            font-size: 18px;
+        .status-icon {
+            font-size: 14px;
             color: #e6a23c;
         }
         .status-title {
@@ -969,10 +959,83 @@
             padding: 10px;
             font-size: 14px;
         }
-        .upload-btn .el-icon {
-            font-size: 16px;
-        }
 
+        /* ============ Pagination Controls ============ */
+        .pagination-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            font-size: 13px;
+            color: #555;
+        }
+        .progress-group {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .progress-label {
+            color: #999;
+        }
+        .progress-value {
+            font-weight: 600;
+            color: #333;
+        }
+        .nav-buttons {
+            display: flex;
+            gap: 4px;
+        }
+        .page-btn {
+            padding: 2px 10px;
+            border: 1px solid #dcdfe6;
+            background: #fff;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #333;
+            transition: all 0.2s;
+        }
+        .page-btn:hover:not(:disabled) {
+            border-color: #fc5531;
+            color: #fc5531;
+            background: #fff5f2;
+        }
+        .page-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .jump-group {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .jump-input {
+            width: 60px;
+            padding: 2px 4px;
+            border: 1px solid #dcdfe6;
+            border-radius: 4px;
+            font-size: 13px;
+            text-align: center;
+        }
+        .jump-input:focus {
+            border-color: #fc5531;
+            outline: none;
+        }
+        .jump-btn {
+            padding: 2px 10px;
+            border: 1px solid #fc5531;
+            background: #fc5531;
+            color: #fff;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: background 0.2s;
+        }
+        .jump-btn:hover {
+            background: #fd7b5f;
+            border-color: #fd7b5f;
+        }
         /* ============ Farm QPet Countdown ============ */
         .farm-qpet-countdown-widget .fqc-grid {
             display: flex;
@@ -1302,22 +1365,6 @@
                 height: auto;
                 min-height: 50px;
             }
-        }
-
-        /* ============ Utility ============ */
-        .text-ellipsis {
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-        .mt-8 {
-            margin-top: 8px;
-        }
-        .mt-12 {
-            margin-top: 12px;
-        }
-        .mt-16 {
-            margin-top: 16px;
         }
 
         /* ============ Toast ============ */

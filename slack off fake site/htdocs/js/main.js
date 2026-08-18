@@ -20,13 +20,17 @@
     const uploadBtn = document.getElementById('uploadBtn');
     const articleTitle = document.getElementById('articleTitle');
     const articleContent = document.getElementById('articleContent');
-	const DEFAULT_ARTICLE_CONTENT = articleContent.innerHTML;
+    const DEFAULT_ARTICLE_CONTENT = articleContent.innerHTML;
     const readCountEl = document.getElementById('readCount');
     const novelSearchInput = document.getElementById('novelSearchInput');
     const novelSearchBtn = document.getElementById('novelSearchBtn');
     const uploadedNovelList = document.getElementById('uploadedNovelList');
     const novelListItems = document.getElementById('novelListItems');
     const NOVEL_STORAGE_KEY = 'uploaded_novels';
+    const PAGE_SIZE = 1500;
+    let currentPage = 1;
+    let totalPages = 0;
+    let currentNovelContent = '';
     let currentNovelId = null;
 
     // ==================== File Upload ====================
@@ -41,14 +45,14 @@
 
         // Check if it's a .txt file
         if (!file.name.toLowerCase().endsWith('.txt')) {
-            showToast('⚠️ 请选择TXT格式的文件');
+            showToast('⚠️ Please choose TXT file');
             novelFileInput.value = '';
             return;
         }
 
         // Check file size (limit to 10MB)
         if (file.size > 10 * 1024 * 1024) {
-            showToast('⚠️ 文件过大，请选择10MB以下的文件');
+            showToast('⚠️ File too large，over than 10MB');
             novelFileInput.value = '';
             return;
         }
@@ -64,7 +68,7 @@
             }
 
             if (!content || content.trim().length === 0) {
-                showToast('⚠️ 文件内容为空');
+                showToast('⚠️ Empty file');
                 novelFileInput.value = '';
                 return;
             }
@@ -85,13 +89,13 @@
             // Display content
             displayNovel(novel);
             updateNovelList();
-            showToast('✅ 小说「' + novelName + '」上传成功！');
+            showToast('✅ 「' + novelName + '」update sucess！');
 
             novelFileInput.value = '';
         };
 
         reader.onerror = function () {
-            showToast('⚠️ 文件读取失败，请重试');
+            showToast('⚠️ File read failed');
             novelFileInput.value = '';
         };
 
@@ -119,14 +123,33 @@
         }
         return false;
     }
-    function displayNovel(novel) {
+    function displayNovel(novel, pageNum) {
+        if (pageNum === undefined || pageNum === null) {
+            pageNum = loadNovelPage(novel.id);
+        }
         articleTitle.textContent = '📖 ' + novel.name;
-        // Split content into paragraphs
-        const paragraphs = novel.content.split(/\n{2,}|\r\n{2,}/).filter(function (p) {
+        currentNovelContent = novel.content;
+        totalPages = Math.ceil(currentNovelContent.length / PAGE_SIZE);
+        if (totalPages === 0)
+            totalPages = 1;
+        if (pageNum < 1)
+            pageNum = 1;
+        if (pageNum > totalPages)
+            pageNum = totalPages;
+        currentPage = pageNum;
+        currentNovelId = novel.id;
+
+        saveNovelPage(novel.id, currentPage);
+
+        const start = (pageNum - 1) * PAGE_SIZE;
+        const end = Math.min(start + PAGE_SIZE, currentNovelContent.length);
+        const pageContent = currentNovelContent.substring(start, end);
+
+        const paragraphs = pageContent.split(/\n{2,}|\r\n{2,}/).filter(function (p) {
             return p.trim().length > 0;
         });
         if (paragraphs.length === 0) {
-            const lines = novel.content.split(/\n|\r\n/).filter(function (l) {
+            const lines = pageContent.split(/\n|\r\n/).filter(function (l) {
                 return l.trim().length > 0;
             });
             articleContent.innerHTML = lines.map(function (line) {
@@ -138,9 +161,64 @@
             }).join('');
         }
         readCountEl.textContent = novel.readCount + ' 阅读';
-        //showToast('📖 正在阅读：' + novel.name);
+
+        updatePaginationUI();
     }
 
+    function saveNovelPage(novelId, page) {
+        try {
+            localStorage.setItem('novel_page_' + novelId, String(page));
+        } catch (e) {
+            console.warn('Save page failed:', e);
+        }
+    }
+
+    function loadNovelPage(novelId) {
+        try {
+            const val = localStorage.getItem('novel_page_' + novelId);
+            if (val !== null) {
+                const page = parseInt(val, 10);
+                return isNaN(page) ? 1 : page;
+            }
+        } catch (e) {
+            console.warn('Load page failed:', e);
+        }
+        return 1;
+    }
+
+    function updatePaginationUI() {
+        const container = document.getElementById('paginationContainer');
+        const progressEl = document.getElementById('pageProgress');
+        const prevBtn = document.getElementById('prevPageBtn');
+        const nextBtn = document.getElementById('nextPageBtn');
+        const jumpInput = document.getElementById('jumpPageInput');
+
+        if (totalPages <= 1) {
+            container.style.display = 'none';
+            return;
+        }
+        container.style.display = 'block';
+        progressEl.textContent = currentPage + ' / ' + totalPages;
+        prevBtn.disabled = (currentPage === 1);
+        nextBtn.disabled = (currentPage === totalPages);
+        jumpInput.max = totalPages;
+        jumpInput.value = currentPage;
+    }
+
+    function goToPage(page) {
+        if (page < 1 || page > totalPages)
+            return;
+        const novel = uploadedNovels.find(function (n) {
+            return n.id === currentNovelId;
+        });
+        if (novel) {
+            displayNovel(novel, page);
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+    }
     function escapeHtml(text) {
         const div = document.createElement('div');
         div.textContent = text;
@@ -209,7 +287,7 @@
             return;
         }
         if (uploadedNovels.length === 0) {
-            showToast('📭 尚未上传任何小说');
+            showToast('📭 尚未上传任何文档');
             return;
         }
 
@@ -229,16 +307,16 @@
         });
 
         if (results.length === 0) {
-            showToast('🔍 未找到包含「' + query + '」的小说');
+            showToast('🔍 未找到包含「' + query + '」的文档');
             return;
         }
         if (results.length === 1) {
             displayNovel(results[0]);
             currentNovelId = results[0].id;
-            showToast('✅ 找到1本匹配的小说');
+            showToast('✅ 找到1本匹配的文档');
         } else {
             // Show list of matches
-            showToast('✅ 找到' + results.length + '本匹配的小说，点击左侧列表阅读');
+            showToast('✅ 找到' + results.length + '本匹配的文档，点击左侧列表阅读');
             // Highlight in the list - scroll to list
             uploadedNovelList.style.display = 'block';
             // Re-render with highlights
@@ -496,7 +574,7 @@
 
     async function refreshAllStocks() {
         if (watchlistStocks.length === 0) {
-            showToast('📭 Empty list,no need to flash');
+            //showToast('📭 Empty list,no need to flash');
             return;
         }
 
@@ -713,5 +791,41 @@
     }
     updateNovelList();
 
+    document.getElementById('prevPageBtn').addEventListener('click', function () {
+        goToPage(currentPage - 1);
+    });
+    document.getElementById('nextPageBtn').addEventListener('click', function () {
+        goToPage(currentPage + 1);
+    });
+    document.getElementById('jumpPageBtn').addEventListener('click', function () {
+        const input = document.getElementById('jumpPageInput');
+        let val = parseInt(input.value, 10);
+        if (isNaN(val) || val < 1)
+            val = 1;
+        if (val > totalPages)
+            val = totalPages;
+        goToPage(val);
+    });
+
+    document.getElementById('jumpPageInput').addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            document.getElementById('jumpPageBtn').click();
+        }
+    });
+    document.addEventListener('keydown', function (e) {
+        const tag = e.target.tagName.toLowerCase();
+        if (tag === 'input' || tag === 'textarea' || tag === 'select')
+            return;
+        if (e.key === 'ArrowLeft') {
+            e.preventDefault();
+            if (currentPage > 1)
+                goToPage(currentPage - 1);
+        } else if (e.key === 'ArrowRight') {
+            e.preventDefault();
+            if (currentPage < totalPages)
+                goToPage(currentPage + 1);
+        }
+    });
     console.log('✅ 页面初始化完成');
 })();

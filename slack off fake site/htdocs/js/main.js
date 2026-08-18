@@ -25,7 +25,7 @@
     const novelSearchBtn = document.getElementById('novelSearchBtn');
     const uploadedNovelList = document.getElementById('uploadedNovelList');
     const novelListItems = document.getElementById('novelListItems');
-
+    const NOVEL_STORAGE_KEY = 'uploaded_novels';
     let currentNovelId = null;
 
     // ==================== File Upload ====================
@@ -78,6 +78,7 @@
             };
 
             uploadedNovels.push(novel);
+            saveNovels()
             currentNovelId = novel.id;
 
             // Display content
@@ -95,7 +96,28 @@
 
         reader.readAsText(file, 'utf-8');
     });
+    function saveNovels() {
+        try {
+            localStorage.setItem(NOVEL_STORAGE_KEY, JSON.stringify(uploadedNovels));
+        } catch (e) {
+            console.warn('Save novels failed:', e);
+        }
+    }
 
+    function loadNovels() {
+        try {
+            const data = localStorage.getItem(NOVEL_STORAGE_KEY);
+            if (data) {
+                const novels = JSON.parse(data);
+                uploadedNovels.length = 0;
+                uploadedNovels.push(...novels);
+                return true;
+            }
+        } catch (e) {
+            console.warn('Load novels failed:', e);
+        }
+        return false;
+    }
     function displayNovel(novel) {
         articleTitle.textContent = '📖 ' + novel.name;
         // Split content into paragraphs
@@ -162,6 +184,7 @@
         if (idx > -1) {
             const name = uploadedNovels[idx].name;
             uploadedNovels.splice(idx, 1);
+            saveNovels()
             updateNovelList();
             if (currentNovelId === id) {
                 if (uploadedNovels.length > 0) {
@@ -558,7 +581,6 @@
     console.log('✅ Stock module initialized (real-time API + localStorage)');
     // ==================== Holiday Countdown ====================
     let nearestHoliday = null; // Currently nearest holiday { date, name }
-    let holidayCache = []; // Cached holiday data for current year
 
     /**
      * Fetch holiday data for a given year from the public API
@@ -682,21 +704,27 @@
 
     // Start the holiday module when the page loads
     initHoliday();
-    // ==================== Init ====================
-    renderStockList();
+    // ==================== Init Novel====================
     updateNovelList();
+    if (!loadNovels() || uploadedNovels.length === 0) {
+        const demoNovel = {
+            id: 'demo001',
+            name: '欢迎使用阅读工具',
+            content: '欢迎使用阅读工具\n\n这是一个仿照CSDN风格的个人阅读平台。\n\n📖 核心功能：\n1. 上传TXT小说：点击右侧「上传文档」按钮，选择本地TXT文件即可阅读。\n2. 搜索小说：在左侧搜索框输入关键词，可搜索已上传小说的名称或内容。\n3. 查看股票：右侧股票面板支持搜索添加自选股，可删除和刷新。\n\n💡 使用提示：\n- 上传的小说会显示在左侧列表中\n- 点击小说名称可切换阅读\n- 股票面板支持代码搜索添加\n\n其他所有按钮仅保留样式，功能已禁用。\n\n祝您阅读愉快！🐟',
+            uploadTime: '2026-08-14 04:51',
+            readCount: 184
+        };
+        uploadedNovels.push(demoNovel);
 
-    // Auto demo: simulate a pre-loaded novel
-    const demoNovel = {
-        id: 'demo001',
-        name: '欢迎使用阅读工具',
-        content: '欢迎使用阅读工具\n\n这是一个仿照CSDN风格的个人阅读平台。\n\n📖 核心功能：\n1. 上传TXT小说：点击右侧「上传文档」按钮，选择本地TXT文件即可阅读。\n2. 搜索小说：在左侧搜索框输入关键词，可搜索已上传小说的名称或内容。\n3. 查看股票：右侧股票面板支持搜索添加自选股，可删除和刷新。\n\n💡 使用提示：\n- 上传的小说会显示在左侧列表中\n- 点击小说名称可切换阅读\n- 股票面板支持代码搜索添加\n\n其他所有按钮仅保留样式，功能已禁用。\n\n祝您摸鱼愉快！🐟',
-        uploadTime: '2026-08-14 04:51',
-        readCount: 184
-    };
-    uploadedNovels.push(demoNovel);
-    currentNovelId = 'demo001';
-    displayNovel(demoNovel);
+    }
+    if (uploadedNovels.length > 0) {
+        currentNovelId = uploadedNovels[0].id;
+        displayNovel(uploadedNovels[0]);
+    } else {
+        // 显示空白占位
+        articleTitle.textContent = '📖 欢迎使用阅读工具';
+        articleContent.innerHTML = '<p>👆 点击右侧「上传文档」按钮...</p>';
+    }
     updateNovelList();
 
     console.log('✅ 页面初始化完成');

@@ -20,6 +20,7 @@
     const uploadBtn = document.getElementById('uploadBtn');
     const articleTitle = document.getElementById('articleTitle');
     const articleContent = document.getElementById('articleContent');
+	const DEFAULT_ARTICLE_CONTENT = articleContent.innerHTML;
     const readCountEl = document.getElementById('readCount');
     const novelSearchInput = document.getElementById('novelSearchInput');
     const novelSearchBtn = document.getElementById('novelSearchBtn');
@@ -192,8 +193,7 @@
                     currentNovelId = uploadedNovels[0].id;
                 } else {
                     articleTitle.textContent = '📖 欢迎使用阅读工具';
-                    articleContent.innerHTML = '<p>👆 点击右侧「上传文档」按钮，选择TXT格式的小说文件即可开始阅读。</p>' +
-                        '<p>上传后小说内容将在此区域显示，左侧搜索框可以搜索已上传的小说。</p>';
+                    articleContent.innerHTML = DEFAULT_ARTICLE_CONTENT;
                     currentNovelId = null;
                 }
             }
@@ -555,21 +555,7 @@
 
     //Init default watchlist
     if (!loadWatchlist() || watchlistStocks.length === 0) {
-        watchlistStocks = [{
-                code: '300139',
-                name: '晓程科技',
-                price: 46.12,
-                change: -1.44,
-                changePct: -3.03,
-                high: 48.50,
-                low: 46.50,
-                volume: 366560,
-                turnover: 15.69,
-                pe: 78.21,
-                marketCap: 128.81,
-                updateTime: '20260817150031'
-            }
-        ];
+        watchlistStocks = [];
         saveWatchlist();
     }
 
@@ -723,7 +709,7 @@
     } else {
         // 显示空白占位
         articleTitle.textContent = '📖 欢迎使用阅读工具';
-        articleContent.innerHTML = '<p>👆 点击右侧「上传文档」按钮...</p>';
+        articleContent.innerHTML = DEFAULT_ARTICLE_CONTENT;
     }
     updateNovelList();
 

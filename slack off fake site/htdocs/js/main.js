@@ -260,8 +260,7 @@
     });
 
     // ==================== Stock Data ====================
-
-    const STORAGE_KEY = 'moyu_watchlist';
+    const STORAGE_KEY = 'stock_watchlist'; // localStorage key for persisting watchlist
     let watchlistStocks = [];
 
     const stockSearchInput = document.getElementById('stockSearchInput');
@@ -271,9 +270,13 @@
 
     function parseStockData(raw) {
         try {
-            const fields = raw.split('~');
+            const match = raw.match(/"([^"]*)"/);
+            if (!match)
+                return null;
+            const fields = match[1].split('~');
             if (fields.length < 35)
                 return null;
+
             return {
                 code: fields[2] || '',
                 name: fields[1] || 'unknow',
@@ -296,58 +299,67 @@
         }
     }
 
-    //JSONP avoid cors error
-    function fetchStockDataJSONP(code) {
-        return new Promise((resolve) => {
-            const callbackName = 'jsonp_callback_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5);
-            const script = document.createElement('script');
-            const url = `https://qt.gtimg.cn/q=${code}&cb=${callbackName}`;
-            window[callbackName] = function (rawData) {
-                delete window[callbackName];
-                document.body.removeChild(script);
-                const parsed = parseStockData(rawData);
-                resolve(parsed);
-            };
-            script.onerror = function () {
-                delete window[callbackName];
-                document.body.removeChild(script);
-                resolve(null);
-            };
-
-            script.src = url;
-            document.body.appendChild(script);
-        });
+    async function fetchStockData(code) {
+        try {
+            const url = `https://qt.gtimg.cn/q=${code}`;
+            const response = await fetch(url);
+            if (!response.ok)
+                throw new Error(`HTTP ${response.status}`);
+            const buffer = await response.arrayBuffer();
+            const decoder = new TextDecoder('gbk');
+            const raw = decoder.decode(buffer);
+            return parseStockData(raw);
+        } catch (error) {
+            console.error(`❌ Failed to fetch ${code}:`, error);
+            return null;
+        }
     }
 
-    async function fetchMultipleStocksJSONP(codes) {
+    async function fetchMultipleStocks(codes) {
         if (codes.length === 0)
             return [];
-        const promises = codes.map(code => fetchStockDataJSONP(code));
-        const results = await Promise.all(promises);
-        return results.filter(item => item !== null);
+        try {
+            const url = `https://qt.gtimg.cn/q=${codes.join(',')}`;
+            const response = await fetch(url);
+            if (!response.ok)
+                throw new Error(`HTTP ${response.status}`);
+            const buffer = await response.arrayBuffer();
+            const decoder = new TextDecoder('gbk');
+            const raw = decoder.decode(buffer);
+            const lines = raw.split('\n').filter(line => line.trim().length > 0);
+            const results = [];
+            for (const line of lines) {
+                const data = parseStockData(line);
+                if (data)
+                    results.push(data);
+            }
+            return results;
+        } catch (error) {
+            console.error('❌ Batch fetch failed:', error);
+            return [];
+        }
     }
 
     function getMarketPrefix(code) {
-        const clean = code.trim();
-        if (clean.startsWith('6'))
-            return 'sh';
-        if (clean.startsWith('0') || clean.startsWith('3'))
-            return 'sz';
-        if (clean.startsWith('8') || clean.startsWith('4'))
-            return 'bj';
-        return 'hk';
+        const cleanCode = code.trim();
+        if (cleanCode.startsWith('6'))
+            return 'sh'; // 60xxxx: shanghai
+        if (cleanCode.startsWith('0') || cleanCode.startsWith('3'))
+            return 'sz'; // 00xxxx, 30xxxx: shenzhen
+        if (cleanCode.startsWith('8') || cleanCode.startsWith('4'))
+            return 'bj'; // 8xxxxx, 4xxxxx: beijing
+        return 'sz'; // Default to Shenzhen
     }
 
     function isValidStockCode(input) {
         return /^\d{6}$/.test(input.trim());
     }
 
-    //localStorage saving
     function saveWatchlist() {
         try {
             localStorage.setItem(STORAGE_KEY, JSON.stringify(watchlistStocks));
         } catch (e) {
-            console.warn('Save failed:', e);
+            console.warn('Failed to save watchlist:', e);
         }
     }
 
@@ -359,7 +371,7 @@
                 return true;
             }
         } catch (e) {
-            console.warn('Load failed:', e);
+            console.warn('Failed to load watchlist:', e);
         }
         return false;
     }
@@ -367,7 +379,7 @@
     function renderStockList() {
         if (watchlistStocks.length === 0) {
             stockListEl.innerHTML =
-                '<div style="text-align:center; padding:16px; font-size:12px; color:#999;">📭 empty list,please add</div>';
+                '<div style="text-align:center; padding:16px; font-size:12px; color:#999;">📭 Empty list,please add.</div>';
             return;
         }
 
@@ -388,7 +400,7 @@
             '</div>' +
             '</div>' +
             '<button class="remove-icon" data-code="' + escapeHtml(stock.code) +
-            '" title="delete from list">✕</button>' +
+            '" title="从自选删除">✕</button>' +
             '</div>';
         }).join('');
 
@@ -417,12 +429,14 @@
     async function addStock(input) {
         const trimmed = input.trim();
         if (!isValidStockCode(trimmed)) {
-            showToast('⚠️ Please input code');
+            showToast('⚠️ Please input stock code');
             return;
         }
 
-        if (watchlistStocks.some(s => s.code === trimmed)) {
-            showToast('⚠️ ' + trimmed + ' already in list');
+        if (watchlistStocks.some(function (s) {
+                return s.code === trimmed;
+            })) {
+            showToast('⚠️ ' + trimmed + ' Already in the list');
             stockSearchInput.value = '';
             return;
         }
@@ -431,7 +445,7 @@
         const fullCode = prefix + trimmed;
 
         showToast('⏳ Searching ' + trimmed + ' ...');
-        const data = await fetchStockDataJSONP(fullCode);
+        const data = await fetchStockData(fullCode);
 
         if (data && data.name && data.name !== 'unknow') {
             watchlistStocks.push({
@@ -453,31 +467,35 @@
             showToast('✅ Added「' + data.name + '」（' + trimmed + '）');
             stockSearchInput.value = '';
         } else {
-            showToast('❌ unalbe to find ' + trimmed + '，please try again later');
+            showToast('❌ Unalbe to find ' + trimmed + '，please try again later');
         }
     }
 
     async function refreshAllStocks() {
         if (watchlistStocks.length === 0) {
-            showToast('📭 empty list,no need to flash');
+            showToast('📭 Empty list,no need to flash');
             return;
         }
 
-        showToast('🔄 Flashing...');
+        //showToast('🔄 Flashing...');
+
         const fullCodes = watchlistStocks.map(function (stock) {
             return getMarketPrefix(stock.code) + stock.code;
         });
 
-        const results = await fetchMultipleStocksJSONP(fullCodes);
+        const results = await fetchMultipleStocks(fullCodes);
 
         if (results.length === 0) {
             showToast('⚠️ Flash failed，please try again later');
             return;
         }
 
+        // Update watchlist with fetched data (match by code)
         let updatedCount = 0;
         for (const newData of results) {
-            const existing = watchlistStocks.find(s => s.code === newData.code);
+            const existing = watchlistStocks.find(function (s) {
+                return s.code === newData.code;
+            });
             if (existing) {
                 existing.price = newData.price;
                 existing.change = newData.change;
@@ -495,9 +513,10 @@
 
         saveWatchlist();
         renderStockList();
-        showToast('✅ Flashed sucessed');
+        //showToast('✅ Flashed sucessed for' + updatedCount);
     }
 
+    //Event Bindings
     stockSearchBtn.addEventListener('click', function () {
         addStock(stockSearchInput.value);
     });
@@ -511,17 +530,32 @@
 
     stockRefreshBtn.addEventListener('click', refreshAllStocks);
 
+    //Init default watchlist
     if (!loadWatchlist() || watchlistStocks.length === 0) {
-        // default watchlist
-        watchlistStocks = [];
+        watchlistStocks = [{
+                code: '300139',
+                name: '晓程科技',
+                price: 46.12,
+                change: -1.44,
+                changePct: -3.03,
+                high: 48.50,
+                low: 46.50,
+                volume: 366560,
+                turnover: 15.69,
+                pe: 78.21,
+                marketCap: 128.81,
+                updateTime: '20260817150031'
+            }
+        ];
         saveWatchlist();
     }
 
     renderStockList();
 
+    // Auto-refresh once on load (with slight delay to avoid blocking)
     setTimeout(refreshAllStocks, 500);
 
-    console.log('✅ Stock module initialized (JSONP + localStorage)');
+    console.log('✅ Stock module initialized (real-time API + localStorage)');
     // ==================== Holiday Countdown ====================
     let nearestHoliday = null; // Currently nearest holiday { date, name }
     let holidayCache = []; // Cached holiday data for current year

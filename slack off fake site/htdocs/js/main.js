@@ -192,12 +192,17 @@
         const prevBtn = document.getElementById('prevPageBtn');
         const nextBtn = document.getElementById('nextPageBtn');
         const jumpInput = document.getElementById('jumpPageInput');
-
+        const progressBar = document.getElementById('progressBarInner');
         if (totalPages <= 1) {
             container.style.display = 'none';
             return;
         }
         container.style.display = 'block';
+        if (progressBar) {
+            const percent = (currentPage / totalPages) * 100;
+            progressBar.style.width = percent + '%';
+            progressBar.setAttribute('aria-valuenow', percent);
+        }
         progressEl.textContent = currentPage + ' / ' + totalPages;
         prevBtn.disabled = (currentPage === 1);
         nextBtn.disabled = (currentPage === totalPages);
@@ -530,7 +535,7 @@
     async function addStock(input) {
         const trimmed = input.trim();
         if (!isValidStockCode(trimmed)) {
-            showToast('⚠️ Please input stock code');
+            showToast('⚠️ Please input the right stock code');
             return;
         }
 

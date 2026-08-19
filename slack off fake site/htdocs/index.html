@@ -3,10 +3,11 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5.0">
-    <title>专业开发者工具|知识管理平台</title>
+    <title>专业开发工具|知识管理平台</title>
     <meta name="renderer" content="webkit">
     <meta name="theme-color" content="#fc5531">
 	<link rel="stylesheet" href="css/main.css"/>
+	<link rel="stylesheet" href="css/el-progress.css"/>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
 </head>
 <body>
@@ -303,20 +304,34 @@
                             </p>
                         </div>
                     </div>
-                    <div id="paginationContainer" style="display:none; margin-top:12px; border-top:1px solid #eee; padding-top:10px;">
+					<div class="text-to-speech">
+					    <div>
+						    <button aria-disabled="false" type="button" class="el-button el-button--primary el-button--small" title="开始听书">
+							    <span> 开始听书 </span>
+							</button>
+				        </div>
+					</div><div style="margin-left:20px; padding-top:20px; border:2px;"><span> 阅读导航 </span></div>
+                    <div id="paginationContainer" style="display:none; padding:20px;">
                         <div class="pagination-row">
                             <div class="progress-group">
                                 <span class="progress-label">进度</span>
                                 <span class="progress-value" id="pageProgress">1 / 1</span>
                             </div>
-                            <div class="nav-buttons">
-                                <button class="page-btn" id="prevPageBtn" disabled>◀</button>
-                                <button class="page-btn" id="nextPageBtn" disabled>▶</button>
-                            </div>
+							<div class="el-progress el-progress--line el-progress--without-text" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+							    <div class="el-progress-bar">
+								    <div class="el-progress-bar__outer" style="height: 4px;">
+									    <div class="el-progress-bar__inner el-progress-bar__inner--striped el-progress-bar__inner--striped-flow" id="progressBarInner" style="width: 0%; animation-duration: 3s;"></div>
+							        </div>
+							    </div>
+							</div>
                             <div class="jump-group">
-                                <span>跳转</span>
+                                <span>跳转页码</span>
                                 <input type="number" class="jump-input" id="jumpPageInput" min="1" value="1">
                                 <button class="jump-btn" id="jumpPageBtn">跳转</button>
+                            </div>
+							<div class="nav-buttons">
+                                <button class="page-btn" id="prevPageBtn" disabled>◀</button>
+                                <button class="page-btn" id="nextPageBtn" disabled>▶</button>
                             </div>
                         </div>
                     </div>

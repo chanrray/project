@@ -27,7 +27,7 @@
     const uploadedNovelList = document.getElementById('uploadedNovelList');
     const novelListItems = document.getElementById('novelListItems');
     const NOVEL_STORAGE_KEY = 'uploaded_novels';
-    const PAGE_SIZE = 1500;
+    const PAGE_SIZE = 1200;
     let currentPage = 1;
     let totalPages = 0;
     let currentNovelContent = '';
@@ -42,37 +42,29 @@
         const file = e.target.files[0];
         if (!file)
             return;
-
-        // Check if it's a .txt file
         if (!file.name.toLowerCase().endsWith('.txt')) {
             showToast('⚠️ Please choose TXT file');
             novelFileInput.value = '';
             return;
         }
-
-        // Check file size (limit to 10MB)
         if (file.size > 10 * 1024 * 1024) {
             showToast('⚠️ File too large，over than 10MB');
             novelFileInput.value = '';
             return;
         }
-
         const reader = new FileReader();
         reader.onload = function (event) {
             let content = event.target.result;
-            // Try to decode as UTF-8
             try {
                 content = new TextDecoder('utf-8').decode(new TextEncoder().encode(content));
             } catch (e) {
                 // fallback to default string
             }
-
             if (!content || content.trim().length === 0) {
                 showToast('⚠️ Empty file');
                 novelFileInput.value = '';
                 return;
             }
-
             const novelName = file.name.replace(/\.txt$/i, '');
             const novel = {
                 id: Date.now().toString(),
@@ -81,24 +73,19 @@
                 uploadTime: new Date().toLocaleString(),
                 readCount: Math.floor(Math.random() * 500) + 50
             };
-
             uploadedNovels.push(novel);
             saveNovels()
             currentNovelId = novel.id;
 
-            // Display content
             displayNovel(novel);
             updateNovelList();
             showToast('✅ 「' + novelName + '」update sucess！');
-
             novelFileInput.value = '';
         };
-
         reader.onerror = function () {
             showToast('⚠️ File read failed');
             novelFileInput.value = '';
         };
-
         reader.readAsText(file, 'utf-8');
     });
     function saveNovels() {
@@ -138,13 +125,10 @@
             pageNum = totalPages;
         currentPage = pageNum;
         currentNovelId = novel.id;
-
         saveNovelPage(novel.id, currentPage);
-
         const start = (pageNum - 1) * PAGE_SIZE;
         const end = Math.min(start + PAGE_SIZE, currentNovelContent.length);
         const pageContent = currentNovelContent.substring(start, end);
-
         const paragraphs = pageContent.split(/\n{2,}|\r\n{2,}/).filter(function (p) {
             return p.trim().length > 0;
         });
@@ -153,15 +137,14 @@
                 return l.trim().length > 0;
             });
             articleContent.innerHTML = lines.map(function (line) {
-                return '<p class="blog-para">' + escapeHtml(line.trim()) + '</p>';
+                return '<p>' + escapeHtml(line.trim()) + '</p>';
             }).join('');
         } else {
             articleContent.innerHTML = paragraphs.map(function (para) {
-                return '<p class="blog-para">' + escapeHtml(para.trim()) + '</p>';
+                return '<p>' + escapeHtml(para.trim()) + '</p>';
             }).join('');
         }
         readCountEl.textContent = novel.readCount + ' 阅读';
-
         updatePaginationUI();
     }
 
@@ -320,11 +303,8 @@
             currentNovelId = results[0].id;
             showToast('✅ 找到1本匹配的文档');
         } else {
-            // Show list of matches
             showToast('✅ 找到' + results.length + '本匹配的文档，点击左侧列表阅读');
-            // Highlight in the list - scroll to list
             uploadedNovelList.style.display = 'block';
-            // Re-render with highlights
             novelListItems.innerHTML = uploadedNovels.map(function (novel) {
                 const isMatch = results.some(function (r) {
                     return r.id === novel.id;
@@ -353,7 +333,6 @@
         }
     });
 
-    // Radio button click handling
     document.querySelectorAll('input[name="searchMode"]').forEach(function (radio) {
         radio.addEventListener('change', function () {
             document.querySelectorAll('.el-radio-button').forEach(function (label) {
@@ -368,7 +347,6 @@
     // ==================== Stock Data ====================
     const STORAGE_KEY = 'stock_watchlist'; // localStorage key for persisting watchlist
     let watchlistStocks = [];
-
     const stockSearchInput = document.getElementById('stockSearchInput');
     const stockSearchBtn = document.getElementById('stockSearchBtn');
     const stockRefreshBtn = document.getElementById('stockRefreshBtn');
@@ -382,7 +360,6 @@
             const fields = match[1].split('~');
             if (fields.length < 35)
                 return null;
-
             return {
                 code: fields[2] || '',
                 name: fields[1] || 'unknow',
@@ -488,7 +465,6 @@
                 '<div style="text-align:center; padding:16px; font-size:12px; color:#999;">📭 Empty list,please add.</div>';
             return;
         }
-
         stockListEl.innerHTML = watchlistStocks.map(function (stock) {
             const isUp = stock.change >= 0;
             const changeClass = isUp ? 'price-up' : 'price-down';
@@ -509,7 +485,6 @@
             '" title="从自选删除">✕</button>' +
             '</div>';
         }).join('');
-
         stockListEl.querySelectorAll('.remove-icon').forEach(function (btn) {
             btn.addEventListener('click', function (e) {
                 e.stopPropagation();
@@ -538,7 +513,6 @@
             showToast('⚠️ Please input the right stock code');
             return;
         }
-
         if (watchlistStocks.some(function (s) {
                 return s.code === trimmed;
             })) {
@@ -546,13 +520,10 @@
             stockSearchInput.value = '';
             return;
         }
-
         const prefix = getMarketPrefix(trimmed);
         const fullCode = prefix + trimmed;
-
         showToast('⏳ Searching ' + trimmed + ' ...');
         const data = await fetchStockData(fullCode);
-
         if (data && data.name && data.name !== 'unknow') {
             watchlistStocks.push({
                 code: trimmed,
@@ -582,20 +553,15 @@
             //showToast('📭 Empty list,no need to flash');
             return;
         }
-
         //showToast('🔄 Flashing...');
-
         const fullCodes = watchlistStocks.map(function (stock) {
             return getMarketPrefix(stock.code) + stock.code;
         });
-
         const results = await fetchMultipleStocks(fullCodes);
-
         if (results.length === 0) {
             showToast('⚠️ Flash failed，please try again later');
             return;
         }
-
         // Update watchlist with fetched data (match by code)
         let updatedCount = 0;
         for (const newData of results) {
@@ -616,34 +582,27 @@
                 updatedCount++;
             }
         }
-
         saveWatchlist();
         renderStockList();
         //showToast('✅ Flashed sucessed for' + updatedCount);
     }
-
     //Event Bindings
     stockSearchBtn.addEventListener('click', function () {
         addStock(stockSearchInput.value);
     });
-
     stockSearchInput.addEventListener('keydown', function (e) {
         if (e.key === 'Enter') {
             e.preventDefault();
             addStock(stockSearchInput.value);
         }
     });
-
     stockRefreshBtn.addEventListener('click', refreshAllStocks);
-
     //Init default watchlist
     if (!loadWatchlist() || watchlistStocks.length === 0) {
         watchlistStocks = [];
         saveWatchlist();
     }
-
     renderStockList();
-
     // Auto-refresh once on load (with slight delay to avoid blocking)
     setTimeout(refreshAllStocks, 500);
 
@@ -692,13 +651,10 @@
                 }))
             .filter(item => item.dateObj >= today)
             .sort((a, b) => a.dateObj - b.dateObj);
-
         return upcoming.length > 0 ? upcoming[0] : null;
     }
 
-    /**
-     * Update the countdown display and also the holiday label in the DOM
-     */
+    /*Update the countdown display and also the holiday label in the DOM*/
     function updateCountdownDisplay() {
         const countdownEl = document.getElementById('holidayCountdown');
         const labelEl = document.querySelector('.hero-label'); // The <span> with "距离 xxx 还有"
@@ -709,34 +665,26 @@
                 labelEl.textContent = '距离 假期 还有';
             return;
         }
-
-        // Set the holiday name in the label (e.g., "距离 春节 还有")
+        // Set the holiday name in the label.
         if (labelEl) {
             labelEl.textContent = `距离 ${nearestHoliday.name} 还有`;
         }
-
         const now = new Date();
         // Target date in Beijing time (UTC+8) to avoid timezone offset issues
         const target = new Date(nearestHoliday.date + 'T00:00:00+08:00');
         const diff = target - now;
-
         if (diff <= 0) {
             countdownEl.textContent = `🎉 ${nearestHoliday.name} is here!`;
             return;
         }
-
         const days = Math.floor(diff / (1000 * 60 * 60 * 24));
         const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
-        countdownEl.textContent =
-`${days}d ${hours}h ${minutes}m ${seconds}s`;
+        countdownEl.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
     }
 
-    /**
-     * Initialize: try current year, then next year if no holidays remain
-     */
+    /*Initialize: try current year, then next year if no holidays remain*/
     async function initHoliday() {
         const year = new Date().getFullYear();
         let data = await fetchHolidaysForYear(year);
@@ -765,14 +713,12 @@
             if (labelEl)
                 labelEl.textContent = '距离 假期 还有';
         }
-
-        // Initial display and start the timer
         updateCountdownDisplay();
         setInterval(updateCountdownDisplay, 1000);
     }
-
     // Start the holiday module when the page loads
     initHoliday();
+
     // ==================== Init Novel====================
     updateNovelList();
     if (!loadNovels() || uploadedNovels.length === 0) {
@@ -784,7 +730,6 @@
             readCount: 184
         };
         uploadedNovels.push(demoNovel);
-
     }
     if (uploadedNovels.length > 0) {
         currentNovelId = uploadedNovels[0].id;

@@ -3,7 +3,6 @@
   display:flex;
   line-height:1;
   position:relative
-  width: 100%;
 }
 .el-progress__text {
   color:var(--el-text-color-regular);
@@ -70,7 +69,7 @@
   flex-grow:1
 }
 .el-progress-bar__outer {
-  background-color:var(--el-border-color-lighter);
+  background-color:#ebeef5;
   border-radius:100px;
   height:6px;
   overflow:hidden;
@@ -78,7 +77,7 @@
   vertical-align:middle
 }
 .el-progress-bar__inner {
-  background-color:var(--el-color-primary);
+  background-color:#409eff;
   border-radius:100px;
   height:100%;
   left:0;
@@ -104,7 +103,8 @@
   background-size:1.25em 1.25em
 }
 .el-progress-bar__inner--striped.el-progress-bar__inner--striped-flow {
-  animation:striped-flow 3s linear infinite
+  animation:striped-flow 3s linear infinite;
+  animation-play-state: paused;
 }
 .el-progress-bar__innerText {
   color:#fff;

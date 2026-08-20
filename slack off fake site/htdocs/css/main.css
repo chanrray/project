@@ -220,7 +220,7 @@
         .csdn-container {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 20px 24px;
+            padding: 10px 15px;
             display: flex;
             gap: 20px;
             align-items: flex-start;
@@ -649,7 +649,7 @@
             background: #ffffff;
             border-radius: 8px;
             border: 1px solid #f0f0f0;
-            padding: 32px 40px;
+            padding: 10px 20px;
             box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
         }
 

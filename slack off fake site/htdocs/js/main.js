@@ -27,7 +27,7 @@
     const uploadedNovelList = document.getElementById('uploadedNovelList');
     const novelListItems = document.getElementById('novelListItems');
     const NOVEL_STORAGE_KEY = 'uploaded_novels';
-    const PAGE_SIZE = 1200;
+    const PAGE_SIZE = 1400;
     let currentPage = 1;
     let totalPages = 0;
     let currentNovelContent = '';

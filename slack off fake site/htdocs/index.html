@@ -305,13 +305,12 @@
                         </div>
                     </div>
 					<div class="text-to-speech">
-					    <div>
-						    <button aria-disabled="false" type="button" class="el-button el-button--primary el-button--small" title="开始听书">
-							    <span> 开始听书 </span>
-							</button>
-				        </div>
-					</div><div style="margin-left:20px; padding-top:20px; border:2px;"><span> 阅读导航 </span></div>
-                    <div id="paginationContainer" style="display:none; padding:20px;">
+						<button aria-disabled="false" class="text-to-speech-button" type="button" class="el-button el-button--primary el-button--small" title="开始听书">
+							<span>🎧 开始听书</span>
+					    </button>
+					</div>
+                    <div id="paginationContainer" style="display:none; padding:0 20px 20px 20px;">
+					    <div style="margin-bottom:10px;"><span> 阅读导航 </span></div>
                         <div class="pagination-row">
                             <div class="progress-group">
                                 <span class="progress-label">进度</span>
@@ -325,13 +324,13 @@
 							    </div>
 							</div>
                             <div class="jump-group">
-                                <span>跳转页码</span>
+                                <span>页码</span>
                                 <input type="number" class="jump-input" id="jumpPageInput" min="1" value="1">
                                 <button class="jump-btn" id="jumpPageBtn">跳转</button>
                             </div>
 							<div class="nav-buttons">
-                                <button class="page-btn" id="prevPageBtn" disabled>◀</button>
-                                <button class="page-btn" id="nextPageBtn" disabled>▶</button>
+                                <button class="page-btn" id="prevPageBtn" disabled><</button>
+                                <button class="page-btn" id="nextPageBtn" disabled style="margin-left:18px;">></button>
                             </div>
                         </div>
                     </div>
@@ -395,7 +394,7 @@
                 <!-- Stock Widget (Core Function) -->
                 <div class="widget stock-widget" id="stockWidget">
                     <div class="widget-header">
-                        <h3 class="widget-title">Stock</h3>
+                        <h3 class="widget-title">📈 Stock</h3>
                         <button class="collapse-toggle-btn" title="收起" onclick="return false;">▲</button>
                     </div>
                     <div class="widget-content" style="padding:12px;">
@@ -412,7 +411,7 @@
                             </div>
                             <div class="stock-section">
                                 <div class="section-header">
-                                    <h4>📈 My Stock</h4>
+                                    <h4>My Stock</h4>
                                     <button class="el-button el-button--small" id="stockRefreshBtn" title="刷新">🔄</button>
                                 </div>
                                 <div class="stock-list" id="stockList">

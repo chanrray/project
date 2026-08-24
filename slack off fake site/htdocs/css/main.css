@@ -54,7 +54,7 @@
         }
 
         /* ============ Header ============ */
-        .csdn-header {
+        .app-header {
             position: sticky;
             top: 0;
             z-index: 1000;
@@ -217,7 +217,7 @@
         }
 
         /* ============ Container ============ */
-        .csdn-container {
+        .app-container {
             max-width: 1400px;
             margin: 0 auto;
             padding: 10px 15px;
@@ -228,8 +228,8 @@
         }
 
         /* ============ Sidebar ============ */
-        .csdn-left-sidebar,
-        .csdn-right-sidebar {
+        .app-left-sidebar,
+        .app-right-sidebar {
             width: 310px;
             flex-shrink: 0;
             display: flex;
@@ -643,7 +643,7 @@
         }
 
         /* ============ Article ============ */
-        .csdn-article {
+        .app-article {
             flex: 1;
             min-width: 0;
             background: #ffffff;
@@ -1346,27 +1346,27 @@
 
         /* ============ Responsive ============ */
         @media (max-width: 1200px) {
-            .csdn-left-sidebar {
+            .app-left-sidebar {
                 width: 260px;
             }
-            .csdn-right-sidebar {
+            .app-right-sidebar {
                 width: 260px;
             }
-            .csdn-article {
+            .app-article {
                 padding: 24px;
             }
         }
         @media (max-width: 900px) {
-            .csdn-container {
+            .app-container {
                 flex-direction: column;
                 padding: 12px;
             }
-            .csdn-left-sidebar,
-            .csdn-right-sidebar {
+            .app-left-sidebar,
+            .app-right-sidebar {
                 width: 100%;
                 flex-direction: column;
             }
-            .csdn-article {
+            .app-article {
                 order: -1;
                 width: 100%;
             }
@@ -1380,7 +1380,7 @@
             .main-nav {
                 display: none;
             }
-            .csdn-header {
+            .app-header {
                 height: auto;
                 min-height: 50px;
             }

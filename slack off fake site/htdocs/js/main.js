@@ -27,13 +27,13 @@
     const uploadedNovelList = document.getElementById('uploadedNovelList');
     const novelListItems = document.getElementById('novelListItems');
     const NOVEL_STORAGE_KEY = 'uploaded_novels';
-    const PAGE_SIZE = 1400;
+    const PAGE_SIZE = 1300;
     let currentPage = 1;
     let totalPages = 0;
     let currentNovelContent = '';
     let currentNovelId = null;
 
-    // ==================== File Upload ====================
+    // ==================== Novel Upload & Display ====================
     uploadBtn.addEventListener('click', function () {
         novelFileInput.click();
     });
@@ -129,21 +129,9 @@
         const start = (pageNum - 1) * PAGE_SIZE;
         const end = Math.min(start + PAGE_SIZE, currentNovelContent.length);
         const pageContent = currentNovelContent.substring(start, end);
-        const paragraphs = pageContent.split(/\n{2,}|\r\n{2,}/).filter(function (p) {
-            return p.trim().length > 0;
-        });
-        if (paragraphs.length === 0) {
-            const lines = pageContent.split(/\n|\r\n/).filter(function (l) {
-                return l.trim().length > 0;
-            });
-            articleContent.innerHTML = lines.map(function (line) {
-                return '<p>' + escapeHtml(line.trim()) + '</p>';
-            }).join('');
-        } else {
-            articleContent.innerHTML = paragraphs.map(function (para) {
-                return '<p>' + escapeHtml(para.trim()) + '</p>';
-            }).join('');
-        }
+        const lines = pageContent.split(/\n|\r\n/);
+        articleContent.innerHTML = lines.map(line => `<p>${escapeHtml(line)}</p>`).join('');
+
         readCountEl.textContent = novel.readCount + ' 阅读';
         updatePaginationUI();
     }

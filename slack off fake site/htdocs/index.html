@@ -11,9 +11,9 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
 </head>
 <body>
-    <div id="app" class="csdn">
+    <div id="app" class="app-osdn">
         <!-- ==================== Header ==================== -->
-        <header class="csdn-header">
+        <header class="app-header">
             <div class="header-container">
                 <div class="header-left">
                     <a class="logo-link" href="#" onclick="return false;">
@@ -53,10 +53,9 @@
             </div>
         </header>
 
-        <!-- ==================== Main ==================== -->
-        <main class="csdn-container">
+        <main class="app-container">
             <!-- ===== Left Sidebar ===== -->
-            <aside class="csdn-left-sidebar">
+            <aside class="app-left-sidebar">
                 <!-- Workspace Widget -->
                 <div class="widget workspace-widget">
                     <div class="widget-header">
@@ -198,7 +197,7 @@
             </aside>
 
             <!-- ===== Article Area ===== -->
-            <article class="csdn-article">
+            <article class="app-article">
                 <h1 class="article-title" id="articleTitle">📖 欢迎使用阅读工具</h1>
                 <div class="article-meta">
                     <span class="meta-item original">原创</span>
@@ -251,7 +250,7 @@
             </article>
 
             <!-- ===== Right Sidebar ===== -->
-            <aside class="csdn-right-sidebar">
+            <aside class="app-right-sidebar">
                 <!-- Settings Widget -->
                 <div class="widget settings-widget">
                     <div class="widget-header">
@@ -288,55 +287,7 @@
                     </div>
                 </div>
 
-                <!-- Upload Widget (Core Function) -->
-                <div class="widget upload-widget" id="uploadWidget">
-                    <div class="widget-header">
-                        <h3 class="widget-title">📤 上传文档</h3>
-                        <button class="collapse-toggle-btn" title="收起" onclick="return false;">▲</button>
-                    </div>
-                    <div class="widget-content">
-                        <div class="reader-panel-compact">
-                            <button class="el-button el-button--primary upload-btn" id="uploadBtn" block>
-                                📤 上传文档
-                            </button>
-                            <p style="font-size:11px; color:#999; margin-top:8px; text-align:center;">
-                                仅支持TXT格式，自动编码检测
-                            </p>
-                        </div>
-                    </div>
-					<div class="text-to-speech">
-						<button aria-disabled="false" class="text-to-speech-button" type="button" class="el-button el-button--primary el-button--small" title="开始听书">
-							<span>🎧 开始听书</span>
-					    </button>
-					</div>
-                    <div id="paginationContainer" style="display:none; padding:0 20px 20px 20px;">
-					    <div style="margin-bottom:10px;"><span> 阅读导航 </span></div>
-                        <div class="pagination-row">
-                            <div class="progress-group">
-                                <span class="progress-label">进度</span>
-                                <span class="progress-value" id="pageProgress">1 / 1</span>
-                            </div>
-							<div class="el-progress el-progress--line el-progress--without-text" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-							    <div class="el-progress-bar">
-								    <div class="el-progress-bar__outer" style="height: 4px;">
-									    <div class="el-progress-bar__inner el-progress-bar__inner--striped el-progress-bar__inner--striped-flow" id="progressBarInner" style="width: 0%; animation-duration: 3s;"></div>
-							        </div>
-							    </div>
-							</div>
-                            <div class="jump-group">
-                                <span>页码</span>
-                                <input type="number" class="jump-input" id="jumpPageInput" min="1" value="1">
-                                <button class="jump-btn" id="jumpPageBtn">跳转</button>
-                            </div>
-							<div class="nav-buttons">
-                                <button class="page-btn" id="prevPageBtn" disabled><</button>
-                                <button class="page-btn" id="nextPageBtn" disabled style="margin-left:18px;">></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Farm QPet Countdown Widget -->
+                <!-- Section Widget -->
                 <div class="widget farm-qpet-countdown-widget">
                     <div class="widget-header">
                         <h3 class="widget-title">⏱ 板块分类</h3>
@@ -391,7 +342,55 @@
                     </div>
                 </div>
 
-                <!-- Stock Widget (Core Function) -->
+                <!-- Article Upload Widget -->
+                <div class="widget upload-widget" id="uploadWidget">
+                    <div class="widget-header">
+                        <h3 class="widget-title">📤 上传文档</h3>
+                        <button class="collapse-toggle-btn" title="收起" onclick="return false;">▲</button>
+                    </div>
+                    <div class="widget-content">
+                        <div class="reader-panel-compact">
+                            <button class="el-button el-button--primary upload-btn" id="uploadBtn" block>
+                                📤 上传文档
+                            </button>
+                            <p style="font-size:11px; color:#999; margin-top:8px; text-align:center;">
+                                仅支持TXT格式，自动编码检测
+                            </p>
+                        </div>
+                    </div>
+					<div class="text-to-speech">
+						<button aria-disabled="false" class="text-to-speech-button" type="button" class="el-button el-button--primary el-button--small" title="开始听书">
+							<span>🎧 开始听书</span>
+					    </button>
+					</div>
+                    <div id="paginationContainer" style="display:none; padding:0 20px 20px 20px;">
+					    <div style="margin-bottom:10px;"><span> 阅读导航 </span></div>
+                        <div class="pagination-row">
+                            <div class="progress-group">
+                                <span class="progress-label">进度</span>
+                                <span class="progress-value" id="pageProgress">1 / 1</span>
+                            </div>
+							<div class="el-progress el-progress--line el-progress--without-text" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+							    <div class="el-progress-bar">
+								    <div class="el-progress-bar__outer" style="height: 4px;">
+									    <div class="el-progress-bar__inner el-progress-bar__inner--striped el-progress-bar__inner--striped-flow" id="progressBarInner" style="width: 0%; animation-duration: 3s;"></div>
+							        </div>
+							    </div>
+							</div>
+                            <div class="jump-group">
+                                <span>页码</span>
+                                <input type="number" class="jump-input" id="jumpPageInput" min="1" value="1">
+                                <button class="jump-btn" id="jumpPageBtn">跳转</button>
+                            </div>
+							<div class="nav-buttons">
+                                <button class="page-btn" id="prevPageBtn" disabled><</button>
+                                <button class="page-btn" id="nextPageBtn" disabled style="margin-left:18px;">></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stock Widget -->
                 <div class="widget stock-widget" id="stockWidget">
                     <div class="widget-header">
                         <h3 class="widget-title">📈 Stock</h3>
@@ -452,7 +451,7 @@
         <!-- ==================== Footer ==================== -->
         <footer class="site-footer">
             <div class="beian-info">
-                <p>本站所有小说为转载作品，所有章节均由网友上传，转载至本站只是为了宣传本书让更多读者欣赏。</p>
+                <p>本站不存储小说，所有章节均由用户上传并存储在本地。</p>
                 <div class="footer-links">
                     <a href="#" onclick="return false;">隐私政策</a>
                     <span class="link-separator">|</span>

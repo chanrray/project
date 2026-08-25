@@ -37,7 +37,6 @@
     uploadBtn.addEventListener('click', function () {
         novelFileInput.click();
     });
-
     novelFileInput.addEventListener('change', function (e) {
         const file = e.target.files[0];
         if (!file)
@@ -88,6 +87,7 @@
         };
         reader.readAsText(file, 'utf-8');
     });
+	
     function saveNovels() {
         try {
             localStorage.setItem(NOVEL_STORAGE_KEY, JSON.stringify(uploadedNovels));
@@ -110,6 +110,7 @@
         }
         return false;
     }
+	
     function displayNovel(novel, pageNum) {
         if (pageNum === undefined || pageNum === null) {
             pageNum = loadNovelPage(novel.id);
@@ -241,7 +242,6 @@
             displayNovel(novel);
         }
     };
-
     window._deleteNovel = function (id) {
         const idx = uploadedNovels.findIndex(function (n) {
             return n.id === id;
@@ -276,14 +276,12 @@
             showToast('📭 尚未上传任何文档');
             return;
         }
-
         const modeRadios = document.querySelectorAll('input[name="searchMode"]');
         let mode = 'name';
         modeRadios.forEach(function (radio) {
             if (radio.checked)
                 mode = radio.value;
         });
-
         const results = uploadedNovels.filter(function (novel) {
             if (mode === 'name') {
                 return novel.name.toLowerCase().includes(query);
@@ -291,7 +289,6 @@
                 return novel.content.toLowerCase().includes(query);
             }
         });
-
         if (results.length === 0) {
             showToast('🔍 未找到包含「' + query + '」的文档');
             return;
@@ -316,6 +313,17 @@
             '</div>';
         }).join('');
     }
+    
+	function syncSearchModeUI() {
+    const radios = document.querySelectorAll('input[name="searchMode"]');
+    const labels = document.querySelectorAll('.el-radio-button');
+    labels.forEach(label => {
+        const radio = label.querySelector('input[name="searchMode"]');
+        if (radio) {
+            label.classList.toggle('is-active', radio.checked);
+        }
+    });
+}
 
     novelSearchBtn.addEventListener('click', performNovelSearch);
     novelSearchInput.addEventListener('keydown', function (e) {
@@ -326,14 +334,7 @@
     });
 
     document.querySelectorAll('input[name="searchMode"]').forEach(function (radio) {
-        radio.addEventListener('change', function () {
-            document.querySelectorAll('.el-radio-button').forEach(function (label) {
-                label.classList.remove('is-active');
-            });
-            if (radio.checked) {
-                radio.closest('.el-radio-button').classList.add('is-active');
-            }
-        });
+        radio.addEventListener('change', syncSearchModeUI);
     });
 
     // ==================== Stock Data ====================
@@ -578,7 +579,7 @@
         renderStockList();
         //showToast('✅ Flashed sucessed for' + updatedCount);
     }
-    //Event Bindings
+	
     stockSearchBtn.addEventListener('click', function () {
         addStock(stockSearchInput.value);
     });
@@ -694,13 +695,11 @@
         }
     }
 
-    /*Initialize: try current year, then next year if no holidays remain*/
     async function initHoliday() {
         const now = new Date();
         const year = now.getFullYear();
         const data = await fetchHolidaysForYear(year);
         const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-
         let holidays = data ? data.filter(item => item.type === 'holiday') : [];
         let prev = null;
         for (const h of holidays) {
@@ -748,7 +747,12 @@
     initHoliday();
 
     // ==================== Init Novel====================
-    updateNovelList();
+    const nameRadio = document.querySelector('input[name="searchMode"][value="name"]');
+    if (nameRadio) {
+        nameRadio.checked = true;
+    }
+	syncSearchModeUI();
+	updateNovelList();
     if (!loadNovels() || uploadedNovels.length === 0) {
         const demoNovel = {
             id: 'demo001',

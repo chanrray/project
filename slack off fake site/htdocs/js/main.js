@@ -87,7 +87,7 @@
         };
         reader.readAsText(file, 'utf-8');
     });
-	
+
     function saveNovels() {
         try {
             localStorage.setItem(NOVEL_STORAGE_KEY, JSON.stringify(uploadedNovels));
@@ -110,7 +110,7 @@
         }
         return false;
     }
-	
+
     function displayNovel(novel, pageNum) {
         if (pageNum === undefined || pageNum === null) {
             pageNum = loadNovelPage(novel.id);
@@ -313,17 +313,17 @@
             '</div>';
         }).join('');
     }
-    
-	function syncSearchModeUI() {
-    const radios = document.querySelectorAll('input[name="searchMode"]');
-    const labels = document.querySelectorAll('.el-radio-button');
-    labels.forEach(label => {
-        const radio = label.querySelector('input[name="searchMode"]');
-        if (radio) {
-            label.classList.toggle('is-active', radio.checked);
-        }
-    });
-}
+
+    function syncSearchModeUI() {
+        const radios = document.querySelectorAll('input[name="searchMode"]');
+        const labels = document.querySelectorAll('.el-radio-button');
+        labels.forEach(label => {
+            const radio = label.querySelector('input[name="searchMode"]');
+            if (radio) {
+                label.classList.toggle('is-active', radio.checked);
+            }
+        });
+    }
 
     novelSearchBtn.addEventListener('click', performNovelSearch);
     novelSearchInput.addEventListener('keydown', function (e) {
@@ -579,7 +579,7 @@
         renderStockList();
         //showToast('✅ Flashed sucessed for' + updatedCount);
     }
-	
+
     stockSearchBtn.addEventListener('click', function () {
         addStock(stockSearchInput.value);
     });
@@ -751,8 +751,8 @@
     if (nameRadio) {
         nameRadio.checked = true;
     }
-	syncSearchModeUI();
-	updateNovelList();
+    syncSearchModeUI();
+    updateNovelList();
     if (!loadNovels() || uploadedNovels.length === 0) {
         const demoNovel = {
             id: 'demo001',
@@ -813,5 +813,36 @@
                 goToPage(currentPage + 1);
         }
     });
+
+    //Stock Widget Collapse
+    const stockWidget = document.getElementById('stockWidget');
+    const stockCollapseBtn = stockWidget?.querySelector('.collapse-toggle-btn');
+    const stockContent = stockWidget?.querySelector('.widget-content');
+    const STOCK_COLLAPSE_KEY = 'stock_widget_collapsed';
+
+    function toggleStockWidget() {
+        if (!stockContent)
+            return;
+        const isCollapsed = stockContent.style.display === 'none';
+        stockContent.style.display = isCollapsed ? 'block' : 'none';
+        stockCollapseBtn.textContent = isCollapsed ? '▲' : '▼';
+        localStorage.setItem(STOCK_COLLAPSE_KEY, JSON.stringify(!isCollapsed));
+    }
+
+    function restoreStockWidgetState() {
+        if (!stockContent || !stockCollapseBtn)
+            return;
+        const saved = localStorage.getItem(STOCK_COLLAPSE_KEY);
+        let collapsed = false;
+        if (saved !== null) {
+            collapsed = JSON.parse(saved);
+        }
+        stockContent.style.display = collapsed ? 'none' : 'block';
+        stockCollapseBtn.textContent = collapsed ? '▼' : '▲';
+    }
+    restoreStockWidgetState();
+    if (stockCollapseBtn) {
+        stockCollapseBtn.addEventListener('click', toggleStockWidget);
+    }
     console.log('✅ 页面初始化完成');
 })();

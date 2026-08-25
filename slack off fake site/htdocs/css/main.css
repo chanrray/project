@@ -1278,32 +1278,32 @@
             display: block;
             font-size: 18px;
             font-weight: 700;
-            color: #ff9800;
+            color: #409eff;
             margin-top: 2px;
         }
-        .moyu-progress-section {
+        .holiday-progress-section {
             padding: 8px 4px;
         }
-        .moyu-progress-header {
+        .holiday-progress-header {
             display: flex;
             justify-content: space-between;
             font-size: 12px;
             color: #666;
             margin-bottom: 4px;
         }
-        .moyu-percent {
+        .holiday-percent {
             font-weight: 600;
-            color: #ff9800;
+            color: #409eff;
         }
-        .moyu-progress-track {
+        .holiday-progress-track {
             height: 8px;
             background: #f0f0f0;
             border-radius: 4px;
             overflow: hidden;
         }
-        .moyu-progress-fill {
+        .holiday-progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, #ff9800, #ffc107);
+            background: linear-gradient(90deg, #409eff, #99cbff);
             border-radius: 4px;
             transition: width 0.5s;
         }

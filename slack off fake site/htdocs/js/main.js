@@ -597,7 +597,7 @@
     console.log('✅ Stock module initialized (real-time API + localStorage)');
     // ==================== Holiday Countdown ====================
     let nearestHoliday = null; // Currently nearest holiday { date, name }
-
+    let previousHoliday = null;
     /**
      * Fetch holiday data for a given year from the public API
      * @param {number|string} year - Year in YYYY format
@@ -626,29 +626,16 @@
      * @param {Array} data - Array of holiday/workday objects
      * @returns {Object|null} The nearest holiday object or null if none found
      */
-    function findNearestHoliday(data) {
-        const now = new Date();
-        // Normalize to midnight (local time) for date-only comparison
-        const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-
-        const upcoming = data
-            .filter(item => item.type === 'holiday')
-            .map(item => ({
-                    ...item,
-                    dateObj: new Date(item.date)
-                }))
-            .filter(item => item.dateObj >= today)
-            .sort((a, b) => a.dateObj - b.dateObj);
-        return upcoming.length > 0 ? upcoming[0] : null;
-    }
 
     /*Update the countdown display and also the holiday label in the DOM*/
     function updateCountdownDisplay() {
         const countdownEl = document.getElementById('holidayCountdown');
-        const labelEl = document.querySelector('.hero-label'); // The <span> with "距离 xxx 还有"
-
+        const labelEl = document.querySelector('.hero-label');
+        const progressFill = document.getElementById('holidayProgressFill');
+        const percentEl = document.getElementById('holidayPercent');
+        //can't happen but remain.
         if (!nearestHoliday) {
-            countdownEl.textContent = '📅 No upcoming holidays';
+            countdownEl.textContent = '📅 No upcoming holidays ⚠️';
             if (labelEl)
                 labelEl.textContent = '距离 假期 还有';
             return;
@@ -657,54 +644,103 @@
         if (labelEl) {
             labelEl.textContent = `距离 ${nearestHoliday.name} 还有`;
         }
-        const now = new Date();
         // Target date in Beijing time (UTC+8) to avoid timezone offset issues
+        const now = new Date();
+        const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
         const target = new Date(nearestHoliday.date + 'T00:00:00+08:00');
         const diff = target - now;
         if (diff <= 0) {
             countdownEl.textContent = `🎉 ${nearestHoliday.name} is here!`;
-            return;
+        } else {
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            countdownEl.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
         }
-        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-        countdownEl.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+        if (previousHoliday && nearestHoliday) {
+            const prevDate = new Date(previousHoliday.date + 'T00:00:00+08:00');
+            const nextDate = new Date(nearestHoliday.date + 'T00:00:00+08:00');
+            const total = nextDate - prevDate;
+            if (total > 0) {
+                const elapsed = today - prevDate;
+                let percent = (elapsed / total) * 100;
+                if (percent < 0)
+                    percent = 0;
+                if (percent > 100)
+                    percent = 100;
+                if (progressFill) {
+                    progressFill.style.width = percent + '%';
+                    progressFill.setAttribute('aria-valuenow', percent);
+                }
+                if (percentEl) {
+                    percentEl.textContent = Math.round(percent) + '%';
+                }
+            } else {
+                if (progressFill)
+                    progressFill.style.width = '0%';
+                if (percentEl)
+                    percentEl.textContent = '0%';
+            }
+        } else {
+            if (progressFill)
+                progressFill.style.width = '0%';
+            if (percentEl)
+                percentEl.textContent = '0%';
+        }
     }
 
     /*Initialize: try current year, then next year if no holidays remain*/
     async function initHoliday() {
-        const year = new Date().getFullYear();
-        let data = await fetchHolidaysForYear(year);
-        let nearest = null;
+        const now = new Date();
+        const year = now.getFullYear();
+        const data = await fetchHolidaysForYear(year);
+        const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 
-        if (data) {
-            nearest = findNearestHoliday(data);
-            if (nearest) {
-                nearestHoliday = nearest;
-            } else {
-                // No holidays left this year → try next year
-                const nextYear = year + 1;
-                const nextData = await fetchHolidaysForYear(nextYear);
-                if (nextData) {
-                    nearest = findNearestHoliday(nextData);
-                    if (nearest)
-                        nearestHoliday = nearest;
+        let holidays = data ? data.filter(item => item.type === 'holiday') : [];
+        let prev = null;
+        for (const h of holidays) {
+            const d = new Date(h.date);
+            if (d <= today) {
+                if (!prev || d > new Date(prev.date)) {
+                    prev = h;
                 }
             }
         }
-
-        if (!nearestHoliday) {
-            document.getElementById('holidayCountdown').textContent = '⚠️ No holiday data available';
-            // Still try to set a fallback label
-            const labelEl = document.querySelector('.hero-label');
-            if (labelEl)
-                labelEl.textContent = '距离 假期 还有';
+        let next = null;
+        for (const h of holidays) {
+            const d = new Date(h.date);
+            if (d >= today) {
+                if (!next || d < new Date(next.date)) {
+                    next = h;
+                }
+            }
         }
+        if (!next) {
+            const nextYear = year + 1;
+            const nextDate = new Date(nextYear, 0, 1);
+            const dateStr = nextDate.getFullYear() + '-' +
+                String(nextDate.getMonth() + 1).padStart(2, '0') + '-' +
+                String(nextDate.getDate()).padStart(2, '0');
+            next = {
+                date: dateStr,
+                name: '元旦',
+                type: 'holiday'
+            };
+        }
+        if (!prev) {
+            prev = {
+                date: today.toISOString().slice(0, 10),
+                name: '今天',
+                type: 'holiday'
+            };
+        }
+        previousHoliday = prev;
+        nearestHoliday = next;
         updateCountdownDisplay();
         setInterval(updateCountdownDisplay, 1000);
     }
-    // Start the holiday module when the page loads
+
     initHoliday();
 
     // ==================== Init Novel====================

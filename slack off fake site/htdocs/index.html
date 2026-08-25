@@ -239,6 +239,12 @@
                             <button class="follow-btn-small" onclick="return false;">关注</button>
                         </div>
                     </div>
+					
+					<div class="nav-buttons">
+                        <button class="page-btn" id="prevPageBtn-bottom" disabled><</button>
+                        <button class="page-btn" id="nextPageBtn-bottom" disabled>></button>
+                    </div>
+					
                     <div class="interaction-btns">
                         <button class="interaction-btn" onclick="return false;"><span class="btn-icon">👍</span><span class="btn-text">点赞 (24)</span></button>
                         <button class="interaction-btn" onclick="return false;"><span class="btn-icon">⭐</span><span class="btn-text">收藏 (129)</span></button>
@@ -433,13 +439,13 @@
                                 <span class="hero-label">距离 **节 还有</span>
                                 <span class="hero-value" id="holidayCountdown">计算中...</span>
                             </div>
-                            <div class="moyu-progress-section">
-                                <div class="moyu-progress-header">
-                                    <span class="moyu-label">进度条</span>
-                                    <span class="moyu-percent" id="moyuPercent">56%</span>
+                            <div class="holiday-progress-section">
+                                <div class="holiday-progress-header">
+                                    <span class="holiday-label">进度条</span>
+                                    <span class="holiday-percent" id="holidayPercent">0%</span>
                                 </div>
-                                <div class="moyu-progress-track">
-                                    <div class="moyu-progress-fill" id="moyuProgressFill" style="width: 56%;"></div>
+                                <div class="holiday-progress-track">
+                                    <div class="holiday-progress-fill" id="holidayProgressFill" style="width: 0%;"></div>
                                 </div>
                             </div>
                         </div>

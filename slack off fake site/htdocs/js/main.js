@@ -160,12 +160,18 @@
     function updatePaginationUI() {
         const container = document.getElementById('paginationContainer');
         const progressEl = document.getElementById('pageProgress');
-        const prevBtn = document.getElementById('prevPageBtn');
-        const nextBtn = document.getElementById('nextPageBtn');
+        const prevBtns = document.querySelectorAll('#prevPageBtn, #prevPageBtn-bottom');
+        const nextBtns = document.querySelectorAll('#nextPageBtn, #nextPageBtn-bottom');
         const jumpInput = document.getElementById('jumpPageInput');
         const progressBar = document.getElementById('progressBarInner');
         if (totalPages <= 1) {
             container.style.display = 'none';
+            prevBtns.forEach(btn => {
+                btn.disabled = true;
+            });
+            nextBtns.forEach(btn => {
+                btn.disabled = true;
+            });
             return;
         }
         container.style.display = 'block';
@@ -175,8 +181,12 @@
             progressBar.setAttribute('aria-valuenow', percent);
         }
         progressEl.textContent = currentPage + ' / ' + totalPages;
-        prevBtn.disabled = (currentPage === 1);
-        nextBtn.disabled = (currentPage === totalPages);
+        prevBtns.forEach(btn => {
+            btn.disabled = (currentPage === 1);
+        });
+        nextBtns.forEach(btn => {
+            btn.disabled = (currentPage === totalPages);
+        });
         jumpInput.max = totalPages;
         jumpInput.value = currentPage;
     }
@@ -286,31 +296,25 @@
             showToast('🔍 未找到包含「' + query + '」的文档');
             return;
         }
-        if (results.length === 1) {
-            displayNovel(results[0]);
-            currentNovelId = results[0].id;
-            showToast('✅ 找到1本匹配的文档');
-        } else {
-            showToast('✅ 找到' + results.length + '本匹配的文档，点击左侧列表阅读');
-            uploadedNovelList.style.display = 'block';
-            novelListItems.innerHTML = uploadedNovels.map(function (novel) {
-                const isMatch = results.some(function (r) {
-                    return r.id === novel.id;
-                });
-                return '<div style="display:flex; align-items:center; gap:6px; padding:6px 8px;' +
-                'background:' + (isMatch ? '#fff5f2' : '#fafafa') + '; border-radius:4px;' +
-                (isMatch ? 'border:1px solid #fed0c4;' : '') +
-                'font-size:12px; cursor:pointer;" ' +
-                'onclick="window._openNovel(\'' + novel.id + '\')" title="点击阅读">' +
-                '<span>' + (isMatch ? '⭐' : '📄') + '</span>' +
-                '<span style="flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">' +
-                escapeHtml(novel.name) + '</span>' +
-                '<span style="color:#999; font-size:10px;">' + novel.uploadTime + '</span>' +
-                '<span style="color:#f56c6c; cursor:pointer;" onclick="event.stopPropagation(); window._deleteNovel(\'' +
-                novel.id + '\')" title="删除">✕</span>' +
-                '</div>';
-            }).join('');
-        }
+        showToast('✅ 找到' + results.length + '本匹配的文档，点击左侧列表阅读');
+        uploadedNovelList.style.display = 'block';
+        novelListItems.innerHTML = uploadedNovels.map(function (novel) {
+            const isMatch = results.some(function (r) {
+                return r.id === novel.id;
+            });
+            return '<div style="display:flex; align-items:center; gap:6px; padding:6px 8px;' +
+            'background:' + (isMatch ? '#fff5f2' : '#fafafa') + '; border-radius:4px;' +
+            (isMatch ? 'border:1px solid #fed0c4;' : '') +
+            'font-size:12px; cursor:pointer;" ' +
+            'onclick="window._openNovel(\'' + novel.id + '\')" title="点击阅读">' +
+            '<span>' + (isMatch ? '⭐' : '📄') + '</span>' +
+            '<span style="flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">' +
+            escapeHtml(novel.name) + '</span>' +
+            '<span style="color:#999; font-size:10px;">' + novel.uploadTime + '</span>' +
+            '<span style="color:#f56c6c; cursor:pointer;" onclick="event.stopPropagation(); window._deleteNovel(\'' +
+            novel.id + '\')" title="删除">✕</span>' +
+            '</div>';
+        }).join('');
     }
 
     novelSearchBtn.addEventListener('click', performNovelSearch);
@@ -759,17 +763,22 @@
         currentNovelId = uploadedNovels[0].id;
         displayNovel(uploadedNovels[0]);
     } else {
-        // 显示空白占位
         articleTitle.textContent = '📖 欢迎使用阅读工具';
         articleContent.innerHTML = DEFAULT_ARTICLE_CONTENT;
     }
     updateNovelList();
 
-    document.getElementById('prevPageBtn').addEventListener('click', function () {
-        goToPage(currentPage - 1);
+    const prevBtns = document.querySelectorAll('#prevPageBtn, #prevPageBtn-bottom');
+    prevBtns.forEach(btn => {
+        btn.addEventListener('click', function () {
+            goToPage(currentPage - 1);
+        });
     });
-    document.getElementById('nextPageBtn').addEventListener('click', function () {
-        goToPage(currentPage + 1);
+    const nextBtns = document.querySelectorAll('#nextPageBtn, #nextPageBtn-bottom');
+    nextBtns.forEach(btn => {
+        btn.addEventListener('click', function () {
+            goToPage(currentPage + 1);
+        });
     });
     document.getElementById('jumpPageBtn').addEventListener('click', function () {
         const input = document.getElementById('jumpPageInput');
@@ -780,7 +789,6 @@
             val = totalPages;
         goToPage(val);
     });
-
     document.getElementById('jumpPageInput').addEventListener('keydown', function (e) {
         if (e.key === 'Enter') {
             e.preventDefault();

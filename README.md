@@ -1,3 +1,5 @@
-手搓小工具  
-  
-![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fapi.bilibili.com%2Fx%2Frelation%2Fstat%3Fvmid%3D11748742&query=data.follower&style=flat&logo=bilibili&logoColor=white&label=bilibili%20fans&labelColor=%23F37697)
+exe tool:api get method for resend invoice email when don't want to change dns or hosts.  
+need .net framework 4.5.2  
+1.修改为可手动填写地址  
+2.返回结果消息由弹窗改为文本框  
+![image](cover.png)

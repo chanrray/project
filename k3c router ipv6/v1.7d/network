@@ -1,3 +1,0 @@
-config interface 'wan6'
- option ifname '@wan3'
- option proto 'dhcpv6'
